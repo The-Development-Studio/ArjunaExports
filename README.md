@@ -107,7 +107,7 @@ Off White:
 #FAFAF7
 
 Charcoal:
-#182323
+#68e6c2
 
 White:
 #FFFFFF

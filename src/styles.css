@@ -88,7 +88,7 @@
   --botanical: oklch(0.7071 0.1039 130.82);
   --ivory: oklch(0.964 0.0123 91.52);
   --offwhite: oklch(0.9843 0.004 106.47);
-  --charcoal: #182323;
+  --charcoal: #68e6c2;
   --pure-white: oklch(1 0 0);
 
   --background: var(--offwhite);
