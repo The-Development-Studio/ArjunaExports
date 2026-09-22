@@ -39,8 +39,8 @@ function ArticleDetail() {
     }));
 
   return (
-    <article className="bg-offwhite px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36">
-      <div className="shell grid items-start gap-14 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_420px] xl:gap-16">
+    <article className="bg-offwhite pb-20 pt-24 sm:pt-28">
+      <div className="shell grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_320px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_360px]">
         <main className="min-w-0">
           <Reveal>
             <div className="flex flex-wrap items-center justify-between gap-5">
@@ -57,7 +57,7 @@ function ArticleDetail() {
               )}
             </div>
 
-            <h1 className="display mt-12 max-w-5xl text-[clamp(3rem,6.2vw,5rem)] uppercase leading-[.94] text-brand-deep">
+            <h1 className="display mt-9 max-w-5xl text-[clamp(2.5rem,4.5vw,4rem)] uppercase leading-[1.02] text-brand-deep">
               {article.title}
             </h1>
 
@@ -94,7 +94,7 @@ function ArticleDetail() {
               </div>
             </div>
 
-            <p className="mt-8 max-w-4xl text-xl font-bold leading-relaxed text-brand-deep sm:text-2xl">
+            <p className="mt-7 max-w-4xl text-lg font-semibold leading-relaxed text-brand-deep sm:text-xl">
               {article.introduction}
             </p>
           </Reveal>
@@ -116,9 +116,9 @@ function ArticleDetail() {
 
           <div className="max-w-4xl">
             {article.sections.map((section, index) => (
-              <Reveal key={section.heading} className="scroll-mt-32 pt-12 sm:pt-16">
+              <Reveal key={section.heading} className="scroll-mt-32 pt-10 sm:pt-12">
                 <section id={`section-${index + 1}`}>
-                  <h2 className="display text-4xl uppercase leading-tight text-brand-deep sm:text-5xl">
+                  <h2 className="display text-[clamp(2rem,3vw,3rem)] uppercase leading-tight text-brand-deep">
                     {section.heading}
                   </h2>
                   <span className="mt-4 block h-1 w-16 bg-brand" aria-hidden />
@@ -154,9 +154,11 @@ function ArticleDetail() {
           </div>
         </main>
 
-        <aside className="border-t border-dashed border-brand/45 pt-10 lg:sticky lg:top-28 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+        <aside className="border-t border-solid border-brand/45 pt-10 lg:sticky lg:top-28 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
           <Reveal>
-            <h2 className="display text-4xl text-earth-brown sm:text-5xl">Explore by category</h2>
+            <h2 className="display text-[clamp(2rem,3vw,3rem)] text-earth-brown">
+              Explore by category
+            </h2>
             <span className="mt-3 block h-0.5 w-full bg-botanical" aria-hidden />
 
             <nav className="mt-8 grid gap-5" aria-label="Resource categories">

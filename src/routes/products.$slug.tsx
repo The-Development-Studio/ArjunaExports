@@ -217,8 +217,8 @@ function ProductDetail() {
           className="pointer-events-none absolute -right-24 top-24 hidden w-[340px] opacity-[0.05] lg:block"
           aria-hidden="true"
         />
-        <div className="shell grid min-h-[calc(100svh-5rem)] gap-8 py-8 lg:grid-cols-[1.08fr_.92fr] lg:items-center lg:gap-14 lg:py-16">
-          <div className="relative min-h-[460px] overflow-hidden rounded-md border border-brand/15 shadow-[0_28px_80px_rgba(31,45,40,.14)] sm:min-h-[560px] lg:min-h-[680px]">
+        <div className="shell grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-14">
+          <div className="relative min-h-[400px] overflow-hidden rounded-md border border-brand/15 shadow-[0_20px_60px_rgba(31,45,40,.12)] sm:min-h-[480px] lg:min-h-[540px]">
             <img
               src={activePhoto.image}
               alt={activePhoto.label}
@@ -263,7 +263,7 @@ function ProductDetail() {
           <Reveal delay={100} className="flex items-center py-8 lg:py-12">
             <div className="w-full max-w-xl">
               <Label className="text-brand">{p.category} collection</Label>
-              <h1 className="display mt-8 max-w-[11ch] text-[clamp(3.5rem,6vw,6.5rem)] leading-[.88]">
+              <h1 className="display mt-6 max-w-[16ch] text-[clamp(2.5rem,4.2vw,4.5rem)] leading-[1.02]">
                 {p.name}
               </h1>
               <p className="mt-7 max-w-xl text-left text-lg font-medium leading-relaxed text-charcoal/70">
@@ -299,7 +299,7 @@ function ProductDetail() {
           <div className="grid gap-8 border-b border-brand/20 pb-10 lg:grid-cols-[.85fr_1.15fr] lg:items-end lg:gap-16">
             <Reveal>
               <Label className="text-brand">Product overview</Label>
-              <h2 className="display mt-7 max-w-[12ch] text-[clamp(2.8rem,5vw,5rem)]">
+              <h2 className="display mt-6 max-w-[16ch] text-[clamp(2.25rem,4vw,4rem)]">
                 Engineered by nature. Refined for consistency.
               </h2>
             </Reveal>
@@ -311,7 +311,7 @@ function ProductDetail() {
           </div>
 
           <Reveal delay={120} className="mt-10 grid gap-4 lg:grid-cols-[1.3fr_.7fr]">
-            <figure className="group relative min-h-[420px] overflow-hidden rounded-md lg:min-h-[560px]">
+            <figure className="group relative min-h-[380px] overflow-hidden rounded-md lg:min-h-[480px]">
               <img
                 src={gallery[1]?.image ?? gallery[0].image}
                 alt={gallery[1]?.label ?? gallery[0].label}
@@ -351,7 +351,9 @@ function ProductDetail() {
           <Reveal className="grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-end lg:gap-16">
             <div>
               <Label className="text-brand">Key benefits</Label>
-              <h2 className="display mt-7 text-[clamp(3rem,5vw,5rem)]">Built around the crop.</h2>
+              <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">
+                Built around the crop.
+              </h2>
             </div>
             <p className="max-w-xl text-left text-lg leading-relaxed text-charcoal/65 lg:justify-self-end">
               Practical performance designed for consistent preparation, growing and delivery.
@@ -382,7 +384,9 @@ function ProductDetail() {
             <div className="flex items-end justify-between gap-6">
               <div>
                 <Label className="text-brand">Technical data</Label>
-                <h2 className="display mt-7 text-5xl">Typical specification.</h2>
+                <h2 className="display mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]">
+                  Typical specification.
+                </h2>
               </div>
               <span className="micro-label hidden text-charcoal/40 sm:block">
                 Subject to agreed order specification
@@ -598,11 +602,11 @@ function ProductDetail() {
         </div>
       </section>
 
-      <section className="bg-brand-soft py-28 lg:py-36">
+      <section className="bg-brand-soft py-20 lg:py-28">
         <div className="shell">
           <Reveal>
             <Label className="text-brand">Applications</Label>
-            <h2 className="display mt-7 text-[clamp(3rem,5vw,5rem)]">Where it performs.</h2>
+            <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">Where it performs.</h2>
           </Reveal>
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {applicationVisuals.map((application, i) => (
@@ -633,12 +637,12 @@ function ProductDetail() {
           src={img.exportPort}
           alt="Export containers ready for shipping"
           loading="lazy"
-          className="h-full min-h-[55vh] w-full object-cover"
+          className="h-full min-h-[440px] w-full object-cover"
         />
-        <div className="flex items-center px-6 py-24 sm:px-12 lg:p-20">
+        <div className="flex items-center px-6 py-16 sm:px-12 lg:p-16">
           <Reveal>
             <Label className="text-aqua">Packaging & shipping</Label>
-            <h2 className="display mt-7 text-[clamp(3rem,5vw,5rem)]">Packed for the journey.</h2>
+            <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">Packed for the journey.</h2>
             <p className="mt-7 max-w-xl leading-relaxed text-pure-white/70">
               Compressed formats reduce transport volume. Private-label packaging and
               customer-configured loading are available in 20-foot and 40-foot full containers.
@@ -650,12 +654,14 @@ function ProductDetail() {
         </div>
       </section>
 
-      <section className="bg-offwhite py-28 lg:py-36">
+      <section className="bg-offwhite py-20 lg:py-28">
         <div className="shell">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <div>
               <Label className="text-brand">Related products</Label>
-              <h2 className="display mt-7 text-5xl">Continue exploring.</h2>
+              <h2 className="display mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]">
+                Continue exploring.
+              </h2>
             </div>
             <TextLink to="/products" className="text-brand">
               View all products

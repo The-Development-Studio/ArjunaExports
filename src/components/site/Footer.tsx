@@ -6,12 +6,12 @@ import { navItems, products } from "@/lib/site-data";
 export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-brand text-pure-white/80">
-      <div className="shell pt-28 pb-10">
-        <h2 className="display max-w-[14ch] text-[clamp(2.8rem,8vw,5rem)] text-pure-white">
+      <div className="shell pb-8 pt-20 lg:pt-24">
+        <h2 className="display max-w-[18ch] text-[clamp(2.5rem,4.5vw,4rem)] text-pure-white">
           Growing Beyond Boundaries.
         </h2>
 
-        <div className="mt-24 grid gap-12 border-t border-pure-white/15 pt-12 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-10 border-t border-pure-white/15 pt-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link to="/" aria-label="Arjuna Exports home" className="inline-block">
               <img
@@ -58,20 +58,14 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="min-w-0 xl:-translate-x-8">
+          <div className="min-w-0">
             <div className="micro-label text-pure-white/60">Contact</div>
             <address className="mt-5 space-y-2.5 text-base leading-relaxed not-italic">
               <p className="space-y-1 text-left">
-                <span className="block xl:whitespace-nowrap">Arjuna Exports</span>
-                <span className="block xl:whitespace-nowrap">
-                  1/140-12, GM Complex, Opp. to TMB Bank
-                </span>
-                <span className="block xl:whitespace-nowrap">
-                  Kumaramangalam Post, Tiruchengode TK
-                </span>
-                <span className="block xl:whitespace-nowrap">
-                  Namakkal District, Tamil Nadu – 637205, India
-                </span>
+                <span className="block">Arjuna Exports</span>
+                <span className="block">1/140-12, GM Complex, Opp. to TMB Bank</span>
+                <span className="block">Kumaramangalam Post, Tiruchengode TK</span>
+                <span className="block">Namakkal District, Tamil Nadu – 637205, India</span>
               </p>
               <p>
                 <a href="mailto:info@arjunaexports.com" className="hover:text-pure-white">
@@ -123,7 +117,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-pure-white/15 pt-6 text-sm text-pure-white/70">
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-pure-white/15 pt-6 text-sm text-pure-white/70">
           <div className="flex flex-col gap-2">
             <span>© {new Date().getFullYear()} Arjuna Exports. All rights reserved.</span>
             <span className="text-pure-white/45">

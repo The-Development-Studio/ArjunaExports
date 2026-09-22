@@ -42,8 +42,8 @@ function Sustainability() {
         intro="The raw material is renewable. Our responsibility is to process it with discipline and keep improving the footprint around it."
         image={img.stageHusk}
       />
-      <section className="bg-ivory py-28">
-        <div className="shell grid gap-16 lg:grid-cols-2">
+      <section className="bg-ivory py-20 lg:py-24">
+        <div className="shell grid gap-12 lg:grid-cols-2">
           <Reveal>
             <img
               src={img.stagePith}
@@ -62,7 +62,7 @@ function Sustainability() {
                 <PointArt index={index} className="h-14 w-14" />
                 <div>
                   <Label className="text-brand">{p.n}</Label>
-                  <h2 className="display mt-4 text-4xl">{p.t}</h2>
+                  <h2 className="display mt-4 text-[clamp(1.75rem,2.5vw,2.5rem)]">{p.t}</h2>
                   <p className="mt-4 max-w-xl leading-relaxed text-charcoal/65">{p.x}</p>
                 </div>
               </Reveal>
@@ -70,10 +70,10 @@ function Sustainability() {
           </div>
         </div>
       </section>
-      <section className="bg-leaf py-24 text-pure-white">
+      <section className="bg-leaf py-20 text-pure-white lg:py-24">
         <div className="shell">
           <Label className="text-sand">The honest next steps</Label>
-          <h2 className="display mt-7 max-w-4xl text-6xl">
+          <h2 className="display mt-6 max-w-4xl text-[clamp(2.25rem,4vw,4rem)]">
             Measure more. Recover more water. Move more energy to renewables.
           </h2>
           <p className="mt-8 max-w-2xl leading-relaxed text-pure-white/70">

@@ -43,7 +43,7 @@ function Applications() {
         intro="From soft fruits and greenhouse vegetables to ornamentals and professional horticulture, coco adapts to the crop and the growing system."
         image={img.appGreenhouse}
       />
-      <section className="bg-offwhite py-28 lg:py-40">
+      <section className="bg-offwhite py-20 lg:py-28">
         <div className="shell">
           <Reveal>
             <ChapterHeading
@@ -51,11 +51,11 @@ function Applications() {
               lines={["The right root zone", "for every crop."]}
             />
           </Reveal>
-          <div className="mt-20 space-y-24 lg:space-y-32">
+          <div className="mt-12 space-y-16 lg:space-y-20">
             {cropApplications.map((group, index) => (
               <Reveal
                 key={group.title}
-                className={`grid items-center gap-12 lg:grid-cols-[1.15fr_.85fr] lg:gap-20 ${index % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
+                className={`grid items-center gap-10 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 ${index % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
               >
                 <div className="group overflow-hidden">
                   <img
@@ -70,8 +70,8 @@ function Applications() {
                   <Label className="text-brand">
                     {group.n} / {group.subtitle}
                   </Label>
-                  <h2 className="display mt-7 text-[clamp(3rem,6vw,5rem)]">{group.title}</h2>
-                  <p className="mt-7 text-lg leading-relaxed text-charcoal/65">
+                  <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">{group.title}</h2>
+                  <p className="mt-5 text-base leading-relaxed text-charcoal/65 lg:text-lg">
                     {group.description}
                   </p>
                   <div className="mt-8 border-y border-charcoal/15 py-5">
@@ -129,7 +129,7 @@ function Applications() {
         className="bg-brand-deep text-pure-white"
       >
         <div className="shell py-10 lg:py-4">
-          <div className="grid bg-pure-white/15 md:grid-cols-2 md:gap-px lg:min-h-[620px] lg:grid-cols-4">
+          <div className="grid bg-pure-white/15 md:grid-cols-2 md:gap-px lg:grid-cols-4">
             {usageApplications.map((usage, index) => {
               const Icon = usageIcons[index] ?? Sprout;
 
@@ -137,7 +137,7 @@ function Applications() {
                 <Reveal
                   key={usage.title}
                   delay={(index % 4) * 60}
-                  className="group flex min-h-[270px] flex-col bg-brand-deep px-8 py-9 transition-colors hover:bg-brand lg:min-h-[306px] lg:px-9 lg:py-10"
+                  className="group flex min-h-[240px] flex-col bg-brand-deep px-7 py-8 transition-colors hover:bg-brand lg:min-h-[260px] lg:px-8"
                 >
                   <div className="flex items-start">
                     <ThreeDIcon
@@ -161,7 +161,7 @@ function Applications() {
         </div>
       </section>
 
-      <section className="bg-ivory py-28 lg:py-36">
+      <section className="bg-ivory py-20 lg:py-24">
         <div className="shell">
           <Reveal>
             <ChapterHeading
@@ -175,7 +175,7 @@ function Applications() {
         {applications.map((a, i) => (
           <Reveal
             key={a.slug}
-            className={`shell grid min-h-[65vh] items-center gap-12 border-b border-charcoal/15 py-20 lg:grid-cols-2 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
+            className={`shell grid items-center gap-10 border-b border-charcoal/15 py-16 lg:grid-cols-2 lg:gap-14 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}
           >
             <div className="overflow-hidden">
               <img
@@ -188,8 +188,8 @@ function Applications() {
             </div>
             <div className="lg:px-12">
               <Label className="text-brand">{a.n}</Label>
-              <h2 className="display mt-7 text-6xl">{a.title}</h2>
-              <p className="mt-5 text-xl leading-relaxed">{a.line}</p>
+              <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">{a.title}</h2>
+              <p className="mt-5 text-lg leading-relaxed">{a.line}</p>
               <p className="mt-6 leading-relaxed text-charcoal/60">{a.why}</p>
               <div className="mt-8 flex flex-wrap gap-2">
                 {a.properties.map((x) => (

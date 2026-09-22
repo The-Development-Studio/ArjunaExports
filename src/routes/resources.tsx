@@ -41,12 +41,12 @@ function Resources() {
         image={img.appGreenhouse}
       />
 
-      <section className="bg-offwhite py-16 lg:py-24">
+      <section className="bg-offwhite py-16 lg:py-20">
         <div className="shell">
           <Reveal className="grid gap-8 border-b border-charcoal/15 pb-10">
             <div>
               <Label className="text-brand">Explore by topic</Label>
-              <h2 className="display mt-6 text-[clamp(1.25rem,5.2vw,4.75rem)] sm:whitespace-nowrap">
+              <h2 className="display mt-6 text-[clamp(2.25rem,3.8vw,3.75rem)]">
                 Advice for every stage.
               </h2>
             </div>
@@ -88,8 +88,8 @@ function Resources() {
           </Reveal>
 
           {filter === "All" && (
-            <Reveal className="group mt-10 grid overflow-hidden rounded-md border-2 border-dotted border-brand bg-brand-deep text-pure-white lg:grid-cols-2">
-              <div className="relative min-h-[360px] overflow-hidden lg:min-h-[520px]">
+            <Reveal className="group mt-10 grid overflow-hidden rounded-md border-2 border-solid border-brand bg-brand-deep text-pure-white lg:grid-cols-2">
+              <div className="relative min-h-[340px] overflow-hidden lg:min-h-[440px]">
                 <img
                   src={featured.image}
                   alt="Compressed coco peat block ready for hydration"
@@ -104,7 +104,7 @@ function Resources() {
                     <Label className="text-aqua">Featured guide</Label>
                     <span className="text-xs text-pure-white/45">{featured.read}</span>
                   </div>
-                  <h2 className="display mt-8 text-4xl leading-tight sm:text-6xl">
+                  <h2 className="display mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)] leading-tight">
                     {featured.title}
                   </h2>
                   <p className="mt-7 max-w-lg text-base leading-relaxed text-pure-white/65">
@@ -129,7 +129,7 @@ function Resources() {
                 <Link
                   to="/resources/$slug"
                   params={{ slug: article.slug }}
-                  className="group flex h-full flex-col overflow-hidden rounded-md border-2 border-dotted border-brand bg-ivory"
+                  className="group flex h-full flex-col overflow-hidden rounded-md border-2 border-solid border-brand bg-ivory"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-brand-soft">
                     <img
@@ -166,11 +166,11 @@ function Resources() {
         </div>
       </section>
 
-      <section className="bg-brand-soft py-24">
+      <section className="bg-brand-soft py-20 lg:py-24">
         <Reveal className="shell grid gap-10 lg:grid-cols-[1.4fr_.6fr] lg:items-end">
           <div>
             <Label className="text-brand">Need a specific answer?</Label>
-            <h2 className="display mt-7 max-w-4xl text-5xl sm:text-6xl">
+            <h2 className="display mt-6 max-w-4xl text-[clamp(2.25rem,3.8vw,3.75rem)]">
               Talk to our team about your crop, climate or specification.
             </h2>
           </div>

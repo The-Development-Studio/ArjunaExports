@@ -88,12 +88,14 @@ function Gallery() {
         image={galleryItems[0]?.image}
       />
 
-      <section className="bg-ivory py-20 lg:py-32">
+      <section className="bg-ivory py-20 lg:py-24">
         <div className="shell">
           <Reveal className="border-b border-charcoal/20 pb-10">
             <div>
               <Label className="text-brand">Inside Arjuna</Label>
-              <h2 className="display mt-6 text-5xl sm:text-6xl">The work, in detail.</h2>
+              <h2 className="display mt-6 text-[clamp(2.25rem,3.8vw,3.75rem)]">
+                The work, in detail.
+              </h2>
             </div>
           </Reveal>
 

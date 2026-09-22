@@ -1,15 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
   CheckCircle2,
-  Clock,
   Container,
   FileText,
   Handshake,
   Mail,
   MapPin,
+  MessageCircleMore,
   Orbit,
   Phone,
   ShoppingCart,
+  Smartphone,
   Sparkles,
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
@@ -34,15 +35,15 @@ const contactMethods = [
     icon: Mail,
   },
   {
-    label: "Landline",
-    value: "+91 4288 250125",
-    href: "tel:+914288250125",
-    icon: Phone,
-  },
-  {
     label: "Mobile",
     value: "+91 96298 74555",
     href: "tel:+919629874555",
+    icon: Smartphone,
+  },
+  {
+    label: "Landline",
+    value: "+91 4288 250125",
+    href: "tel:+914288250125",
     icon: Phone,
   },
 ];
@@ -136,16 +137,16 @@ function Contact() {
         image={img.exportPort}
       />
 
-      <section className="bg-ivory py-20 lg:py-28">
+      <section className="bg-ivory py-16 lg:py-24">
         <div className="shell">
           <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid auto-rows-fr gap-6 md:grid-cols-2">
               {contactMethods.map(({ label, value, href, icon: Icon }) => (
-                <Reveal key={label}>
+                <Reveal key={label} className="h-full">
                   <a
                     href={href}
                     aria-label={`${label}: ${value}`}
-                    className="group flex min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)] transition-transform hover:-translate-y-1"
+                    className="group flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)] transition-transform hover:-translate-y-1"
                   >
                     <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-32">
                       <Icon
@@ -154,34 +155,40 @@ function Contact() {
                         aria-hidden
                       />
                     </span>
-                    <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-7">
-                      <span className="break-words text-[clamp(1.15rem,2.1vw,2rem)] font-extrabold leading-tight tracking-[-.025em] text-brand">
+                    <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-6">
+                      <span
+                        className={`min-w-0 font-extrabold leading-tight tracking-[-.025em] text-brand ${
+                          label === "Email"
+                            ? "whitespace-nowrap text-[clamp(.9rem,1.18vw,1.15rem)]"
+                            : "whitespace-nowrap text-[clamp(1.15rem,1.65vw,1.7rem)]"
+                        }`}
+                      >
                         {value}
                       </span>
                     </span>
                   </a>
                 </Reveal>
               ))}
-              <Reveal>
-                <div className="flex min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)]">
+              <Reveal className="h-full">
+                <div className="flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)]">
                   <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-32">
-                    <Clock
+                    <MessageCircleMore
                       className="h-11 w-11 text-pure-white sm:h-14 sm:w-14"
                       strokeWidth={1.7}
                       aria-hidden
                     />
                   </span>
-                  <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-7">
-                    <span className="text-[clamp(1.15rem,2.1vw,2rem)] font-extrabold leading-tight tracking-[-.025em] text-brand">
-                      We’ll respond within 24 hours
+                  <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-6">
+                    <span className="text-[clamp(1.15rem,1.55vw,1.7rem)] font-extrabold leading-snug tracking-[-.025em] text-brand">
+                      We’ll Respond within 24 Hours
                     </span>
                   </span>
                 </div>
               </Reveal>
             </div>
 
-            <Reveal delay={120}>
-              <address className="flex min-h-full overflow-hidden rounded-sm bg-[#68e6c2] not-italic shadow-[0_12px_30px_rgba(0,100,101,.08)]">
+            <Reveal delay={120} className="h-full">
+              <address className="flex h-full min-h-full overflow-hidden rounded-sm bg-[#68e6c2] not-italic shadow-[0_12px_30px_rgba(0,100,101,.08)]">
                 <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-32 lg:w-28 xl:w-32">
                   <MapPin
                     className="h-11 w-11 text-pure-white sm:h-14 sm:w-14"
@@ -190,10 +197,7 @@ function Contact() {
                   />
                 </span>
                 <span className="flex min-w-0 flex-1 items-center px-6 py-8 lg:px-7">
-                  <span className="text-left text-sm font-bold leading-relaxed text-brand xl:text-base">
-                    <span className="mb-2 block text-lg font-extrabold xl:text-xl">
-                      Arjuna Exports
-                    </span>
+                  <span className="text-left text-base font-bold leading-relaxed text-brand xl:text-lg">
                     <span className="block">1/140-12, GM Complex, Opp. to TMB Bank</span>
                     <span className="block">Kumaramangalam Post, Tiruchengode TK</span>
                     <span className="block">Namakkal District, Tamil Nadu</span>
@@ -206,7 +210,7 @@ function Contact() {
         </div>
       </section>
 
-      <section className="bg-offwhite pb-24 lg:pb-32">
+      <section className="bg-offwhite pb-20 lg:pb-24">
         <div className="shell grid gap-8 lg:grid-cols-[.82fr_1.18fr] lg:items-start">
           <Reveal className="lg:order-2">
             <form
@@ -214,13 +218,13 @@ function Contact() {
               className="rounded-md border border-charcoal/10 bg-pure-white p-5 shadow-[0_24px_90px_rgba(31,45,40,.08)] sm:p-8 lg:p-10"
             >
               {sent ? (
-                <div className="grid min-h-[620px] place-items-center rounded-sm bg-brand-soft p-8 text-center">
+                <div className="grid min-h-[480px] place-items-center rounded-sm bg-brand-soft p-8 text-center">
                   <div className="max-w-lg">
                     <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand text-pure-white">
                       <CheckCircle2 className="h-8 w-8" strokeWidth={1.7} aria-hidden />
                     </span>
                     <Label className="mt-8 justify-center text-brand">Thank you</Label>
-                    <h2 className="display mt-6 text-[clamp(2.5rem,6vw,4.75rem)]">
+                    <h2 className="display mt-6 text-[clamp(2.25rem,4vw,3.75rem)]">
                       Your enquiry is ready for our team.
                     </h2>
                     <p className="mt-5 text-center text-charcoal/65">
@@ -502,7 +506,7 @@ function Contact() {
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/12 to-transparent" />
                   <div className="absolute right-5 bottom-5 left-5">
                     <span className="micro-label text-aqua">Export support</span>
-                    <h2 className="display mt-3 text-4xl">From sample to container.</h2>
+                    <h2 className="display mt-3 text-3xl">From sample to container.</h2>
                   </div>
                 </div>
                 <div className="grid gap-px bg-pure-white/12">

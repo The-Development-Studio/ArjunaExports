@@ -195,7 +195,7 @@ export function CustomerJourney() {
       id="customer-journey"
       ref={sectionRef}
       aria-labelledby="customer-journey-title"
-      className="relative overflow-clip bg-[#043f40] py-20 text-pure-white sm:py-24 lg:h-[300vh] lg:py-0"
+      className="relative overflow-clip bg-[#043f40] py-20 text-pure-white lg:h-[240vh] lg:py-0"
     >
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_12%,rgba(0,100,101,.6),transparent_34%),linear-gradient(145deg,#043f40_0%,#032e2f_100%)]" />
@@ -213,7 +213,7 @@ export function CustomerJourney() {
               </p>
               <h2
                 id="customer-journey-title"
-                className="display mt-5 max-w-[15ch] text-[clamp(2.8rem,4.4vw,5rem)] leading-[.92] text-pure-white"
+                className="display mt-5 max-w-[18ch] text-[clamp(2.25rem,3.8vw,4rem)] leading-[1.02] text-pure-white"
               >
                 From First Call to Long-Term Partnership
               </h2>
@@ -291,7 +291,7 @@ export function CustomerJourney() {
                       </button>
                       <span
                         className={cn(
-                        "journey-milestone-label absolute left-0 text-center text-[13px] font-bold leading-tight text-pure-white",
+                          "journey-milestone-label absolute left-0 text-center text-[13px] font-bold leading-tight text-pure-white",
                           index >= 10 ? "bottom-12" : "top-12",
                           visible && "is-visible",
                         )}

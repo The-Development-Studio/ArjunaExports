@@ -189,9 +189,9 @@ export function ChapterHeading({
   return (
     <div className={cn(align === "center" && "text-center", className)}>
       {label && (
-        <Label className={cn("mb-8 block", align === "center" && "justify-center")}>{label}</Label>
+        <Label className={cn("mb-6 block", align === "center" && "justify-center")}>{label}</Label>
       )}
-      <h2 className="display text-[clamp(2.4rem,6vw,5rem)]">
+      <h2 className="display max-w-[22ch] text-[clamp(2.25rem,4vw,4rem)] leading-[1.02]">
         {lines.map((l, i) => (
           <span key={i} className="block">
             {l}

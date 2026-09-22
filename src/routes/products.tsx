@@ -32,7 +32,7 @@ function Products() {
         intro="Compressed blocks, coir fibre, husk chips and natural formats with clear specifications for export buyers."
         image={img.productBlock}
       />
-      <section className="relative overflow-hidden bg-offwhite py-24">
+      <section className="relative overflow-hidden bg-offwhite py-20 lg:py-24">
         <div className="shell relative">
           <div className="flex flex-wrap gap-2">
             {productFilters.map((f) => (
@@ -45,7 +45,7 @@ function Products() {
               </button>
             ))}
           </div>
-          <div className="mt-14 grid gap-6 lg:gap-8">
+          <div className="mt-10 grid gap-6">
             {shown.map((p, i) => (
               <Reveal
                 key={p.slug}
@@ -54,7 +54,7 @@ function Products() {
               >
                 <a
                   href={`/products/${p.slug}`}
-                  className="grid min-h-[360px] gap-0 md:grid-cols-[minmax(320px,.92fr)_1.08fr]"
+                  className="grid min-h-[320px] gap-0 md:grid-cols-[minmax(300px,.9fr)_1.1fr]"
                 >
                   <div className="relative min-h-[280px] overflow-hidden">
                     <img
@@ -68,17 +68,17 @@ function Products() {
                       {p.category}
                     </span>
                   </div>
-                  <div className="flex flex-col justify-between p-7 md:p-10">
+                  <div className="flex flex-col justify-between p-7 md:p-8">
                     <div>
                       <span className="micro-label text-brand">Export product</span>
-                      <h2 className="display mt-4 text-[clamp(2.4rem,4vw,4.5rem)] text-charcoal">
+                      <h2 className="display mt-4 text-[clamp(2.2rem,3.5vw,3.75rem)] text-charcoal">
                         {p.name}
                       </h2>
                       <p className="mt-5 max-w-2xl text-base leading-relaxed text-charcoal/68">
                         {p.short}
                       </p>
                     </div>
-                    <div className="mt-10 grid gap-px bg-charcoal/12 sm:grid-cols-3">
+                    <div className="mt-8 grid gap-px bg-charcoal/12 sm:grid-cols-3">
                       {[
                         ["Format", p.format],
                         ["Application", p.application],

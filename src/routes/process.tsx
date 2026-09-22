@@ -6,11 +6,11 @@ import {
   Container,
   Factory,
   FileCheck2,
-  FlaskConical,
   PackageCheck,
   Ship,
   Sparkles,
 } from "lucide-react";
+import { useState } from "react";
 import { img, processStages } from "@/lib/site-data";
 import coconutArtworkLeft from "@/assets/coconut.svg";
 import coconutArtworkRight from "@/assets/coconut2.svg";
@@ -34,11 +34,10 @@ export const Route = createFileRoute("/process")({
   component: Process,
 });
 
-const proofStats = [
-  { value: "09", label: "Controlled stages", Icon: Factory },
-  { value: "05", label: "Batch parameters", Icon: FlaskConical },
-  { value: "40 ft", label: "Export containers", Icon: Container },
-];
+const processFilters = [
+  { id: "product", label: "Product Process", Icon: Factory },
+  { id: "logistics", label: "Shipping & Logistics", Icon: Ship },
+] as const;
 
 const processChapters = [
   { label: "01 — Foundation", stages: processStages.slice(0, 3) },
@@ -200,6 +199,8 @@ function ProcessStage({ stage, index }: { stage: (typeof processStages)[number];
 }
 
 function Process() {
+  const [filter, setFilter] = useState<(typeof processFilters)[number]["id"]>("product");
+
   return (
     <>
       <PageHero
@@ -209,173 +210,201 @@ function Process() {
         image={img.processCompression}
       />
 
-      <section className="border-b border-charcoal/10 bg-ivory py-10 lg:py-12">
-        <div className="shell grid gap-4 sm:grid-cols-3">
-          {proofStats.map(({ value, label, Icon }, index) => (
-            <Reveal
-              key={label}
-              delay={index * 70}
-              className="flex items-center gap-5 border-charcoal/12 py-3 sm:justify-center sm:border-r sm:last:border-r-0"
-            >
-              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brand/25 bg-brand-soft text-brand shadow-sm lg:h-14 lg:w-14">
-                <Icon className="h-6 w-6 lg:h-7 lg:w-7" strokeWidth={1.7} aria-hidden="true" />
-              </span>
-              <p className="display text-4xl text-brand lg:text-5xl">{value}</p>
-              <p className="max-w-24 text-left text-xs font-semibold uppercase leading-5 tracking-[.12em] text-charcoal/55">
-                {label}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="process-journey relative overflow-hidden bg-offwhite py-16 lg:py-20">
-        <img
-          src={coconutArtworkLeft}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="process-journey-decoration process-journey-decoration-left"
-          aria-hidden="true"
-        />
-        <img
-          src={coconutArtworkRight}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="process-journey-decoration process-journey-decoration-right"
-          aria-hidden="true"
-        />
-        <div className="shell process-journey-intro relative z-10">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <Label className="text-brand">The complete workflow</Label>
-            <h2 className="display mt-5 text-[clamp(2.8rem,5.2vw,5rem)]">
-              One continuous line of care.
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-center leading-relaxed text-charcoal/65">
-              Every handoff is measured. Every batch is traceable. Follow the route from locally
-              sourced coconut husk to its final export-ready form.
-            </p>
-            <span className="mx-auto mt-6 grid h-11 w-11 place-items-center rounded-full border border-brand/25 text-brand">
-              <ArrowDown className="h-5 w-5" aria-hidden="true" />
-            </span>
-          </Reveal>
-        </div>
-      </section>
-
-      <div className="process-chapters bg-offwhite">
-        {processChapters.map((chapter, chapterIndex) => (
-          <section className="process-chapter relative overflow-hidden" key={chapter.label}>
-            <div className="process-coconut-art" aria-hidden="true">
-              <span />
-              <span />
-              <span />
-            </div>
-            <div className="shell relative z-10">
-              <div className="mb-4 flex items-center gap-4 lg:mb-5">
-                <Label className="text-brand">{chapter.label}</Label>
-                <span className="h-px flex-1 bg-brand/15" aria-hidden="true" />
-                <span className="text-[10px] font-semibold uppercase tracking-[.15em] text-charcoal/45">
-                  3 stages
-                </span>
-              </div>
-              <div className="process-stage-list relative grid gap-4 lg:gap-5">
-                {chapter.stages.map((stage, stageIndex) => (
-                  <ProcessStage key={stage.n} stage={stage} index={chapterIndex * 3 + stageIndex} />
-                ))}
-              </div>
-              {chapterIndex === processChapters.length - 1 && (
-                <Reveal className="relative z-10 mx-auto mt-4 flex w-fit items-center gap-3 rounded-full bg-brand px-6 py-3 text-pure-white shadow-[0_16px_40px_rgba(0,100,101,.2)]">
-                  <Check className="h-5 w-5" aria-hidden="true" />
-                  <span className="text-xs font-semibold uppercase tracking-[.15em]">
-                    Export ready
+      <section
+        className="border-b border-charcoal/10 bg-ivory py-10 lg:py-12"
+        aria-label="Process categories"
+      >
+        <div className="shell">
+          <div className="mx-auto grid max-w-lg grid-cols-2 gap-6 sm:gap-10">
+            {processFilters.map(({ id, label, Icon }) => {
+              const selected = filter === id;
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => setFilter(id)}
+                  aria-pressed={selected}
+                  aria-controls={`${id}-process`}
+                  className="group flex min-w-0 flex-col items-center gap-3 rounded-sm text-center focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-brand"
+                >
+                  <span
+                    className={`grid aspect-square w-20 place-items-center rounded-full border-[5px] border-brand transition-all sm:w-24 ${selected ? "-translate-y-1 bg-brand text-pure-white shadow-[0_14px_32px_rgba(0,100,101,.2)] ring-4 ring-brand/12" : "bg-brand-soft text-brand shadow-sm group-hover:-translate-y-1"}`}
+                  >
+                    <Icon
+                      className="h-9 w-9 sm:h-11 sm:w-11"
+                      strokeWidth={1.65}
+                      aria-hidden="true"
+                    />
                   </span>
-                </Reveal>
-              )}
+                  <span
+                    className={`text-xs font-bold uppercase leading-5 tracking-[.08em] ${selected ? "text-brand" : "text-charcoal/60 group-hover:text-brand"}`}
+                  >
+                    {label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {filter === "product" && (
+        <div id="product-process">
+          <section className="process-journey relative overflow-hidden bg-offwhite py-16 lg:py-20">
+            <img
+              src={coconutArtworkLeft}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="process-journey-decoration process-journey-decoration-left"
+              aria-hidden="true"
+            />
+            <img
+              src={coconutArtworkRight}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="process-journey-decoration process-journey-decoration-right"
+              aria-hidden="true"
+            />
+            <div className="shell process-journey-intro relative z-10">
+              <Reveal className="mx-auto max-w-3xl text-center">
+                <Label className="text-brand">The complete workflow</Label>
+                <h2 className="display mt-5 text-[clamp(2.25rem,4vw,4rem)]">
+                  One continuous line of care.
+                </h2>
+                <p className="mx-auto mt-5 max-w-2xl text-center leading-relaxed text-charcoal/65">
+                  Every handoff is measured. Every batch is traceable. Follow the route from locally
+                  sourced coconut husk to its final export-ready form.
+                </p>
+                <span className="mx-auto mt-6 grid h-11 w-11 place-items-center rounded-full border border-brand/25 text-brand">
+                  <ArrowDown className="h-5 w-5" aria-hidden="true" />
+                </span>
+              </Reveal>
             </div>
           </section>
-        ))}
-      </div>
 
-      <section className="logistics-section overflow-hidden bg-ivory">
-        <div className="shell flex min-h-[calc(100svh-88px)] flex-col justify-center py-10 lg:py-12">
-          <Reveal className="flex flex-col gap-5 border-b border-charcoal/12 pb-5 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <Label className="text-brand">From factory to buyer</Label>
-              <h2 className="display mt-4 text-[clamp(1.8rem,3vw,3.75rem)] md:whitespace-nowrap">
-                Shipping &amp; logistics process.
-              </h2>
-            </div>
-            <p className="max-w-md text-left text-sm leading-6 text-charcoal/65 lg:text-right">
-              One coordinated export route—from factory collection and customs handling to ocean
-              transit and final delivery.
-            </p>
-          </Reveal>
-
-          <div className="logistics-map relative mt-6 lg:mt-8">
-            <svg
-              className="logistics-route"
-              viewBox="0 0 1000 220"
-              fill="none"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <marker
-                  id="logistics-arrow"
-                  markerWidth="9"
-                  markerHeight="9"
-                  refX="7"
-                  refY="4.5"
-                  orient="auto"
-                >
-                  <path d="M0 0L9 4.5L0 9Z" fill="var(--brand)" />
-                </marker>
-              </defs>
-              <path
-                d="M45 105H955"
-                stroke="var(--brand)"
-                strokeWidth="2"
-                strokeDasharray="7 9"
-                markerEnd="url(#logistics-arrow)"
-              />
-            </svg>
-
-            {logisticsSteps.map((step, index) => (
-              <Reveal
-                key={step.n}
-                delay={(index % 5) * 55}
-                className={`logistics-step ${step.position}`}
-              >
-                <span className="logistics-number">{step.n}</span>
-                <div className="logistics-image">
-                  <img
-                    src={step.image}
-                    alt=""
-                    loading="lazy"
-                    className="h-full w-full object-contain"
-                  />
+          <div className="process-chapters bg-offwhite">
+            {processChapters.map((chapter, chapterIndex) => (
+              <section className="process-chapter relative overflow-hidden" key={chapter.label}>
+                <div className="process-coconut-art" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
                 </div>
-                <h3 className="subtitle text-center text-[15px] leading-tight text-brand lg:text-base">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-center text-[10px] font-semibold uppercase leading-4 tracking-[.08em] text-charcoal/55">
-                  {step.term}
-                </p>
-              </Reveal>
+                <div className="shell relative z-10">
+                  <div className="mb-4 flex items-center gap-4 lg:mb-5">
+                    <Label className="text-brand">{chapter.label}</Label>
+                    <span className="h-px flex-1 bg-brand/15" aria-hidden="true" />
+                    <span className="text-[10px] font-semibold uppercase tracking-[.15em] text-charcoal/45">
+                      3 stages
+                    </span>
+                  </div>
+                  <div className="process-stage-list relative grid gap-4 lg:gap-5">
+                    {chapter.stages.map((stage, stageIndex) => (
+                      <ProcessStage
+                        key={stage.n}
+                        stage={stage}
+                        index={chapterIndex * 3 + stageIndex}
+                      />
+                    ))}
+                  </div>
+                  {chapterIndex === processChapters.length - 1 && (
+                    <Reveal className="relative z-10 mx-auto mt-4 flex w-fit items-center gap-3 rounded-full bg-brand px-6 py-3 text-pure-white shadow-[0_16px_40px_rgba(0,100,101,.2)]">
+                      <Check className="h-5 w-5" aria-hidden="true" />
+                      <span className="text-xs font-semibold uppercase tracking-[.15em]">
+                        Export ready
+                      </span>
+                    </Reveal>
+                  )}
+                </div>
+              </section>
             ))}
           </div>
-
-          <Reveal className="mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 border-t border-charcoal/10 pt-5 text-[10px] font-semibold uppercase tracking-[.12em] text-charcoal/50">
-            <span>Export documentation</span>
-            <span>Customs coordination</span>
-            <span>Container tracking</span>
-            <span>Destination delivery</span>
-          </Reveal>
         </div>
-      </section>
+      )}
 
-      <section className="bg-brand-deep py-24 text-pure-white lg:py-28">
+      {filter === "logistics" && (
+        <section id="logistics-process" className="logistics-section overflow-hidden bg-ivory">
+          <div className="shell flex flex-col justify-center py-16 lg:py-20">
+            <Reveal className="flex flex-col gap-5 border-b border-charcoal/12 pb-5 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <Label className="text-brand">From factory to buyer</Label>
+                <h2 className="display mt-4 text-[clamp(2rem,3vw,3.25rem)]">
+                  Shipping &amp; logistics process.
+                </h2>
+              </div>
+              <p className="max-w-md text-left text-sm leading-6 text-charcoal/65 lg:text-right">
+                One coordinated export route—from factory collection and customs handling to ocean
+                transit and final delivery.
+              </p>
+            </Reveal>
+
+            <div className="logistics-map relative mt-6 lg:mt-8">
+              <svg
+                className="logistics-route"
+                viewBox="0 0 1000 220"
+                fill="none"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <defs>
+                  <marker
+                    id="logistics-arrow"
+                    markerWidth="9"
+                    markerHeight="9"
+                    refX="7"
+                    refY="4.5"
+                    orient="auto"
+                  >
+                    <path d="M0 0L9 4.5L0 9Z" fill="var(--brand)" />
+                  </marker>
+                </defs>
+                <path
+                  d="M45 105H955"
+                  stroke="var(--brand)"
+                  strokeWidth="2"
+                  strokeDasharray="7 9"
+                  markerEnd="url(#logistics-arrow)"
+                />
+              </svg>
+
+              {logisticsSteps.map((step, index) => (
+                <Reveal
+                  key={step.n}
+                  delay={(index % 5) * 55}
+                  className={`logistics-step ${step.position}`}
+                >
+                  <span className="logistics-number">{step.n}</span>
+                  <div className="logistics-image">
+                    <img
+                      src={step.image}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  <h3 className="subtitle text-center text-[15px] leading-tight text-brand lg:text-base">
+                    {step.title}
+                  </h3>
+                  <p className="mt-1 text-center text-[10px] font-semibold uppercase leading-4 tracking-[.08em] text-charcoal/55">
+                    {step.term}
+                  </p>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal className="mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 border-t border-charcoal/10 pt-5 text-[10px] font-semibold uppercase tracking-[.12em] text-charcoal/50">
+              <span>Export documentation</span>
+              <span>Customs coordination</span>
+              <span>Container tracking</span>
+              <span>Destination delivery</span>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      <section className="bg-brand-deep py-20 text-pure-white lg:py-24">
         <div className="shell">
           <Reveal>
             <ChapterHeading label="Output Formats" lines={["One process.", "Multiple products."]} />
@@ -408,11 +437,11 @@ function Process() {
         </div>
       </section>
 
-      <section className="bg-ivory py-24 lg:py-28">
+      <section className="bg-ivory py-20 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
           <Reveal>
             <Label className="text-brand">Export Readiness</Label>
-            <h2 className="display mt-7 text-[clamp(3rem,6vw,5rem)]">
+            <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">
               Finished means ready to ship.
             </h2>
             <p className="mt-8 max-w-md leading-relaxed text-charcoal/65">
@@ -441,11 +470,11 @@ function Process() {
         </div>
       </section>
 
-      <section className="bg-[#68e6c2] py-20 text-brand lg:py-24">
+      <section className="bg-[#68e6c2] py-16 text-brand lg:py-20">
         <div className="shell grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <Reveal>
             <Label className="text-aqua">Custom Specification</Label>
-            <h2 className="display mt-7 max-w-3xl text-[clamp(3rem,6vw,5rem)]">
+            <h2 className="display mt-6 max-w-3xl text-[clamp(2.25rem,4vw,4rem)]">
               Need a specific coco peat process?
             </h2>
           </Reveal>
