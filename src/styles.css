@@ -589,7 +589,8 @@ h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: clamp(1.25rem, 2vw, 2rem);
+  min-height: 320px;
+  padding: clamp(1.75rem, 2.5vw, 2.5rem);
   border: 1.5px solid color-mix(in oklab, var(--brand) 22%, transparent);
   border-radius: var(--radius-md);
   background: color-mix(in oklab, var(--ivory) 78%, white);
@@ -612,7 +613,7 @@ h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
 
 .process-stage-photo {
   position: relative;
-  min-height: 250px;
+  min-height: 320px;
   overflow: hidden;
   border: 1.5px solid color-mix(in oklab, var(--brand) 22%, transparent);
   border-radius: var(--radius-md);
@@ -654,7 +655,7 @@ h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
   }
   .process-stage-photo {
     height: 100%;
-    min-height: 220px;
+    min-height: 320px;
   }
   .process-stage-node {
     position: relative;
@@ -665,40 +666,6 @@ h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
 }
 
 @media (min-width: 1024px) and (max-height: 740px) {
-  .process-chapter {
-    padding-block: 1.25rem;
-  }
-
-  .process-chapter .process-stage-list {
-    gap: 0.75rem;
-  }
-
-  .process-stage-photo {
-    height: 100%;
-    min-height: 140px;
-  }
-
-  .process-stage-copy {
-    padding: 0.8rem 1rem;
-  }
-
-  .process-stage-copy p {
-    margin-top: 0.45rem;
-    font-size: 12px;
-    line-height: 1.45;
-  }
-
-  .process-stage-copy > div:last-child {
-    margin-top: 0.5rem;
-    padding-top: 0.45rem;
-  }
-
-  .process-stage-node {
-    width: 56px;
-    height: 56px;
-    border-width: 5px;
-  }
-
   .logistics-map {
     min-height: 250px;
   }

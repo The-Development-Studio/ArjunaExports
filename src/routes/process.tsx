@@ -151,17 +151,19 @@ function ProcessStage({ stage, index }: { stage: (typeof processStages)[number];
       delay={90}
       className={`process-stage-copy ${imageFirst ? "lg:col-start-3" : "lg:col-start-1 lg:row-start-1"}`}
     >
-      <div className="mb-3 flex items-center justify-between gap-4">
+      <div className="mb-4 flex items-center justify-between gap-4">
         <span className="micro-label text-brand">
           {isShipping ? "Delivery / shipping" : "Production process"}
         </span>
         <span className="h-px flex-1 bg-brand/20" aria-hidden="true" />
       </div>
-      <h3 className="display text-[clamp(1.55rem,2.25vw,2.5rem)]">{stage.title}</h3>
-      <p className="mt-3 max-w-[62ch] text-[13px] leading-[1.6] text-charcoal/65 lg:text-[14px]">
+      <h3 className="display text-[clamp(1.6rem,2.2vw,2.35rem)] text-[#20555A] leading-snug">
+        {stage.title}
+      </h3>
+      <p className="mt-4 max-w-[65ch] text-[15px] sm:text-base leading-[1.75] text-[#20555A]/85">
         {stage.text}
       </p>
-      <div className="mt-4 flex items-center gap-3 border-t border-charcoal/10 pt-3">
+      <div className="mt-6 flex items-center gap-3 border-t border-brand/15 pt-4">
         <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-soft text-brand">
           <Check className="h-4 w-4" strokeWidth={2.2} aria-hidden="true" />
         </span>
@@ -189,7 +191,7 @@ function ProcessStage({ stage, index }: { stage: (typeof processStages)[number];
   );
 
   return (
-    <article className="process-stage relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:items-stretch lg:gap-9">
+    <article className="process-stage relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:items-stretch lg:gap-10">
       {photo}
       <div className="process-stage-node lg:col-start-2 lg:row-start-1 lg:self-center" aria-hidden="true">
         <span>{stage.n}</span>
@@ -281,7 +283,7 @@ function Process() {
                       3 stages
                     </span>
                   </div>
-                  <div className="process-stage-list relative grid gap-4 lg:gap-5">
+                  <div className="process-stage-list relative grid gap-7 lg:gap-9">
                     {chapter.stages.map((stage, stageIndex) => (
                       <ProcessStage
                         key={stage.n}

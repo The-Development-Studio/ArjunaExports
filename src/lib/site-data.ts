@@ -9,6 +9,15 @@ import processCompression from "@/assets/process-compression.jpg";
 import processQuality from "@/assets/process-quality.jpg";
 import processWashing from "@/assets/process-washing.png";
 import processPackaging from "@/assets/process-packaging.png";
+import stage1RawMaterial from "@/assets/process/stage-1-raw-material.jpg";
+import stage2Extraction from "@/assets/process/stage-2-extraction.jpg";
+import stage3Screening from "@/assets/process/stage-3-screening.png";
+import stage4Washing from "@/assets/process/stage-4-washing.jpg";
+import stage5Drying from "@/assets/process/stage-5-drying.jpg";
+import stage6Compression from "@/assets/process/stage-6-compression.jpg";
+import stage7Inspection from "@/assets/process/stage-7-inspection.jpg";
+import stage8Packaging from "@/assets/process/stage-8-packaging.jpg";
+import stage9Shipping from "@/assets/process/stage-9-shipping.jpg";
 import productBlock from "@/assets/product-block.jpg";
 import productGrowbag from "@/assets/product-growbag.jpg";
 import productErosion from "@/assets/product-erosion.jpg";
@@ -274,63 +283,63 @@ export const processStages = [
     n: "01",
     title: "Raw Material Selection",
     text: "Our process begins with the careful selection of mature coconut husks from trusted plantation clusters across Tamil Nadu. Each incoming lot is visually inspected and screened so that only clean, consistent raw material is released for production.",
-    image: stageCoconut,
+    image: stage1RawMaterial,
     data: "Sourced within 120 km",
   },
   {
     n: "02",
     title: "Fibre & Pith Extraction",
     text: "Selected husks enter mechanical defibring drums, where long coir fibre is separated from the soft pith. The recovered pith is collected carefully and transferred to the next stage while fibre is graded for other coir applications.",
-    image: stageFibre,
+    image: stage2Extraction,
     data: "Mechanical separation",
   },
   {
     n: "03",
     title: "Screening & Quality Control",
     text: "The extracted pith passes through calibrated screens to remove excess fibre, sand and unwanted particles. Our production team checks the screened material for a consistent texture before it advances to conditioning.",
-    image: stagePith,
+    image: stage3Screening,
     data: "Consistent particle grading",
   },
   {
     n: "04",
     title: "Washing",
     text: "To prepare the pith for horticultural use, it is washed with fresh water in controlled cycles. Electrical conductivity and pH are monitored throughout the process to reduce soluble salts and meet the agreed buyer specification.",
-    image: processWashing,
+    image: stage4Washing,
     data: "Low-EC options available",
   },
   {
     n: "05",
     title: "Natural Drying",
     text: "Following washing, the pith is transferred to dedicated drying yards. Controlled sun drying lowers moisture naturally while regular turning promotes even conditioning and prepares the material for efficient compression.",
-    image: processDrying,
+    image: stage5Drying,
     data: "Moisture 15–20%",
   },
   {
     n: "06",
     title: "Compression",
     text: "Dried material is screened once more, blended where required and fed into hydraulic presses. It is compressed into 650 gram bricks, 5 kilogram blocks or customised grow slabs for efficient handling and shipment.",
-    image: processCompression,
+    image: stage6Compression,
     data: "Up to 8 : 1",
   },
   {
     n: "07",
     title: "Quality Inspection",
     text: "Every production batch undergoes a final assessment for pH, electrical conductivity, moisture, particle size and bulk density. The quality team records the results and confirms that the material is clean and within specification.",
-    image: processQuality,
+    image: stage7Inspection,
     data: "5 parameters, every batch",
   },
   {
     n: "08",
     title: "Packaging",
     text: "Approved products are shrink-wrapped, labelled and arranged securely on treated wooden pallets. Packaging, unit count and private-label details are matched to the purchase order and destination-market requirements.",
-    image: processPackaging,
+    image: stage8Packaging,
     data: "Private label ready",
   },
   {
     n: "09",
     title: "Shipping",
     text: "Finished pallets are loaded into 20-foot or 40-foot high-cube containers and dispatched from our facility. Export documentation and logistics coordination support a reliable journey by road and sea to growers worldwide.",
-    image: exportPort,
+    image: stage9Shipping,
     data: "20 ft & 40 ft FCL",
   },
 ];
