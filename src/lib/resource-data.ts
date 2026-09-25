@@ -182,8 +182,9 @@ function parseArticles() {
 
   for (const line of lines) {
     const categoryMatch = line.match(/^([1-4])\.\t+/);
-    if (categoryMatch && categoryNames[categoryMatch[1]]) {
-      category = categoryNames[categoryMatch[1]];
+    const catNum = categoryMatch?.[1];
+    if (catNum && categoryNames[catNum]) {
+      category = categoryNames[catNum];
       continue;
     }
 
@@ -215,7 +216,7 @@ function parseArticles() {
       title: draft.title,
       excerpt: makeExcerpt(draft.lines),
       category: draft.category,
-      image: images[index % images.length],
+      image: images[index % images.length] ?? img.productBlock,
       read: estimateReadingTime(draft.lines),
       introduction,
       sections,

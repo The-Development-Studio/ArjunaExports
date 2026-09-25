@@ -29,6 +29,7 @@ import closingRoots from "@/assets/closing-roots.jpg";
 import exportPort from "@/assets/export-port.jpg";
 import storyPeople from "@/assets/story-people.jpg";
 import founderMohanraj from "@/assets/founder-mohanraj.png";
+import coirBoard from "@/assets/certifications/coir-board.jpg";
 import blackberryIcon from "@/assets/blackberry.svg";
 import blueberriesIcon from "@/assets/blueberries.svg";
 import cucumberIcon from "@/assets/cucumber.svg";
@@ -55,6 +56,8 @@ export const img = {
   processCompression,
   processQuality,
   processPackaging,
+  processWashing,
+  coirBoard,
   productBlock,
   productGrowbag,
   productErosion,

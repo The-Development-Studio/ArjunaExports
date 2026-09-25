@@ -1,19 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+  Anchor,
   ArrowDown,
   Boxes,
   Check,
   Container,
   Factory,
   FileCheck2,
+  Package,
   PackageCheck,
   Ship,
   Sparkles,
+  Tag,
 } from "lucide-react";
 import { useState } from "react";
 import { img, processStages } from "@/lib/site-data";
-import coconutArtworkLeft from "@/assets/coconut.svg";
-import coconutArtworkRight from "@/assets/coconut2.svg";
 import sellerFactory from "@/assets/Process/Sell Factory.png";
 import firstCarrier from "@/assets/Process/First Carrier.png";
 import freightStation from "@/assets/Process/container freight station customs clearence.png";
@@ -188,9 +189,9 @@ function ProcessStage({ stage, index }: { stage: (typeof processStages)[number];
   );
 
   return (
-    <article className="process-stage relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:items-center lg:gap-9">
+    <article className="process-stage relative grid gap-6 lg:grid-cols-[minmax(0,1fr)_96px_minmax(0,1fr)] lg:items-stretch lg:gap-9">
       {photo}
-      <div className="process-stage-node lg:col-start-2 lg:row-start-1" aria-hidden="true">
+      <div className="process-stage-node lg:col-start-2 lg:row-start-1 lg:self-center" aria-hidden="true">
         <span>{stage.n}</span>
       </div>
       {copy}
@@ -206,6 +207,7 @@ function Process() {
       <PageHero
         eyebrow="Our Process"
         title="From husk to harvest."
+        titleClassName="hero-title-dark text-[#20555A]"
         intro="Nine carefully controlled stages turn a natural by-product into dependable growing media, ready for growers around the world."
         image={img.processCompression}
       />
@@ -251,22 +253,6 @@ function Process() {
       {filter === "product" && (
         <div id="product-process">
           <section className="process-journey relative overflow-hidden bg-offwhite py-16 lg:py-20">
-            <img
-              src={coconutArtworkLeft}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="process-journey-decoration process-journey-decoration-left"
-              aria-hidden="true"
-            />
-            <img
-              src={coconutArtworkRight}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="process-journey-decoration process-journey-decoration-right"
-              aria-hidden="true"
-            />
             <div className="shell process-journey-intro relative z-10">
               <Reveal className="mx-auto max-w-3xl text-center">
                 <Label className="text-brand">The complete workflow</Label>
@@ -287,11 +273,6 @@ function Process() {
           <div className="process-chapters bg-offwhite">
             {processChapters.map((chapter, chapterIndex) => (
               <section className="process-chapter relative overflow-hidden" key={chapter.label}>
-                <div className="process-coconut-art" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
                 <div className="shell relative z-10">
                   <div className="mb-4 flex items-center gap-4 lg:mb-5">
                     <Label className="text-brand">{chapter.label}</Label>
@@ -325,13 +306,14 @@ function Process() {
       )}
 
       {filter === "logistics" && (
-        <section id="logistics-process" className="logistics-section overflow-hidden bg-ivory">
+        <div id="logistics-process">
+        <section className="logistics-section overflow-hidden bg-ivory">
           <div className="shell flex flex-col justify-center py-16 lg:py-20">
             <Reveal className="flex flex-col gap-5 border-b border-charcoal/12 pb-5 lg:flex-row lg:items-end lg:justify-between">
               <div>
                 <Label className="text-brand">From factory to buyer</Label>
                 <h2 className="display mt-4 text-[clamp(2rem,3vw,3.25rem)]">
-                  Shipping &amp; logistics process.
+                  Shipping &amp; Logistics
                 </h2>
               </div>
               <p className="max-w-md text-left text-sm leading-6 text-charcoal/65 lg:text-right">
@@ -393,15 +375,98 @@ function Process() {
                 </Reveal>
               ))}
             </div>
-
-            <Reveal className="mt-6 flex flex-wrap justify-center gap-x-7 gap-y-2 border-t border-charcoal/10 pt-5 text-[10px] font-semibold uppercase tracking-[.12em] text-charcoal/50">
-              <span>Export documentation</span>
-              <span>Customs coordination</span>
-              <span>Container tracking</span>
-              <span>Destination delivery</span>
-            </Reveal>
           </div>
         </section>
+
+          {/* ── Logistics detail content ── */}
+          <section className="bg-offwhite py-20 lg:py-24">
+            <div className="shell">
+              {/* Main intro */}
+              <Reveal className="mx-auto max-w-3xl text-center">
+                <Label className="text-brand">Our Expertise</Label>
+                <h2 className="display mt-5 text-[clamp(2.25rem,4vw,4rem)]" style={{ color: '#20555A' }}>
+                  Logistics
+                </h2>
+                <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-charcoal/65">
+                  Our dedicated team within the logistics department ensures the seamless movement of
+                  our products, from packaging to delivery. With a focus on both speed and quality,
+                  our experienced professionals handle all aspects of sea and air shipments. By
+                  maintaining strong relationships with major carrier lines, we secure competitive
+                  pricing for our customers, ensuring cost-effectiveness without compromising on
+                  service.
+                </p>
+              </Reveal>
+
+              {/* 3-column detail cards */}
+              <div className="mt-16 grid gap-8 lg:grid-cols-3">
+                {/* Strategic Port Access */}
+                <Reveal delay={0} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                    <Anchor className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
+                  </span>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                    Strategic Port Access
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                    We are strategically located near major Indian ports, with Tuticorin Port at a
+                    distance of 285 KM, Cochin Port at 235 KM and Chennai Port at 485 KM, providing
+                    us with direct access to various global destinations. Our full-fledged logistics
+                    division guarantees timely delivery of consignments, overseen by a team of
+                    professionals dedicated to enhancing time-to-market efficiency.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Tuticorin — 285 km</span>
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Cochin — 235 km</span>
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Chennai — 485 km</span>
+                  </div>
+                </Reveal>
+
+                {/* Tailored Packaging Solutions */}
+                <Reveal delay={80} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                    <Package className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
+                  </span>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                    Tailored Packaging Solutions
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                    In terms of packaging, the materials used vary depending on the items being
+                    shipped. For sea shipments, palletizing is standard practice for both LCL (Less
+                    than Container Load) and FCL (Full Container Load) shipments. Additional
+                    specifications are provided upon inquiry for each item.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">LCL shipments</span>
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">FCL shipments</span>
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Palletized</span>
+                  </div>
+                </Reveal>
+
+                {/* Private Labelling */}
+                <Reveal delay={160} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
+                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                    <Tag className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
+                  </span>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                    Private Labelling
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                    We specialize in private labelling, offering support to clients looking to create
+                    their own brands and packaging materials. Our processing units can pack products
+                    under the client's brand, and we ensure that containers are loaded within our
+                    premises. The private labelling service includes detailed information such as
+                    product name, grade details, item code, gross weight, net weight, package numbers,
+                    quantity in units (size/counts/weight/CBM), packing date, and shipper information.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Custom branding</span>
+                    <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">In-premise loading</span>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </section>
+        </div>
       )}
 
       <section className="bg-brand-deep py-20 text-pure-white lg:py-24">

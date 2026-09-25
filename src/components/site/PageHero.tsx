@@ -6,12 +6,14 @@ export function PageHero({
   intro,
   image,
   titleClassName = "",
+  introClassName = "",
 }: {
   eyebrow: string;
   title: string;
   intro: string;
   image?: string;
   titleClassName?: string;
+  introClassName?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-charcoal pt-12 text-pure-white lg:pt-14">
@@ -25,7 +27,7 @@ export function PageHero({
           </h1>
         </Reveal>
         <Reveal delay={120}>
-          <p className="max-w-[46ch] text-base leading-relaxed text-pure-white/72 lg:justify-self-end">
+          <p className={`max-w-[46ch] text-base leading-relaxed lg:justify-self-end ${introClassName || "text-pure-white/72"}`}>
             {intro}
           </p>
         </Reveal>

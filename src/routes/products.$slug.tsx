@@ -163,7 +163,7 @@ function ProductDetail() {
     { image: img.processQuality, label: "Quality inspection" },
     { image: img.exportPort, label: "Export-ready shipment" },
   ];
-  const [activePhoto, setActivePhoto] = useState(gallery[0]);
+  const [activePhoto, setActivePhoto] = useState(gallery[0]!);
   const related = products.filter((product) => product.slug !== p.slug).slice(0, 3);
   const applicationVisuals = p.applications.map((name) => ({
     name,
@@ -313,14 +313,14 @@ function ProductDetail() {
           <Reveal delay={120} className="mt-10 grid gap-4 lg:grid-cols-[1.3fr_.7fr]">
             <figure className="group relative min-h-[380px] overflow-hidden rounded-md lg:min-h-[480px]">
               <img
-                src={gallery[1]?.image ?? gallery[0].image}
-                alt={gallery[1]?.label ?? gallery[0].label}
+                src={gallery[1]?.image ?? gallery[0]?.image}
+                alt={gallery[1]?.label ?? gallery[0]?.label}
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
               <figcaption className="micro-label absolute right-6 bottom-6 left-6 text-pure-white">
-                {gallery[1]?.label ?? gallery[0].label}
+                {gallery[1]?.label ?? gallery[0]?.label}
               </figcaption>
             </figure>
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-1 lg:grid-rows-2">

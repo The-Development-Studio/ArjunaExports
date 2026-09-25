@@ -59,7 +59,7 @@ export function ThreeDIcon({
   className?: string;
   iconClassName?: string;
 }) {
-  const palette = palettes[index % palettes.length];
+  const palette = palettes[index % palettes.length] ?? palettes[0]!;
   const dimension = sizes[size];
 
   return (

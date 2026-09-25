@@ -380,7 +380,7 @@ function Home() {
           <div className="mt-12 grid gap-px bg-brand-deep/15 md:grid-cols-2 lg:grid-cols-3">
             {trustPoints.map((point, index) => {
               const icons = [Award, UsersRound, PackageCheck, ClipboardCheck, Gauge, Headphones];
-              const Icon = icons[index];
+              const Icon = icons[index] ?? Award;
               return (
                 <Reveal
                   key={point.label}

@@ -38,15 +38,20 @@ const galleryItems = Object.entries(galleryModules)
             : "",
   }));
 
-const galleryTiles = galleryItems.flatMap((item, index) => {
-  const tiles = [{ type: "photo" as const, ...item }];
+type GalleryTile =
+  | { type: "photo"; size: string; image: string; number: number }
+  | { type: "logo"; size: string }
+  | { type: "mark"; size: string };
+
+const galleryTiles: GalleryTile[] = galleryItems.flatMap((item, index) => {
+  const tiles: GalleryTile[] = [{ type: "photo", ...item }];
 
   if (index === 10) {
-    tiles.push({ type: "logo" as const, size: "md:col-span-2" });
+    tiles.push({ type: "logo", size: "md:col-span-2" });
   }
 
   if (index === 25) {
-    tiles.push({ type: "mark" as const, size: "md:row-span-2" });
+    tiles.push({ type: "mark", size: "md:row-span-2" });
   }
 
   return tiles;
@@ -84,8 +89,9 @@ function Gallery() {
       <PageHero
         eyebrow="Visual Archive"
         title="Products. Process. People."
+        titleClassName="hero-title-dark text-[#20555A]"
         intro="A closer look at the materials, infrastructure and growing environments behind every Arjuna shipment."
-        image={galleryItems[0]?.image}
+        image={galleryItems[0]?.image ?? ""}
       />
 
       <section className="bg-ivory py-20 lg:py-24">

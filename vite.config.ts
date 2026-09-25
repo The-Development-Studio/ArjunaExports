@@ -61,6 +61,11 @@ export default defineConfig(({ command }) => ({
   server: {
     host: "::",
     port: 8080,
-    allowedHosts: ["given-deception-saved.ngrok-free.dev", "dairy-whoops-knapsack.ngrok-free.dev"],
+    allowedHosts: true,
+  },
+  preview: {
+    host: "::",
+    port: 8080,
+    allowedHosts: true,
   },
 }));

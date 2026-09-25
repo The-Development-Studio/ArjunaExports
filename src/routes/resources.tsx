@@ -37,6 +37,7 @@ function Resources() {
       <PageHero
         eyebrow="Tips & Advice"
         title="Knowledge that helps things grow."
+        titleClassName="hero-title-dark text-[#20555A]"
         intro="Practical guidance from coco preparation to commercial cultivation — written for growers, buyers and curious minds."
         image={img.appGreenhouse}
       />
@@ -52,7 +53,8 @@ function Resources() {
             </div>
             <div className="grid w-full grid-cols-3 justify-items-center gap-x-4 gap-y-6 sm:grid-cols-5 sm:gap-6">
               {categories.map((category, index) => {
-                const { Icon, colors } = resourceTopicIcons[index];
+                const topic = resourceTopicIcons[index] ?? resourceTopicIcons[0]!;
+                const { Icon, colors } = topic;
                 const selected = filter === category;
 
                 return (
@@ -87,7 +89,7 @@ function Resources() {
             </div>
           </Reveal>
 
-          {filter === "All" && (
+          {filter === "All" && featured && (
             <Reveal className="group mt-10 grid overflow-hidden rounded-md border-2 border-solid border-brand bg-brand-deep text-pure-white lg:grid-cols-2">
               <div className="relative min-h-[340px] overflow-hidden lg:min-h-[440px]">
                 <img

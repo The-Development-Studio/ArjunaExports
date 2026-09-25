@@ -272,6 +272,12 @@
   color: var(--pure-white) !important;
 }
 
+/* Override the dark-surface heading rule for hero titles configured with #20555A */
+.bg-charcoal h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]),
+h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
+  color: #20555A !important;
+}
+
 @utility shell {
   width: 100%;
   min-width: 0;
@@ -570,11 +576,17 @@
 
 .process-stage-copy {
   position: relative;
-  padding: clamp(1rem, 1.65vw, 1.5rem);
-  border: 1px solid color-mix(in oklab, var(--charcoal) 12%, transparent);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  border: 1.5px solid color-mix(in oklab, var(--brand) 22%, transparent);
   border-radius: var(--radius-md);
   background: color-mix(in oklab, var(--ivory) 78%, white);
   box-shadow: 0 20px 55px rgba(31, 45, 40, 0.07);
+}
+
+.process-stage-copy > div:last-child {
+  margin-top: auto;
 }
 
 .process-stage-copy::before {
@@ -589,10 +601,11 @@
 
 .process-stage-photo {
   position: relative;
-  min-height: 210px;
+  min-height: 250px;
   overflow: hidden;
+  border: 1.5px solid color-mix(in oklab, var(--brand) 22%, transparent);
   border-radius: var(--radius-md);
-  box-shadow: 0 24px 60px rgba(31, 45, 40, 0.12);
+  box-shadow: 0 20px 55px rgba(31, 45, 40, 0.07);
 }
 
 .process-stage-node {
@@ -629,8 +642,8 @@
     transform: translateX(-50%);
   }
   .process-stage-photo {
-    height: clamp(170px, 19.5vh, 205px);
-    min-height: 0;
+    height: 100%;
+    min-height: 220px;
   }
   .process-stage-node {
     position: relative;
@@ -650,7 +663,8 @@
   }
 
   .process-stage-photo {
-    height: 140px;
+    height: 100%;
+    min-height: 140px;
   }
 
   .process-stage-copy {

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 import {
   CheckCircle2,
   Container,
@@ -10,7 +10,6 @@ import {
   Orbit,
   Phone,
   ShoppingCart,
-  Smartphone,
   Sparkles,
 } from "lucide-react";
 import { useState, type FormEvent } from "react";
@@ -38,7 +37,7 @@ const contactMethods = [
     label: "Mobile",
     value: "+91 96298 74555",
     href: "tel:+919629874555",
-    icon: Smartphone,
+    icon: Phone,
   },
   {
     label: "Landline",
@@ -132,7 +131,7 @@ function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Share Your Requirement. We’ll Take It From There!"
-        titleClassName="contact-hero-title"
+        titleClassName="contact-hero-title text-[#20555A]"
         intro="Tell us what you need to source, where it needs to go and in what volume. We’ll evaluate your requirements and guide you through product specification, packaging and shipment planning."
         image={img.exportPort}
       />
@@ -157,11 +156,7 @@ function Contact() {
                     </span>
                     <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-6">
                       <span
-                        className={`min-w-0 font-extrabold leading-tight tracking-[-.025em] text-brand ${
-                          label === "Email"
-                            ? "whitespace-nowrap text-[clamp(.9rem,1.18vw,1.15rem)]"
-                            : "whitespace-nowrap text-[clamp(1.15rem,1.65vw,1.7rem)]"
-                        }`}
+                        className="min-w-0 font-extrabold leading-tight tracking-[-.025em] text-brand whitespace-nowrap text-[clamp(1.1rem,1.45vw,1.55rem)]"
                       >
                         {value}
                       </span>
@@ -179,7 +174,7 @@ function Contact() {
                     />
                   </span>
                   <span className="flex min-w-0 flex-1 items-center px-5 py-6 sm:px-6">
-                    <span className="text-[clamp(1.15rem,1.55vw,1.7rem)] font-extrabold leading-snug tracking-[-.025em] text-brand">
+                    <span className="font-extrabold leading-snug tracking-[-.025em] text-brand text-[clamp(1.1rem,1.45vw,1.55rem)]">
                       We’ll Respond within 24 Hours
                     </span>
                   </span>
@@ -196,13 +191,15 @@ function Contact() {
                     aria-hidden
                   />
                 </span>
-                <span className="flex min-w-0 flex-1 items-center px-6 py-8 lg:px-7">
-                  <span className="text-left text-base font-bold leading-relaxed text-brand xl:text-lg">
-                    <span className="block">1/140-12, GM Complex, Opp. to TMB Bank</span>
-                    <span className="block">Kumaramangalam Post, Tiruchengode TK</span>
-                    <span className="block">Namakkal District, Tamil Nadu</span>
-                    <span className="block">637205, India</span>
-                  </span>
+                <span className="flex min-w-0 flex-1 items-center px-6 py-6 lg:px-7">
+                  <div className="flex flex-col justify-center text-left text-[15px] font-bold leading-[1.65] tracking-normal text-brand sm:text-base xl:text-[17px] xl:leading-[1.7]">
+                    <span>1/140-12, GM Complex,</span>
+                    <span>Opp. to TMB Bank</span>
+                    <span>Kumaramangalam Post,</span>
+                    <span>Tiruchengode TK</span>
+                    <span>Namakkal District, Tamil Nadu</span>
+                    <span>637205, India</span>
+                  </div>
                 </span>
               </address>
             </Reveal>

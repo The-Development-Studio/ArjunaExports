@@ -40,7 +40,7 @@ export function CompanyJourney() {
 
   const scrollMilestone = Math.min(timeline.length - 1, Math.floor(progress * timeline.length));
   const activeIndex = hoveredMilestone ?? scrollMilestone;
-  const active = timeline[activeIndex];
+  const active = timeline[activeIndex] ?? timeline[0]!;
 
   return (
     <section
