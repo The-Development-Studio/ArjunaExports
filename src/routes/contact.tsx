@@ -8,7 +8,6 @@ import {
   MapPin,
   MessageCircleMore,
   Orbit,
-  Phone,
   ShoppingCart,
   Sparkles,
 } from "lucide-react";
@@ -16,6 +15,7 @@ import { useState, type FormEvent } from "react";
 import { img, products } from "@/lib/site-data";
 import { PageHero, pageMeta } from "@/components/site/PageHero";
 import { Label, PrimaryButton, Reveal } from "@/components/site/primitives";
+import { DeskPhoneIcon } from "@/components/site/DeskPhoneIcon";
 
 export const Route = createFileRoute("/contact")({
   head: () =>
@@ -37,13 +37,13 @@ const contactMethods = [
     label: "Mobile",
     value: "+91 96298 74555",
     href: "tel:+919629874555",
-    icon: Phone,
+    icon: DeskPhoneIcon,
   },
   {
     label: "Landline",
     value: "+91 4288 250125",
     href: "tel:+914288250125",
-    icon: Phone,
+    icon: DeskPhoneIcon,
   },
 ];
 
@@ -147,7 +147,7 @@ function Contact() {
                     aria-label={`${label}: ${value}`}
                     className="group flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)] transition-transform hover:-translate-y-1"
                   >
-                    <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-28 lg:w-24 xl:w-28">
+                    <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
                       <Icon
                         className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
                         strokeWidth={1.7}
@@ -171,7 +171,7 @@ function Contact() {
               ))}
               <Reveal className="h-full">
                 <div className="flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)]">
-                  <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-28 lg:w-24 xl:w-28">
+                  <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
                     <MessageCircleMore
                       className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
                       strokeWidth={1.7}
@@ -192,7 +192,7 @@ function Contact() {
 
             <Reveal delay={120} className="h-full">
               <address className="flex h-full min-h-full overflow-hidden rounded-sm bg-[#68e6c2] not-italic shadow-[0_12px_30px_rgba(0,100,101,.08)]">
-                <span className="flex w-24 shrink-0 items-center justify-center bg-[#286571] sm:w-28 lg:w-24 xl:w-28">
+                <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
                   <MapPin
                     className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
                     strokeWidth={1.7}
