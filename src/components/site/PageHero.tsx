@@ -16,18 +16,18 @@ export function PageHero({
   introClassName?: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-charcoal pt-12 text-pure-white lg:pt-14">
+    <section className="relative overflow-hidden bg-charcoal pt-12 text-[#20555A] lg:pt-14">
       <div className="shell relative z-10 grid min-h-[260px] items-end gap-6 py-8 lg:min-h-[280px] lg:grid-cols-[1.2fr_.8fr] lg:gap-12 lg:py-9">
         <Reveal>
-          <span className="micro-label mb-6 block text-aqua">{eyebrow}</span>
+          <span className="micro-label mb-6 block text-[#20555A]">{eyebrow}</span>
           <h1
-            className={`display max-w-[21ch] text-[clamp(2.25rem,3.8vw,4rem)] leading-[1.02] ${titleClassName}`}
+            className={`display max-w-[21ch] text-[clamp(2.25rem,3.8vw,4rem)] leading-[1.02] text-[#20555A] ${titleClassName}`}
           >
             {title}
           </h1>
         </Reveal>
         <Reveal delay={120}>
-          <p className={`max-w-[46ch] text-base leading-relaxed lg:justify-self-end ${introClassName || "text-pure-white/72"}`}>
+          <p className={`max-w-[46ch] text-base leading-relaxed text-[#20555A] lg:justify-self-end ${introClassName}`}>
             {intro}
           </p>
         </Reveal>

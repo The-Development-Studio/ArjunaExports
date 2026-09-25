@@ -65,6 +65,7 @@
   --color-offwhite: var(--offwhite);
   --color-charcoal: var(--charcoal);
   --color-pure-white: var(--pure-white);
+  --color-body-text: var(--body-text);
 
   --font-display: "Bowlby One", "Arial Black", ui-sans-serif, system-ui, sans-serif;
   --font-subtitle: "Macabrough", "Bowlby One", "Arial Black", ui-sans-serif, system-ui, sans-serif;
@@ -90,19 +91,20 @@
   --offwhite: oklch(0.9843 0.004 106.47);
   --charcoal: #68e6c2;
   --pure-white: oklch(1 0 0);
+  --body-text: #20555A;
 
   --background: var(--offwhite);
-  --foreground: var(--charcoal);
+  --foreground: var(--body-text);
   --card: var(--pure-white);
-  --card-foreground: var(--charcoal);
+  --card-foreground: var(--body-text);
   --popover: var(--pure-white);
-  --popover-foreground: var(--charcoal);
+  --popover-foreground: var(--body-text);
   --primary: var(--brand);
   --primary-foreground: var(--pure-white);
   --secondary: var(--ivory);
-  --secondary-foreground: var(--charcoal);
+  --secondary-foreground: var(--body-text);
   --muted: var(--ivory);
-  --muted-foreground: oklch(0.52 0.012 196);
+  --muted-foreground: var(--body-text);
   --accent: var(--brand-soft);
   --accent-foreground: var(--brand-deep);
   --destructive: oklch(0.577 0.245 27.325);
@@ -128,7 +130,7 @@
     width: 100%;
     overflow-x: clip;
     background-color: var(--color-background);
-    color: var(--color-foreground);
+    color: var(--body-text);
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.65;
@@ -166,14 +168,23 @@
     overflow-wrap: break-word;
     word-break: normal;
     hyphens: auto;
+    color: var(--body-text);
   }
 
-  p[class*="text-charcoal/"] {
-    color: color-mix(in oklab, var(--charcoal) 88%, transparent) !important;
+  /* Body text, supporting text, descriptions, labels, captions, and informational text mapped to #20555A */
+  :is(
+    [class~="text-charcoal"],
+    [class*="text-charcoal/"],
+    p[class*="text-charcoal/"],
+    p[class*="text-brand-deep/"]
+  ) {
+    color: var(--body-text) !important;
   }
 
-  p[class*="text-brand-deep/"] {
-    color: color-mix(in oklab, var(--brand-deep) 88%, transparent) !important;
+  /* Maintain sufficient contrast for text on dark backgrounds (e.g. brand, brand-deep, hero video, footer) */
+  :is(.bg-brand, .bg-brand-deep, .home-hero, footer, [class~="text-pure-white"])
+    p:not([class*="text-[#20555A]"]):not([class*="text-body-text"]) {
+    color: inherit;
   }
 
   p[class*="text-pure-white/"] {
@@ -264,7 +275,7 @@
   color: var(--brand) !important;
 }
 
-:is(.bg-charcoal, .bg-brand-deep, .bg-brand, .home-hero, [class~="text-pure-white"])
+:is(.bg-brand-deep, .bg-brand, .home-hero, [class~="text-pure-white"])
   :is(h1, h2, h3, h4, h5, h6, .micro-label),
 :is(h1, h2, h3, h4, h5, h6).text-pure-white,
 :is(h1, h2, h3, h4, h5, h6).text-ivory,
@@ -272,10 +283,10 @@
   color: var(--pure-white) !important;
 }
 
-/* Override the dark-surface heading rule for hero titles configured with #20555A */
-.bg-charcoal h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]),
+/* Ensure .bg-charcoal (mint background) surfaces maintain consistent, high-contrast dark-teal #20555A typography */
+.bg-charcoal :is(h1, h2, h3, h4, h5, h6, .micro-label, p, a.micro-label),
 h1:is(.hero-title-dark, .contact-hero-title, [class*="text-[#20555A]"]) {
-  color: #20555A !important;
+  color: var(--body-text) !important;
 }
 
 @utility shell {

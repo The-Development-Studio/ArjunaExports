@@ -109,6 +109,9 @@ Off White:
 Charcoal:
 #68e6c2
 
+Primary Body Text:
+#20555A
+
 White:
 #FFFFFF
 

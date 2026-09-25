@@ -281,7 +281,7 @@ function Home() {
           </div>
         </div>
       </section>
-      <section className="bg-charcoal py-20 text-pure-white lg:py-28">
+      <section className="bg-charcoal py-20 text-[#20555A] lg:py-28">
         <div className="shell">
           <Reveal>
             <ChapterHeading label="02 / Transformation" lines={["Nature meets", "precision."]} />
@@ -302,17 +302,17 @@ function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-7">
-                  <span className="display text-4xl text-aqua/60">
+                  <span className="display text-4xl text-[#20555A]/60">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="display mt-2 text-3xl">{s.title}</h3>
-                  <p className="mt-2 max-w-md text-sm text-pure-white/65">{s.text}</p>
-                  <span className="micro-label mt-4 block text-aqua">{s.data}</span>
+                  <h3 className="display mt-2 text-3xl text-[#20555A]">{s.title}</h3>
+                  <p className="mt-2 max-w-md text-sm text-[#20555A]">{s.text}</p>
+                  <span className="micro-label mt-4 block text-[#20555A]">{s.data}</span>
                 </div>
               </Reveal>
             ))}
           </div>
-          <TextLink to="/process" className="mt-12 text-aqua">
+          <TextLink to="/process" className="mt-12 text-[#20555A]">
             Explore the full process
           </TextLink>
         </div>
