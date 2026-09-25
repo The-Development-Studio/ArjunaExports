@@ -7,7 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { Header } from "../components/site/Header";
@@ -39,6 +39,24 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
 
+  useEffect(() => {
+    const message = error?.message || "";
+    const isChunkError =
+      message.includes("Failed to fetch dynamically imported module") ||
+      message.includes("dynamically imported module") ||
+      message.includes("Loading chunk") ||
+      message.includes("Importing a module script failed");
+
+    if (isChunkError && typeof window !== "undefined") {
+      const storageKey = `chunk_reload_${window.location.pathname}`;
+      const lastReload = sessionStorage.getItem(storageKey);
+      if (!lastReload || Date.now() - Number(lastReload) > 10000) {
+        sessionStorage.setItem(storageKey, String(Date.now()));
+        window.location.reload();
+      }
+    }
+  }, [error]);
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -51,8 +69,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
-              router.invalidate();
-              reset();
+              if (typeof window !== "undefined") {
+                window.location.reload();
+              } else {
+                router.invalidate();
+                reset();
+              }
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
@@ -127,6 +149,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const handlePreloadError = () => {
+      window.location.reload();
+    };
+    window.addEventListener("vite:preloadError", handlePreloadError);
+    return () => window.removeEventListener("vite:preloadError", handlePreloadError);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

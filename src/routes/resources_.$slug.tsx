@@ -30,6 +30,7 @@ const ribbonStyles = [
 
 function ArticleDetail() {
   const article = Route.useLoaderData();
+  if (!article) return null;
   const related = resourceArticles.filter((item) => item.slug !== article.slug).slice(0, 3);
   const categories = resourceCategories
     .filter((category) => category !== "All")

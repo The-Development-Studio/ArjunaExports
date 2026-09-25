@@ -1,5 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { applications, img, products } from "@/lib/site-data";
 import {
   Arrow,
@@ -160,15 +160,27 @@ export const Route = createFileRoute("/products/$slug")({
 });
 function ProductDetail() {
   const p = Route.useLoaderData();
-  const gallery = productGalleries[p.slug] ?? [
+  if (!p) {
+    return null;
+  }
+  const gallery = (p.slug ? productGalleries[p.slug] : undefined) ?? [
     { image: p.image, label: p.name },
     { image: img.stageMedium, label: "Prepared growing medium" },
     { image: img.processQuality, label: "Quality inspection" },
     { image: img.exportPort, label: "Export-ready shipment" },
   ];
-  const [activePhoto, setActivePhoto] = useState(gallery[0]!);
+  const [activePhoto, setActivePhoto] = useState(
+    gallery[0] ?? { image: p.image, label: p.name },
+  );
+
+  useEffect(() => {
+    if (gallery[0]) {
+      setActivePhoto(gallery[0]);
+    }
+  }, [p.slug]);
+
   const related = products.filter((product) => product.slug !== p.slug).slice(0, 3);
-  const applicationVisuals = p.applications.map((name) => ({
+  const applicationVisuals = (p.applications ?? []).map((name) => ({
     name,
     image: applications.find((application) => application.title === name)?.image ?? p.image,
   }));
@@ -176,11 +188,13 @@ function ProductDetail() {
   const isCoirMatting = p.slug === "coir-matting";
   const isGramBlock = p.slug === "650-gram-block";
   const isHuskChips = p.slug === "husk-chips";
-  const isPackagingPhoto = [
-    img.productCocoPeat5kg,
-    img.productCocoPeat650g,
-    img.productCocoHuskChips4kg,
-  ].includes(activePhoto.image);
+  const isPackagingPhoto = activePhoto?.image
+    ? [
+        img.productCocoPeat5kg,
+        img.productCocoPeat650g,
+        img.productCocoHuskChips4kg,
+      ].includes(activePhoto.image)
+    : false;
   const specification = [
     p.name,
     "",
@@ -234,15 +248,15 @@ function ProductDetail() {
             {isPackagingPhoto ? (
               <div className="absolute inset-x-0 top-0 bottom-[140px] flex items-center justify-center p-6 sm:bottom-[150px] sm:p-8">
                 <img
-                  src={activePhoto.image}
-                  alt={activePhoto.label}
+                  src={activePhoto?.image}
+                  alt={activePhoto?.label ?? p.name}
                   className="max-h-full w-auto max-w-full object-contain drop-shadow-xl transition duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
                 />
               </div>
             ) : (
               <img
-                src={activePhoto.image}
-                alt={activePhoto.label}
+                src={activePhoto?.image}
+                alt={activePhoto?.label ?? p.name}
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
               />
             )}
@@ -260,7 +274,7 @@ function ProductDetail() {
                     Arjuna Exports · Product Series
                   </span>
                   <p className="mt-3 max-w-sm text-sm leading-relaxed text-pure-white/80">
-                    {activePhoto.label}
+                    {activePhoto?.label ?? p.name}
                   </p>
                 </div>
                 <div className="grid grid-cols-6 gap-2">
@@ -277,7 +291,7 @@ function ProductDetail() {
                         onClick={() => setActivePhoto(photo)}
                         aria-label={`Show ${photo.label}`}
                         className={`group relative aspect-square overflow-hidden rounded-sm border-2 transition duration-300 ${
-                          activePhoto.image === photo.image
+                          activePhoto?.image === photo.image
                             ? "border-aqua shadow-[0_0_0_3px_rgba(104,230,194,.18)]"
                             : "border-pure-white/30 opacity-75 hover:border-pure-white hover:opacity-100"
                         } ${isThumbPackaging ? "bg-pure-white" : ""}`}
