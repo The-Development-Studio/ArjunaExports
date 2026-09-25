@@ -8,6 +8,7 @@ import {
   MapPin,
   MessageCircleMore,
   Orbit,
+  Phone,
   ShoppingCart,
   Sparkles,
 } from "lucide-react";
@@ -43,7 +44,7 @@ const contactMethods = [
     label: "Landline",
     value: "+91 4288 250125",
     href: "tel:+914288250125",
-    icon: DeskPhoneIcon,
+    icon: Phone,
   },
 ];
 
