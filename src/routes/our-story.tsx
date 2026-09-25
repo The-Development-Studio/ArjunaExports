@@ -92,32 +92,98 @@ const founderStory = [
 function Story() {
   return (
     <>
-      <section className="bg-offwhite pt-20 lg:pt-24">
-        <div className="shell grid overflow-hidden rounded-md border border-brand/12 bg-pure-white lg:grid-cols-2">
-          <Reveal className="flex flex-col justify-between p-8 sm:p-10 lg:p-14">
-            <div>
-              <Label className="text-brand">About Arjuna Exports</Label>
-              <h1 className="mt-7 max-w-[15ch] text-balance text-[clamp(2.5rem,4.5vw,4rem)] font-bold leading-[1.08] tracking-tight">
-                Rooted in agriculture. Built for the world.
-              </h1>
-              <p className="mt-7 max-w-xl text-base leading-relaxed text-charcoal/78 sm:text-lg">
-                A South India–based exporter of coco substrate solutions for professional growers,
-                horticultural businesses, and international customers.
-              </p>
+      <section className="bg-offwhite pt-16 pb-6 sm:pt-20 sm:pb-8 lg:pt-24 lg:pb-10">
+        <div className="shell">
+          <Reveal className="relative overflow-hidden rounded-md border border-[#20555A]/16 bg-pure-white p-7 sm:p-10 lg:p-12 xl:p-14">
+            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16 items-start">
+              {/* Left Column: Label + Headline */}
+              <div className="flex flex-col justify-between lg:col-span-5 h-full">
+                <div>
+                  <Label className="text-[#20555A]">About Arjuna Exports</Label>
+                  <h1 className="display mt-6 max-w-[14ch] text-balance text-[clamp(2.5rem,4.2vw,4.25rem)] leading-[1.08] text-[#20555A]">
+                    Rooted in agriculture. Built for the world.
+                  </h1>
+                </div>
+
+                <div className="mt-10 lg:mt-16 border-t border-[#20555A]/16 pt-6 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.18em] text-[#20555A]/75">
+                  <span className="inline-flex items-center gap-2">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#20555A]" />
+                    Commercial Substrates
+                  </span>
+                  <span>Tamil Nadu · India</span>
+                </div>
+              </div>
+
+              {/* Right Column: Introduction + 2019 Founded + 3 Highlights */}
+              <div className="flex flex-col justify-between lg:col-span-7 h-full space-y-8">
+                <div>
+                  <p className="text-base sm:text-lg lg:text-xl font-medium leading-relaxed text-[#20555A]">
+                    Arjuna Exports is a South India–based exporter of coco substrate solutions for
+                    professional growers, horticultural businesses, and international customers.
+                  </p>
+                  <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#20555A]/85">
+                    Rooted in the coconut-producing heartland of Tamil Nadu, we combine deep
+                    agricultural understanding with modern engineering discipline and stringent
+                    quality control. From substrate blending to containerized port dispatch, we
+                    provide consistent, crop-tailored growing media engineered for professional
+                    growing environments worldwide.
+                  </p>
+                </div>
+
+                {/* 2019 — FOUNDED element */}
+                <div className="flex flex-wrap items-center justify-between gap-4 border-y border-[#20555A]/16 py-5">
+                  <div className="flex items-baseline gap-3.5">
+                    <span className="display text-4xl sm:text-5xl font-bold tracking-tight text-[#20555A]">
+                      2019
+                    </span>
+                    <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#20555A]/75">
+                      — Founded
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#20555A]/70">
+                    <span className="h-px w-6 bg-[#20555A]/40" />
+                    <span>Namakkal District, South India</span>
+                  </div>
+                </div>
+
+                {/* 3 small supporting company facts / highlights */}
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#20555A]">
+                      01 · Origin
+                    </span>
+                    <h3 className="mt-2 text-sm sm:text-base font-bold text-[#20555A]">
+                      100% Organic Sourcing
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#20555A]/80">
+                      Ethically collected raw coconut husks from local Tamil Nadu farming clusters.
+                    </p>
+                  </div>
+                  <div className="border-t border-[#20555A]/15 pt-5 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#20555A]">
+                      02 · Quality
+                    </span>
+                    <h3 className="mt-2 text-sm sm:text-base font-bold text-[#20555A]">
+                      Low-EC Washed Grades
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#20555A]/80">
+                      Multi-cycle fresh water washing ensuring low electrical conductivity and ideal pH balance.
+                    </p>
+                  </div>
+                  <div className="border-t border-[#20555A]/15 pt-5 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#20555A]">
+                      03 · Logistics
+                    </span>
+                    <h3 className="mt-2 text-sm sm:text-base font-bold text-[#20555A]">
+                      Port-Direct Logistics
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-[13px] leading-relaxed text-[#20555A]/80">
+                      Containerised full-load freight dispatched through Tuticorin and Chennai ports.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="mt-12 flex items-end gap-5 border-t border-brand/20 pt-6">
-              <p className="text-3xl font-extrabold tracking-tight text-brand">2019</p>
-              <p className="pb-1 text-[10px] font-semibold uppercase tracking-[.2em] text-charcoal/55">
-                Founded
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={100} className="min-h-[380px] overflow-hidden lg:min-h-[540px]">
-            <img
-              src={img.storyPeople}
-              alt="Arjuna Exports team working with coco substrate products"
-              className="h-full w-full object-cover object-center"
-            />
           </Reveal>
         </div>
       </section>
