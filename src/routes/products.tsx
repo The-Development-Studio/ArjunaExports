@@ -56,15 +56,27 @@ function Products() {
                   href={`/products/${p.slug}`}
                   className="grid min-h-[320px] gap-0 md:grid-cols-[minmax(300px,.9fr)_1.1fr]"
                 >
-                  <div className="relative min-h-[280px] overflow-hidden">
+                  <div
+                    className={`relative min-h-[300px] overflow-hidden ${
+                      p.slug === "coir-matting"
+                        ? "bg-brand-soft"
+                        : "flex items-center justify-center bg-pure-white p-6 sm:p-8"
+                    }`}
+                  >
                     <img
                       src={p.image}
                       alt={p.name}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                      className={`transition duration-700 group-hover:scale-105 ${
+                        p.slug === "coir-matting"
+                          ? "absolute inset-0 h-full w-full object-cover"
+                          : "max-h-[260px] sm:max-h-[290px] w-auto max-w-full object-contain drop-shadow-md"
+                      }`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/55 via-transparent to-transparent" />
-                    <span className="micro-label absolute bottom-6 left-6 rounded-sm bg-brand-deep/80 px-3 py-2 text-pure-white">
+                    {p.slug === "coir-matting" && (
+                      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/55 via-transparent to-transparent" />
+                    )}
+                    <span className="micro-label absolute top-5 left-5 z-10 rounded-sm bg-brand-deep/85 px-3 py-1.5 text-[11px] font-semibold tracking-wider text-pure-white uppercase backdrop-blur-sm">
                       {p.category}
                     </span>
                   </div>

@@ -14,6 +14,7 @@ import coconutIcon from "@/assets/coconut2.svg";
 
 const productGalleries: Record<string, Array<{ image: string; label: string }>> = {
   "coco-peat-blocks": [
+    { image: img.productCocoPeat5kg, label: "Premium 5kg Coco Peat Block" },
     { image: img.productBlock, label: "Compressed coco peat blocks" },
     { image: img.detailBlockStack, label: "Export-ready coco peat block stacks" },
     { image: img.stagePith, label: "Screened coco pith texture" },
@@ -30,6 +31,7 @@ const productGalleries: Record<string, Array<{ image: string; label: string }>> 
     { image: img.exportPort, label: "Export logistics readiness" },
   ],
   "650-gram-block": [
+    { image: img.productCocoPeat650g, label: "Premium 650g Coco Peat Brick" },
     { image: img.productBlock, label: "650 gram coco peat block format" },
     { image: img.detailBlockStack, label: "Compressed coco block stacks" },
     { image: img.stagePith, label: "Screened coco pith" },
@@ -38,6 +40,7 @@ const productGalleries: Record<string, Array<{ image: string; label: string }>> 
     { image: img.processPackaging, label: "Private-label packing formats" },
   ],
   "husk-chips": [
+    { image: img.productCocoHuskChips4kg, label: "Premium 4kg Coco Husk Chips" },
     { image: img.stageHusk, label: "Coconut husk chips source material" },
     { image: img.stageCoconut, label: "Renewable coconut origin" },
     { image: img.stageFibre, label: "Coarse coir structure" },
@@ -173,6 +176,11 @@ function ProductDetail() {
   const isCoirMatting = p.slug === "coir-matting";
   const isGramBlock = p.slug === "650-gram-block";
   const isHuskChips = p.slug === "husk-chips";
+  const isPackagingPhoto = [
+    img.productCocoPeat5kg,
+    img.productCocoPeat650g,
+    img.productCocoHuskChips4kg,
+  ].includes(activePhoto.image);
   const specification = [
     p.name,
     "",
@@ -218,13 +226,33 @@ function ProductDetail() {
           aria-hidden="true"
         />
         <div className="shell grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-14">
-          <div className="relative min-h-[400px] overflow-hidden rounded-md border border-brand/15 shadow-[0_20px_60px_rgba(31,45,40,.12)] sm:min-h-[480px] lg:min-h-[540px]">
-            <img
-              src={activePhoto.image}
-              alt={activePhoto.label}
-              className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
+          <div
+            className={`relative min-h-[400px] overflow-hidden rounded-md border border-brand/15 shadow-[0_20px_60px_rgba(31,45,40,.12)] sm:min-h-[480px] lg:min-h-[540px] ${
+              isPackagingPhoto ? "bg-pure-white" : "bg-charcoal"
+            }`}
+          >
+            {isPackagingPhoto ? (
+              <div className="absolute inset-x-0 top-0 bottom-[140px] flex items-center justify-center p-6 sm:bottom-[150px] sm:p-8">
+                <img
+                  src={activePhoto.image}
+                  alt={activePhoto.label}
+                  className="max-h-full w-auto max-w-full object-contain drop-shadow-xl transition duration-500 ease-[cubic-bezier(.22,1,.36,1)]"
+                />
+              </div>
+            ) : (
+              <img
+                src={activePhoto.image}
+                alt={activePhoto.label}
+                className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
+              />
+            )}
+            <div
+              className={`pointer-events-none absolute inset-0 ${
+                isPackagingPhoto
+                  ? "bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"
+                  : "bg-gradient-to-t from-charcoal/75 via-transparent to-charcoal/10"
+              }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/75 via-transparent to-charcoal/10" />
             <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
               <div className="flex flex-col gap-5">
                 <div>
@@ -236,26 +264,35 @@ function ProductDetail() {
                   </p>
                 </div>
                 <div className="grid grid-cols-6 gap-2">
-                  {gallery.map((photo) => (
-                    <button
-                      key={photo.label}
-                      type="button"
-                      onClick={() => setActivePhoto(photo)}
-                      aria-label={`Show ${photo.label}`}
-                      className={`group relative aspect-square overflow-hidden rounded-sm border-2 transition duration-300 ${
-                        activePhoto.image === photo.image
-                          ? "border-aqua shadow-[0_0_0_3px_rgba(104,230,194,.18)]"
-                          : "border-pure-white/30 opacity-75 hover:border-pure-white hover:opacity-100"
-                      }`}
-                    >
-                      <img
-                        src={photo.image}
-                        alt=""
-                        loading="lazy"
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
-                      />
-                    </button>
-                  ))}
+                  {gallery.map((photo) => {
+                    const isThumbPackaging = [
+                      img.productCocoPeat5kg,
+                      img.productCocoPeat650g,
+                      img.productCocoHuskChips4kg,
+                    ].includes(photo.image);
+                    return (
+                      <button
+                        key={photo.label}
+                        type="button"
+                        onClick={() => setActivePhoto(photo)}
+                        aria-label={`Show ${photo.label}`}
+                        className={`group relative aspect-square overflow-hidden rounded-sm border-2 transition duration-300 ${
+                          activePhoto.image === photo.image
+                            ? "border-aqua shadow-[0_0_0_3px_rgba(104,230,194,.18)]"
+                            : "border-pure-white/30 opacity-75 hover:border-pure-white hover:opacity-100"
+                        } ${isThumbPackaging ? "bg-pure-white" : ""}`}
+                      >
+                        <img
+                          src={photo.image}
+                          alt=""
+                          loading="lazy"
+                          className={`h-full w-full transition duration-500 group-hover:scale-110 ${
+                            isThumbPackaging ? "object-contain p-0.5" : "object-cover"
+                          }`}
+                        />
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -671,12 +708,22 @@ function ProductDetail() {
             {related.map((product, i) => (
               <Reveal key={product.slug} delay={i * 70} className="group">
                 <a href={`/products/${product.slug}`}>
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div
+                    className={`aspect-[4/3] overflow-hidden rounded-md border border-brand/15 ${
+                      product.slug === "coir-matting"
+                        ? "bg-brand-soft"
+                        : "flex items-center justify-center bg-pure-white p-4"
+                    }`}
+                  >
                     <img
                       src={product.image}
                       alt={product.name}
                       loading="lazy"
-                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                      className={`transition duration-700 group-hover:scale-105 ${
+                        product.slug === "coir-matting"
+                          ? "h-full w-full object-cover"
+                          : "max-h-full w-auto max-w-full object-contain drop-shadow-sm"
+                      }`}
                     />
                   </div>
                   <span className="micro-label mt-6 block text-brand">{product.category}</span>

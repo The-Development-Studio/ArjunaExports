@@ -19,6 +19,9 @@ import stage7Inspection from "@/assets/Process/stage-7-inspection.jpg";
 import stage8Packaging from "@/assets/Process/stage-8-packaging.jpg";
 import stage9Shipping from "@/assets/Process/stage-9-shipping.jpg";
 import productBlock from "@/assets/product-block.jpg";
+import productCocoPeat5kg from "@/assets/product-coco-peat-5kg.png";
+import productCocoPeat650g from "@/assets/product-coco-peat-650g.png";
+import productCocoHuskChips4kg from "@/assets/product-coco-husk-chips-4kg.png";
 import productGrowbag from "@/assets/product-growbag.jpg";
 import productErosion from "@/assets/product-erosion.jpg";
 import productFloor from "@/assets/product-floor.jpg";
@@ -68,6 +71,9 @@ export const img = {
   processWashing,
   coirBoard,
   productBlock,
+  productCocoPeat5kg,
+  productCocoPeat650g,
+  productCocoHuskChips4kg,
   productGrowbag,
   productErosion,
   productFloor,
@@ -135,7 +141,7 @@ export const products: Product[] = [
     slug: "coco-peat-blocks",
     name: "Coco Peat Blocks",
     category: "Coco Peat",
-    image: productBlock,
+    image: productCocoPeat5kg,
     short: "Compressed, low-EC coco pith for professional substrate blending.",
     format: "5 kg block · 650 g brick · 30 kg bale",
     application: "Substrate blending, nurseries, potting mixes",
@@ -193,7 +199,7 @@ export const products: Product[] = [
     slug: "650-gram-block",
     name: "650 Gram Block",
     category: "Coco Peat",
-    image: productBlock,
+    image: productCocoPeat650g,
     short: "Compact coco peat block format for retail packs and smaller growing applications.",
     format: "650 g compressed block",
     application: "Retail gardening, nurseries, potting mixes and sampling",
@@ -222,9 +228,9 @@ export const products: Product[] = [
     slug: "husk-chips",
     name: "Husk Chips",
     category: "Coco Husk",
-    image: stageHusk,
+    image: productCocoHuskChips4kg,
     short: "Chunky coconut husk chips for airy substrate blends and orchid-style growing media.",
-    format: "Loose chips · Compressed bales · Custom grading",
+    format: "4 kg block · Loose chips · Compressed bales",
     application: "Orchids, aroids, nursery blends and hydroponic substrates",
     overview:
       "Coconut husk chips add structure, drainage and air space to professional growing mixes. Custom grading helps customers balance water retention with fast drainage for crop-specific blends.",

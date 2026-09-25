@@ -98,13 +98,23 @@ function ProductCarousel() {
                 tabIndex={duplicate ? -1 : undefined}
                 className="group block w-[min(82vw,22rem)] shrink-0 overflow-hidden rounded-md border border-brand/15 bg-ivory shadow-[0_14px_38px_rgba(31,45,40,.08)]"
               >
-                <div className="aspect-[4/3] overflow-hidden bg-brand-soft">
+                <div
+                  className={`aspect-[4/3] overflow-hidden ${
+                    product.slug === "coir-matting"
+                      ? "bg-brand-soft"
+                      : "flex items-center justify-center bg-pure-white p-4"
+                  }`}
+                >
                   <img
                     src={product.image}
                     alt={duplicate ? "" : product.name}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    className={`transition duration-700 group-hover:scale-105 ${
+                      product.slug === "coir-matting"
+                        ? "h-full w-full object-cover"
+                        : "max-h-full w-auto max-w-full object-contain drop-shadow-sm"
+                    }`}
                   />
                 </div>
                 <div className="p-6">
