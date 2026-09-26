@@ -27,24 +27,41 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
-const contactMethods = [
+const contactCards = [
   {
+    key: "email",
     label: "Email",
-    value: "info@arjunexports.com",
-    href: "mailto:info@arjunexports.com",
+    value: "info@arjunaexports.com",
+    href: "mailto:info@arjunaexports.com",
     icon: Mail,
+    orderClass: "order-1 md:order-1",
+    isEmail: true,
   },
   {
+    key: "mobile",
     label: "Mobile",
     value: "+91 96298 74555",
     href: "tel:+919629874555",
     icon: DeskPhoneIcon,
+    orderClass: "order-2 md:order-2",
+    isEmail: false,
   },
   {
+    key: "hours",
+    label: "Hours",
+    value: "We’ll Respond within 24 Hours",
+    icon: MessageCircleMore,
+    orderClass: "order-4 md:order-3",
+    isEmail: false,
+  },
+  {
+    key: "landline",
     label: "Landline",
     value: "+91 4288 250125",
     href: "tel:+914288250125",
-    icon: Phone,
+    icon: DeskPhoneIcon,
+    orderClass: "order-3 md:order-4",
+    isEmail: false,
   },
 ];
 
@@ -132,7 +149,7 @@ function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Share Your Requirement. We’ll Take It From There!"
-        titleClassName="contact-hero-title text-[#20555A]"
+        titleClassName="contact-hero-title leading-[1.08] pb-1 text-[#20555A]"
         intro="Tell us what you need to source, where it needs to go and in what volume. We’ll evaluate your requirements and guide you through product specification, packaging and shipment planning."
         image={img.exportPort}
       />
@@ -141,58 +158,59 @@ function Contact() {
         <div className="shell">
           <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
             <div className="grid auto-rows-fr gap-6 md:grid-cols-2">
-              {contactMethods.map(({ label, value, href, icon: Icon }) => (
-                <Reveal key={label} className="h-full">
-                  <a
-                    href={href}
-                    aria-label={`${label}: ${value}`}
-                    className="group flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)] transition-transform hover:-translate-y-1"
-                  >
-                    <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
-                      <Icon
-                        className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
-                        strokeWidth={1.7}
-                        aria-hidden
-                      />
-                    </span>
-                    <span className="flex min-w-0 flex-1 items-center justify-center px-3.5 py-5 text-center sm:px-4 sm:py-6 lg:px-3 xl:px-5">
-                      <span
-                        className={`min-w-0 font-extrabold leading-tight tracking-[-.025em] text-[#20555A] text-center ${
-                          label === "Email"
-                            ? "whitespace-nowrap text-[clamp(0.78rem,1.12vw,1.25rem)] xl:text-[1.2rem]"
-                            : "whitespace-nowrap text-[clamp(1.05rem,1.4vw,1.5rem)]"
-                        }`}
-                        style={{ color: "#20555A" }}
-                      >
-                        {value}
+              {contactCards.map((card) => (
+                <Reveal key={card.key} className={`h-full ${card.orderClass}`}>
+                  {card.href ? (
+                    <a
+                      href={card.href}
+                      aria-label={`${card.label}: ${card.value}`}
+                      className="group flex h-full min-h-[140px] overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)] transition-transform hover:-translate-y-1"
+                    >
+                      <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
+                        <card.icon
+                          className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
+                          strokeWidth={1.7}
+                          aria-hidden
+                        />
                       </span>
-                    </span>
-                  </a>
+                      <span className="flex min-w-0 flex-1 items-center justify-center px-3.5 py-5 text-center sm:px-4 sm:py-6 lg:px-3 xl:px-5">
+                        <span
+                          className={`min-w-0 font-extrabold leading-tight tracking-[-.025em] text-[#20555A] text-center ${
+                            card.isEmail
+                              ? "whitespace-nowrap text-[clamp(0.92rem,1.22vw,1.35rem)]"
+                              : "whitespace-nowrap text-[clamp(1.05rem,1.4vw,1.5rem)]"
+                          }`}
+                          style={{ color: "#20555A" }}
+                        >
+                          {card.value}
+                        </span>
+                      </span>
+                    </a>
+                  ) : (
+                    <div className="flex h-full min-h-[140px] overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)]">
+                      <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
+                        <card.icon
+                          className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
+                          strokeWidth={1.7}
+                          aria-hidden
+                        />
+                      </span>
+                      <span className="flex min-w-0 flex-1 items-center justify-center px-4 py-5 text-center sm:px-5 sm:py-6">
+                        <span
+                          className="font-extrabold leading-snug tracking-[-.025em] text-[#20555A] text-[clamp(1rem,1.32vw,1.45rem)]"
+                          style={{ color: "#20555A" }}
+                        >
+                          {card.value}
+                        </span>
+                      </span>
+                    </div>
+                  )}
                 </Reveal>
               ))}
-              <Reveal className="h-full">
-                <div className="flex h-full min-h-32 overflow-hidden rounded-sm bg-[#68e6c2] shadow-[0_12px_30px_rgba(0,100,101,.08)]">
-                  <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
-                    <MessageCircleMore
-                      className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
-                      strokeWidth={1.7}
-                      aria-hidden
-                    />
-                  </span>
-                  <span className="flex min-w-0 flex-1 items-center justify-center px-4 py-5 text-center sm:px-5 sm:py-6">
-                    <span
-                      className="font-extrabold leading-snug tracking-[-.025em] text-[#20555A] text-[clamp(1rem,1.35vw,1.45rem)]"
-                      style={{ color: "#20555A" }}
-                    >
-                      We’ll Respond within 24 Hours
-                    </span>
-                  </span>
-                </div>
-              </Reveal>
             </div>
 
             <Reveal delay={120} className="h-full">
-              <address className="flex h-full min-h-full overflow-hidden rounded-sm bg-[#68e6c2] not-italic shadow-[0_12px_30px_rgba(0,100,101,.08)]">
+              <address className="flex h-full min-h-[140px] overflow-hidden rounded-sm bg-[#68e6c2] not-italic shadow-[0_12px_30px_rgba(0,100,101,.08)]">
                 <span className="flex w-24 shrink-0 items-center justify-center bg-[#20555A] sm:w-28 lg:w-24 xl:w-28">
                   <MapPin
                     className="h-10 w-10 text-pure-white sm:h-12 sm:w-12"
@@ -200,9 +218,9 @@ function Contact() {
                     aria-hidden
                   />
                 </span>
-                <span className="flex min-w-0 flex-1 items-center px-6 py-6 lg:px-7">
+                <span className="flex min-w-0 flex-1 items-center justify-center px-6 py-6 sm:px-8 xl:px-9">
                   <div
-                    className="flex flex-col justify-center text-left text-[15px] font-bold leading-[1.65] tracking-normal text-[#20555A] sm:text-base xl:text-[17px] xl:leading-[1.7]"
+                    className="flex flex-col justify-center text-left text-[15px] font-bold leading-[1.7] tracking-normal text-[#20555A] sm:text-base xl:text-[17px] xl:leading-[1.75]"
                     style={{ color: "#20555A" }}
                   >
                     <span>1/140-12, GM Complex,</span>
