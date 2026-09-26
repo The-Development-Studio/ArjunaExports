@@ -384,12 +384,15 @@ function Process() {
           <section className="bg-offwhite py-20 lg:py-24">
             <div className="shell">
               {/* Main intro */}
-              <Reveal className="mx-auto max-w-5xl text-center">
+              <Reveal className="mx-auto max-w-6xl text-center">
                 <Label className="text-brand justify-center">Our Expertise</Label>
                 <h2 className="display mt-5 text-[clamp(2.5rem,4.5vw,4.25rem)]" style={{ color: '#20555A' }}>
                   Logistics
                 </h2>
-                <p className="mx-auto mt-6 max-w-4xl text-base sm:text-lg leading-[1.8] text-[#20555A]/80 font-normal">
+                <p
+                  className="mx-auto mt-6 max-w-6xl text-base sm:text-lg leading-[1.8] text-[#20555A] font-normal"
+                  style={{ color: '#20555A' }}
+                >
                   Our dedicated team within the logistics department ensures the seamless movement of
                   our products, from packaging to delivery. With a focus on both speed and quality,
                   our experienced professionals handle all aspects of sea and air shipments. By
