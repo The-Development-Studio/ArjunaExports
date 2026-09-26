@@ -148,8 +148,14 @@ function Contact() {
     <>
       <PageHero
         eyebrow="Contact"
-        title="Share Your Requirement. We’ll Take It From There!"
-        titleClassName="contact-hero-title leading-[1.08] pb-1 text-[#20555A]"
+        title={
+          <>
+            Share Your Requirement....
+            <br />
+            We’ll Take It From There!
+          </>
+        }
+        titleClassName="contact-hero-title leading-[1.12] pb-1 text-[#20555A]"
         intro="Tell us what you need to source, where it needs to go and in what volume. We’ll evaluate your requirements and guide you through product specification, packaging and shipment planning."
         image={img.exportPort}
       />

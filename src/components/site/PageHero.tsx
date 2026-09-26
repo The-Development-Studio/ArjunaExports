@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Reveal } from "./primitives";
 
 export function PageHero({
@@ -9,7 +10,7 @@ export function PageHero({
   introClassName = "",
 }: {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   intro: string;
   image?: string;
   titleClassName?: string;
