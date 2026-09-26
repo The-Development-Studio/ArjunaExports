@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import {
   Anchor,
   ArrowDown,
-  Boxes,
   Check,
   Container,
   Factory,
@@ -110,13 +109,6 @@ const logisticsSteps = [
     image: buyerPlace,
     position: "logistics-step-9",
   },
-];
-
-const outputs = [
-  { name: "Coco Peat Blocks", format: "5 kg block / 650 g brick", image: img.productBlock },
-  { name: "Grow Bags", format: "Open-top and lay-flat formats", image: img.productGrowbag },
-  { name: "Husk Chips", format: "Loose or compressed grades", image: img.stageHusk },
-  { name: "Custom Blends", format: "Pith, chips and amendments", image: img.stageMedium },
 ];
 
 const exportReadiness = [
@@ -473,39 +465,6 @@ function Process() {
           </section>
         </div>
       )}
-
-      <section className="bg-brand-deep py-20 text-pure-white lg:py-24">
-        <div className="shell">
-          <Reveal>
-            <ChapterHeading label="Output Formats" lines={["One process.", "Multiple products."]} />
-          </Reveal>
-          <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {outputs.map((output, index) => (
-              <Reveal
-                key={output.name}
-                delay={index * 60}
-                className="group overflow-hidden rounded-md border border-pure-white/12 bg-pure-white/[0.07]"
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={output.image}
-                    alt={output.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6">
-                  <Boxes className="h-7 w-7 text-[#ffc21a]" strokeWidth={1.7} aria-hidden="true" />
-                  <h3 className="mt-6 text-2xl font-black leading-tight text-ivory">
-                    {output.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-pure-white/62">{output.format}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="bg-ivory py-20 lg:py-24">
         <div className="shell grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:items-start">
