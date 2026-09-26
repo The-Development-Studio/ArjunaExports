@@ -88,9 +88,10 @@ function Gallery() {
     <>
       <PageHero
         eyebrow="Visual Archive"
-        title="Products. Process. People."
-        titleClassName="hero-title-dark max-w-none text-[#20555A] tracking-[-.02em] leading-tight md:whitespace-nowrap text-[clamp(1.75rem,3.1vw,3.75rem)]"
-        gridClassName="lg:grid-cols-[1.35fr_.65fr] xl:grid-cols-[1.45fr_.55fr]"
+        title="People. Process. Products."
+        titleClassName="hero-title-dark max-w-none text-[#20555A] tracking-[-.025em] leading-none md:whitespace-nowrap text-[clamp(1.75rem,3.4vw,3.85rem)]"
+        gridClassName="lg:grid-cols-[auto_minmax(0,1fr)] items-end lg:gap-8 xl:gap-12"
+        introClassName="border-l border-[#20555A]/35 pl-5 sm:pl-6 max-w-[34ch] text-sm sm:text-base leading-relaxed text-[#20555A] lg:justify-self-start"
         intro="A closer look at the materials, infrastructure and growing environments behind every Arjuna shipment."
         image={galleryItems[0]?.image ?? ""}
       />
