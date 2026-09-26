@@ -7,9 +7,15 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-brand text-pure-white/80">
       <div className="shell pb-8 pt-20 lg:pt-24">
-        <h2 className="display max-w-[18ch] text-[clamp(2.5rem,4.5vw,4rem)] text-pure-white">
-          Growing Beyond Boundaries.
-        </h2>
+        <div className="grid items-center gap-8 md:grid-cols-2">
+          <h2 className="display text-[clamp(1.5rem,2.7vw,2.4rem)] font-bold leading-tight tracking-tight text-pure-white antialiased">
+            The journey continues
+            <span className="block">From a coconut husk to new life</span>
+          </h2>
+          <h2 className="display text-[clamp(1rem,1.8vw,1.6rem)] font-bold leading-tight tracking-tight text-pure-white antialiased md:text-right">
+            Growing Beyond Boundaries.
+          </h2>
+        </div>
 
         <div className="mt-14 grid gap-10 border-t border-pure-white/15 pt-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -26,6 +32,39 @@ export function Footer() {
               Manufacturer and exporter of coconut-based growing media, serving professional growers
               worldwide from Tamil Nadu, India.
             </p>
+            <div className="mt-6 flex gap-3" aria-label="Arjuna Exports social media">
+              {[
+                {
+                  label: "LinkedIn",
+                  href: "https://www.linkedin.com/company/arjunaexports",
+                  icon: Linkedin,
+                },
+                {
+                  label: "Instagram",
+                  href: "https://www.instagram.com/arjunaexports/",
+                  icon: Instagram,
+                },
+                {
+                  label: "Facebook",
+                  href: "https://www.facebook.com/ArjunaExports/",
+                  icon: Facebook,
+                },
+              ].map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-pure-white/25 transition-colors duration-300 hover:border-aqua hover:bg-aqua hover:text-brand-deep"
+                >
+                  <Icon
+                    className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110"
+                    strokeWidth={1.7}
+                  />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div>
@@ -81,39 +120,6 @@ export function Footer() {
                 </a>
               </p>
             </address>
-            <div className="mt-6 flex gap-3" aria-label="Arjuna Exports social media">
-              {[
-                {
-                  label: "LinkedIn",
-                  href: "https://www.linkedin.com/company/arjunaexports",
-                  icon: Linkedin,
-                },
-                {
-                  label: "Instagram",
-                  href: "https://www.instagram.com/arjunaexports/",
-                  icon: Instagram,
-                },
-                {
-                  label: "Facebook",
-                  href: "https://www.facebook.com/ArjunaExports/",
-                  icon: Facebook,
-                },
-              ].map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-pure-white/25 transition-colors duration-300 hover:border-aqua hover:bg-aqua hover:text-brand-deep"
-                >
-                  <Icon
-                    className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110"
-                    strokeWidth={1.7}
-                  />
-                </a>
-              ))}
-            </div>
           </div>
         </div>
 
