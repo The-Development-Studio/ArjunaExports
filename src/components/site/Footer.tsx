@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Linkedin } from "lucide-react";
 import logo from "@/assets/logo.svg";
 import { navItems, products } from "@/lib/site-data";
 
@@ -37,19 +36,16 @@ export function Footer() {
                 {
                   label: "LinkedIn",
                   href: "https://www.linkedin.com/company/arjunaexports",
-                  icon: Linkedin,
                 },
                 {
                   label: "Instagram",
                   href: "https://www.instagram.com/arjunaexports/",
-                  icon: Instagram,
                 },
                 {
                   label: "Facebook",
                   href: "https://www.facebook.com/ArjunaExports/",
-                  icon: Facebook,
                 },
-              ].map(({ label, href, icon: Icon }) => (
+              ].map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
@@ -58,10 +54,39 @@ export function Footer() {
                   aria-label={label}
                   className="group flex h-11 w-11 items-center justify-center rounded-full border border-pure-white/25 transition-colors duration-300 hover:border-aqua hover:bg-aqua hover:text-brand-deep"
                 >
-                  <Icon
-                    className="h-[18px] w-[18px] transition-transform duration-300 group-hover:scale-110"
-                    strokeWidth={1.7}
-                  />
+                  <svg
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
+                  >
+                    {label === "Instagram" && (
+                      <>
+                        <defs>
+                          <linearGradient id="footer-instagram-gradient" x1="0" y1="1" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#FFB13D" />
+                            <stop offset="48%" stopColor="#E1306C" />
+                            <stop offset="100%" stopColor="#833AB4" />
+                          </linearGradient>
+                        </defs>
+                        <circle cx="12" cy="12" r="12" fill="url(#footer-instagram-gradient)" />
+                        <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="white" strokeWidth="1.8" />
+                        <circle cx="12" cy="12" r="3.2" fill="none" stroke="white" strokeWidth="1.8" />
+                        <circle cx="16.3" cy="7.9" r="1" fill="white" />
+                      </>
+                    )}
+                    {label === "LinkedIn" && (
+                      <>
+                        <circle cx="12" cy="12" r="12" fill="#0A66C2" />
+                        <text x="12" y="17" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-1">in</text>
+                      </>
+                    )}
+                    {label === "Facebook" && (
+                      <>
+                        <circle cx="12" cy="12" r="12" fill="#0866FF" />
+                        <path d="M13.7 24V13.1h3.6l.55-4.25H13.7V6.14c0-1.23.34-2.07 2.1-2.07H18V.27C17.62.22 16.3.1 14.76.1c-3.2 0-5.4 1.95-5.4 5.54v3.21H5.74v4.25h3.62V24h4.34Z" fill="white" transform="translate(1.8 0) scale(.84)" />
+                      </>
+                    )}
+                  </svg>
                 </a>
               ))}
             </div>
