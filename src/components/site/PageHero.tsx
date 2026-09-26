@@ -8,6 +8,7 @@ export function PageHero({
   image,
   titleClassName = "",
   introClassName = "",
+  gridClassName = "lg:grid-cols-[1.2fr_.8fr]",
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -15,10 +16,11 @@ export function PageHero({
   image?: string;
   titleClassName?: string;
   introClassName?: string;
+  gridClassName?: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-charcoal pt-12 text-[#20555A] lg:pt-14">
-      <div className="shell relative z-10 grid min-h-[260px] items-end gap-6 py-8 lg:min-h-[280px] lg:grid-cols-[1.2fr_.8fr] lg:gap-12 lg:py-9">
+      <div className={`shell relative z-10 grid min-h-[260px] items-end gap-6 py-8 lg:min-h-[280px] ${gridClassName} lg:gap-12 lg:py-9`}>
         <Reveal>
           <span className="micro-label mb-6 block text-[#20555A]">{eyebrow}</span>
           <h1

@@ -149,13 +149,13 @@ function Contact() {
       <PageHero
         eyebrow="Contact"
         title={
-          <>
-            Share Your Requirement....
-            <br />
-            We’ll Take It From There!
-          </>
+          <span className="block">
+            <span className="block whitespace-nowrap">Share Your Requirement....</span>
+            <span className="block whitespace-nowrap">We’ll Take It From There!</span>
+          </span>
         }
-        titleClassName="contact-hero-title leading-[1.12] pb-1 text-[#20555A]"
+        titleClassName="contact-hero-title max-w-none text-[clamp(1.15rem,5.1vw,1.6rem)] sm:text-[clamp(1.6rem,3.4vw,3.35rem)] leading-[1.12] pb-1 text-[#20555A]"
+        gridClassName="lg:grid-cols-[1.45fr_.55fr] xl:grid-cols-[1.5fr_.5fr]"
         intro="Tell us what you need to source, where it needs to go and in what volume. We’ll evaluate your requirements and guide you through product specification, packaging and shipment planning."
         image={img.exportPort}
       />
