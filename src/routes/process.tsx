@@ -384,12 +384,12 @@ function Process() {
           <section className="bg-offwhite py-20 lg:py-24">
             <div className="shell">
               {/* Main intro */}
-              <Reveal className="mx-auto max-w-3xl text-center">
-                <Label className="text-brand">Our Expertise</Label>
-                <h2 className="display mt-5 text-[clamp(2.25rem,4vw,4rem)]" style={{ color: '#20555A' }}>
+              <Reveal className="mx-auto max-w-5xl text-center">
+                <Label className="text-brand justify-center">Our Expertise</Label>
+                <h2 className="display mt-5 text-[clamp(2.5rem,4.5vw,4.25rem)]" style={{ color: '#20555A' }}>
                   Logistics
                 </h2>
-                <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-charcoal/65">
+                <p className="mx-auto mt-6 max-w-4xl text-base sm:text-lg leading-[1.8] text-[#20555A]/80 font-normal">
                   Our dedicated team within the logistics department ensures the seamless movement of
                   our products, from packaging to delivery. With a focus on both speed and quality,
                   our experienced professionals handle all aspects of sea and air shipments. By
@@ -400,23 +400,23 @@ function Process() {
               </Reveal>
 
               {/* 3-column detail cards */}
-              <div className="mt-16 grid gap-8 lg:grid-cols-3">
+              <div className="mt-16 grid gap-8 auto-rows-fr items-stretch lg:grid-cols-3">
                 {/* Strategic Port Access */}
-                <Reveal delay={0} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                <Reveal delay={0} className="flex h-full flex-col rounded-md border border-brand/12 bg-pure-white p-8 sm:p-9 shadow-[0_20px_55px_rgba(31,45,40,.06)] transition-all hover:shadow-[0_24px_60px_rgba(31,45,40,.1)]">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand text-pure-white">
                     <Anchor className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
                   </span>
-                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem] font-bold" style={{ color: '#20555A' }}>
                     Strategic Port Access
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                  <p className="mt-4 flex-1 text-sm sm:text-[15px] leading-[1.7] text-[#20555A]/75 font-normal">
                     We are strategically located near major Indian ports, with Tuticorin Port at a
                     distance of 285 KM, Cochin Port at 235 KM and Chennai Port at 485 KM, providing
                     us with direct access to various global destinations. Our full-fledged logistics
                     division guarantees timely delivery of consignments, overseen by a team of
                     professionals dedicated to enhancing time-to-market efficiency.
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                  <div className="mt-8 flex flex-wrap gap-2.5 border-t border-charcoal/10 pt-6">
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Tuticorin — 285 km</span>
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Cochin — 235 km</span>
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Chennai — 485 km</span>
@@ -424,20 +424,20 @@ function Process() {
                 </Reveal>
 
                 {/* Tailored Packaging Solutions */}
-                <Reveal delay={80} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                <Reveal delay={80} className="flex h-full flex-col rounded-md border border-brand/12 bg-pure-white p-8 sm:p-9 shadow-[0_20px_55px_rgba(31,45,40,.06)] transition-all hover:shadow-[0_24px_60px_rgba(31,45,40,.1)]">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand text-pure-white">
                     <Package className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
                   </span>
-                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem] font-bold" style={{ color: '#20555A' }}>
                     Tailored Packaging Solutions
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                  <p className="mt-4 flex-1 text-sm sm:text-[15px] leading-[1.7] text-[#20555A]/75 font-normal">
                     In terms of packaging, the materials used vary depending on the items being
                     shipped. For sea shipments, palletizing is standard practice for both LCL (Less
                     than Container Load) and FCL (Full Container Load) shipments. Additional
                     specifications are provided upon inquiry for each item.
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                  <div className="mt-8 flex flex-wrap gap-2.5 border-t border-charcoal/10 pt-6">
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">LCL shipments</span>
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">FCL shipments</span>
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Palletized</span>
@@ -445,14 +445,14 @@ function Process() {
                 </Reveal>
 
                 {/* Private Labelling */}
-                <Reveal delay={160} className="flex flex-col rounded-md border border-brand/12 bg-pure-white p-8 shadow-[0_20px_55px_rgba(31,45,40,.06)]">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-brand text-pure-white">
+                <Reveal delay={160} className="flex h-full flex-col rounded-md border border-brand/12 bg-pure-white p-8 sm:p-9 shadow-[0_20px_55px_rgba(31,45,40,.06)] transition-all hover:shadow-[0_24px_60px_rgba(31,45,40,.1)]">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand text-pure-white">
                     <Tag className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
                   </span>
-                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem]" style={{ color: '#20555A' }}>
+                  <h3 className="display mt-7 text-2xl lg:text-[1.65rem] font-bold" style={{ color: '#20555A' }}>
                     Private Labelling
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-charcoal/65">
+                  <p className="mt-4 flex-1 text-sm sm:text-[15px] leading-[1.7] text-[#20555A]/75 font-normal">
                     We specialize in private labelling, offering support to clients looking to create
                     their own brands and packaging materials. Our processing units can pack products
                     under the client's brand, and we ensure that containers are loaded within our
@@ -460,7 +460,7 @@ function Process() {
                     product name, grade details, item code, gross weight, net weight, package numbers,
                     quantity in units (size/counts/weight/CBM), packing date, and shipper information.
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-3 border-t border-charcoal/10 pt-5">
+                  <div className="mt-8 flex flex-wrap gap-2.5 border-t border-charcoal/10 pt-6">
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">Custom branding</span>
                     <span className="rounded-full bg-brand-soft px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[.1em] text-brand">In-premise loading</span>
                   </div>
