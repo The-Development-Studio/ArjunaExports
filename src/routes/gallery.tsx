@@ -89,7 +89,8 @@ function Gallery() {
       <PageHero
         eyebrow="Visual Archive"
         title="Products. Process. People."
-        titleClassName="hero-title-dark text-[#20555A]"
+        titleClassName="hero-title-dark max-w-none text-[#20555A] tracking-[-.02em] leading-tight md:whitespace-nowrap text-[clamp(1.75rem,3.1vw,3.75rem)]"
+        gridClassName="lg:grid-cols-[1.35fr_.65fr] xl:grid-cols-[1.45fr_.55fr]"
         intro="A closer look at the materials, infrastructure and growing environments behind every Arjuna shipment."
         image={galleryItems[0]?.image ?? ""}
       />
