@@ -42,7 +42,7 @@ const contactCards = [
     label: "Mobile",
     value: "+91 96298 74555",
     href: "tel:+919629874555",
-    icon: DeskPhoneIcon,
+    icon: Phone,
     orderClass: "order-2 md:order-2",
     isEmail: false,
   },
