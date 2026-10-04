@@ -1035,6 +1035,75 @@ footer [class~="mt-16"] {
   z-index: 2;
 }
 
+.industry-card {
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    border-color 300ms ease;
+}
+
+.industry-media::after {
+  content: none;
+}
+
+.industry-photo {
+  transition:
+    transform 400ms ease-out,
+    opacity 250ms ease-out;
+}
+
+.industry-image-skeleton {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(110deg, #e7f0ee 8%, #dbe9e7 18%, #e7f0ee 33%);
+  background-size: 200% 100%;
+  animation: industry-skeleton 1.4s ease-in-out infinite;
+  opacity: 1;
+  transition: opacity 250ms ease-out;
+}
+
+.industry-image-skeleton[data-loaded="true"] {
+  opacity: 0;
+}
+
+.industry-copy {
+  text-align: left !important;
+}
+
+.industry-icon,
+.industry-arrow {
+  transition:
+    background-color 300ms ease,
+    transform 300ms ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .industry-card:hover {
+    transform: translateY(-4px);
+    border-color: #0b5c5c;
+    box-shadow: 0 12px 30px rgb(11 92 92 / 12%);
+  }
+
+  .industry-card:hover .industry-photo {
+    transform: scale(1.05);
+  }
+
+  .industry-card:hover .industry-icon {
+    background-color: rgb(8 92 102 / 14%);
+  }
+
+  .industry-card:hover .industry-arrow {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes industry-skeleton {
+  to {
+    background-position-x: -200%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -1067,5 +1136,16 @@ footer [class~="mt-16"] {
 
   .running-carousel-track > [aria-hidden="true"] {
     display: none;
+  }
+
+  .industry-card,
+  .industry-icon,
+  .industry-arrow,
+  .industry-photo {
+    transition: none;
+  }
+
+  .industry-image-skeleton {
+    animation: none;
   }
 }

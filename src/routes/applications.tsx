@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   ArrowDownRight,
   ArrowRight,
@@ -14,7 +15,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { cropIcons, img } from "@/lib/site-data";
-import { Label, PrimaryButton, SecondaryButton } from "@/components/site/primitives";
+import { Label, PrimaryButton, Reveal, SecondaryButton } from "@/components/site/primitives";
 import { pageMeta } from "@/components/site/PageHero";
 import strawberryPlants from "@/assets/applications/strawberry-plants.jpg";
 import blueberryPlants from "@/assets/applications/blueberry-plants.jpg";
@@ -24,6 +25,15 @@ import tomatoPlants from "@/assets/applications/tomato-plants.jpg";
 import cucumberPlants from "@/assets/applications/cucumber-plants.jpg";
 import bellPepperPlants from "@/assets/applications/bell-pepper-plants.jpg";
 import eggplantPlants from "@/assets/applications/eggplant-plants.jpg";
+import industryProfessionalHorticulture from "@/assets/applications/industry-professional-horticulture.jpg";
+import industryGreenhouseGrowers from "@/assets/applications/industry-greenhouse-growers.jpg";
+import industryFloriculture from "@/assets/applications/industry-floriculture.jpg";
+import industrySubstrateManufacturers from "@/assets/applications/industry-substrate-manufacturers.jpg";
+import industryLandscaping from "@/assets/applications/industry-landscaping.jpg";
+import industryRetailGardenCentres from "@/assets/applications/industry-retail-garden-centres.jpg";
+import industryPlantPropagation from "@/assets/applications/industry-plant-propagation.jpg";
+import industryIndustrialOilAbsorption from "@/assets/applications/industry-industrial-oil-absorption.jpg";
+import industryAnimalBedding from "@/assets/applications/industry-animal-bedding.jpg";
 
 export const Route = createFileRoute("/applications")({
   head: () =>
@@ -136,16 +146,86 @@ const coirBenefits: { title: string; description: string; Icon: LucideIcon }[] =
   { title: "Versatile Applications", description: "For greenhouse, nursery, landscape and commercial use.", Icon: Sprout },
 ];
 
-const industries: { title: string; description: string; Icon: LucideIcon }[] = [
-  { title: "Professional Horticulture", description: "Commercial growing media for greenhouse and controlled cultivation.", Icon: Sprout },
-  { title: "Greenhouse Growers", description: "Coir substrates designed for controlled irrigation and root-zone management.", Icon: Leaf },
-  { title: "Floriculture", description: "Growing solutions for cut flowers and ornamental cultivation.", Icon: Flower2 },
-  { title: "Substrate Manufacturers", description: "Coir materials suited to professional substrate formulations.", Icon: Factory },
-  { title: "Landscaping", description: "Natural growing media for landscape and planting applications.", Icon: Mountain },
-  { title: "Retail Garden Centres", description: "Convenient coir formats for professional and consumer gardening.", Icon: Store },
-  { title: "Plant Propagation", description: "Suitable substrate conditions for establishing young plants.", Icon: Sprout },
-  { title: "Industrial Oil Absorption", description: "Natural coir-based material for selected absorption applications.", Icon: Droplets },
-  { title: "Animal Bedding", description: "Natural coir material for applicable animal bedding uses.", Icon: Leaf },
+const industries: {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  icon: LucideIcon;
+  href: "/products";
+}[] = [
+  {
+    title: "Professional Horticulture",
+    description: "Commercial growing media for greenhouse and controlled cultivation.",
+    image: industryProfessionalHorticulture,
+    alt: "Rows of young seedlings in a modern commercial nursery",
+    icon: Sprout,
+    href: "/products",
+  },
+  {
+    title: "Greenhouse Growers",
+    description: "Coir substrates designed for controlled irrigation and root-zone management.",
+    image: industryGreenhouseGrowers,
+    alt: "Tomato and cucumber plants growing inside a bright commercial greenhouse",
+    icon: Leaf,
+    href: "/products",
+  },
+  {
+    title: "Floriculture",
+    description: "Growing solutions for cut flowers and ornamental cultivation.",
+    image: industryFloriculture,
+    alt: "Fresh colorful flowers growing on a flower farm",
+    icon: Flower2,
+    href: "/products",
+  },
+  {
+    title: "Substrate Manufacturers",
+    description: "Coir materials suited to professional substrate formulations.",
+    image: industrySubstrateManufacturers,
+    alt: "Compressed coir block prepared for professional substrate manufacturing",
+    icon: Factory,
+    href: "/products",
+  },
+  {
+    title: "Landscaping",
+    description: "Natural growing media for landscape and planting applications.",
+    image: industryLandscaping,
+    alt: "Freshly planted garden bed with natural mulch and leafy plants",
+    icon: Mountain,
+    href: "/products",
+  },
+  {
+    title: "Retail Garden Centres",
+    description: "Convenient coir formats for professional and consumer gardening.",
+    image: industryRetailGardenCentres,
+    alt: "Coir and garden products arranged for retail garden use",
+    icon: Store,
+    href: "/products",
+  },
+  {
+    title: "Plant Propagation",
+    description: "Suitable substrate conditions for establishing young plants.",
+    image: industryPlantPropagation,
+    alt: "Young plants growing in organized propagation trays",
+    icon: Sprout,
+    href: "/products",
+  },
+  {
+    title: "Industrial Oil Absorption",
+    description: "Natural coir-based material for selected absorption applications.",
+    image: industryIndustrialOilAbsorption,
+    alt: "Natural coir fibre matting arranged for industrial floor protection and absorption",
+    icon: Droplets,
+    href: "/products",
+  },
+  {
+    title: "Animal Bedding",
+    description: "Natural coir material for applicable animal bedding uses.",
+    image: industryAnimalBedding,
+    alt: "Horse standing on clean, natural coir bedding in a bright stable stall",
+    icon: Leaf,
+    href: "/products",
+  },
 ];
 
 const relatedProducts = [
@@ -280,9 +360,22 @@ function Applications() {
 
       <section id="by-application" className="scroll-mt-24 bg-pure-white py-14 sm:py-16 lg:py-24">
         <div className="shell">
-          <div className="mb-9 max-w-3xl"><Label className="text-brand">By Application</Label><h2 className="display mt-5 text-[clamp(2rem,3.5vw,3rem)] leading-tight text-brand-deep">Solutions Across Industries</h2><p className="mt-4 max-w-[68ch] text-base leading-relaxed text-charcoal/65">From greenhouse production to landscape projects, coir products can be selected to suit a range of professional uses.</p></div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map(({ title, description, Icon }) => <article key={title} className="group flex min-w-0 flex-col rounded-sm border border-charcoal/10 bg-offwhite p-5 transition-colors hover:border-brand/40 sm:p-6"><Icon className="h-6 w-6 text-brand" strokeWidth={1.6} aria-hidden="true" /><h3 className="mt-5 text-lg font-semibold leading-snug text-brand-deep">{title}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-charcoal/65">{description}</p><Link to="/products" className="mt-5 inline-flex min-h-11 items-center gap-2 self-start text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">Explore <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" /></Link></article>)}
+          <div className="mb-9 max-w-3xl">
+            <Label className="text-brand">By Application</Label>
+            <h2 className="display mt-5 text-[clamp(2rem,3.5vw,3rem)] leading-tight text-brand-deep">
+              Solutions Across Industries
+            </h2>
+            <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-charcoal/65">
+              From greenhouse production to landscape projects, coir products can be selected to
+              suit a range of professional uses.
+            </p>
+          </div>
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {industries.map((industry, index) => (
+              <Reveal key={industry.title} delay={index * 60} className="h-full">
+                <IndustryCard {...industry} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -303,6 +396,54 @@ function Applications() {
         </div>
       </section>
     </main>
+  );
+}
+
+function IndustryCard({
+  title,
+  description,
+  image,
+  alt,
+  icon: Icon,
+  href,
+}: (typeof industries)[number]) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  return (
+    <Link
+      to={href}
+      aria-label={`${title}: ${description} Explore`}
+      className="industry-card group block h-full overflow-hidden rounded-2xl border border-[#D7E3E1] bg-[#F9F9F5] text-left shadow-[0_4px_18px_rgba(11,92,92,0.06)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B5C5C]"
+    >
+      <article className="flex h-full min-w-0 flex-col">
+        <div className="industry-media relative aspect-[16/10] overflow-hidden bg-[#e7f0ee]">
+          <div className="industry-image-skeleton" aria-hidden="true" data-loaded={imageLoaded} />
+          <img
+            src={image}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
+            className="industry-photo absolute inset-0 h-full w-full object-cover"
+            style={{ opacity: imageLoaded ? 1 : 0 }}
+          />
+          <span className="absolute inset-0 bg-gradient-to-t from-[rgba(11,92,92,0.35)] to-transparent" aria-hidden="true" />
+        </div>
+        <div className="flex flex-1 flex-col px-5 pb-5 sm:px-6 sm:pb-6">
+          <span className="industry-icon relative -mt-5 flex size-10 items-center justify-center self-start rounded-full border border-[#D7E3E1] bg-white text-[#0B5C5C] shadow-sm">
+            <Icon className="h-5 w-5" strokeWidth={1.7} aria-hidden="true" />
+          </span>
+          <h3 className="mt-3 text-xl font-semibold leading-snug text-[#0B5C5C]">{title}</h3>
+          <p className="industry-copy mt-2 line-clamp-3 flex-1 text-sm leading-[1.6] text-[#4A5A58]">
+            {description}
+          </p>
+          <span className="mt-4 inline-flex min-h-8 items-center gap-2 self-start text-sm font-semibold text-[#0B5C5C]">
+            Explore <ArrowRight className="industry-arrow h-4 w-4" aria-hidden="true" />
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }
 
