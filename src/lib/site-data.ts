@@ -1,3 +1,4 @@
+import { Droplets, Factory, Flower2, Leaf, Mountain, Sprout, Store, type LucideIcon } from "lucide-react";
 import heroPlantation from "@/assets/hero-plantation.jpg";
 import stageCoconut from "@/assets/stage-coconut.jpg";
 import stageHusk from "@/assets/stage-husk.jpg";
@@ -27,6 +28,15 @@ import productErosion from "@/assets/product-erosion.jpg";
 import productFloor from "@/assets/product-floor.jpg";
 import productGarden from "@/assets/product-garden.jpg";
 import productNutrients from "@/assets/product-nutrients.jpg";
+import industryProfessionalHorticulture from "@/assets/applications/industry-professional-horticulture.jpg";
+import industryFloriculture from "@/assets/applications/industry-floriculture.jpg";
+import industrySubstrateManufacturers from "@/assets/applications/industry-substrate-manufacturers.jpg";
+import industryLandscaping from "@/assets/applications/industry-landscaping.jpg";
+import industryRetailGardenCentres from "@/assets/applications/industry-retail-garden-centres.jpg";
+import industryPlantPropagation from "@/assets/applications/industry-plant-propagation.jpg";
+import industryGreenhouseGrowers from "@/assets/applications/industry-greenhouse-growers.jpg";
+import industryIndustrialOilAbsorption from "@/assets/applications/industry-industrial-oil-absorption.jpg";
+import industryAnimalBedding from "@/assets/applications/industry-animal-bedding.jpg";
 import detailBlockStack from "@/assets/detail-block-stack.png";
 import detailGrowbagTomatoes from "@/assets/detail-growbag-tomatoes.png";
 import detailErosionSlope from "@/assets/detail-erosion-slope.png";
@@ -134,6 +144,22 @@ export type Product = {
   benefits: string[];
   specs: { label: string; value: string }[];
   applications: string[];
+  industrySolutions?: {
+    title: string;
+    description: string;
+    image: string;
+    alt: string;
+    icon: LucideIcon;
+  }[];
+};
+
+export type IndustrySolution = {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+  icon: LucideIcon;
+  href: `/products/${string}`;
 };
 
 export const products: Product[] = [
@@ -165,6 +191,12 @@ export const products: Product[] = [
       { label: "Customisation", value: "Private label, custom grading" },
     ],
     applications: ["Nurseries", "Horticulture", "Plant Propagation", "Home Gardening"],
+    industrySolutions: [
+      { title: "Professional Horticulture", description: "Commercial growing media for greenhouse and controlled cultivation.", image: industryProfessionalHorticulture, alt: "Rows of young seedlings in a modern commercial nursery", icon: Sprout },
+      { title: "Greenhouse Growers", description: "Coir substrates designed for controlled irrigation and root-zone management.", image: industryGreenhouseGrowers, alt: "Tomato and cucumber plants growing inside a bright commercial greenhouse", icon: Leaf },
+      { title: "Substrate Manufacturers", description: "Coir materials suited to professional substrate formulations.", image: industrySubstrateManufacturers, alt: "Compressed coir block prepared for professional substrate manufacturing", icon: Factory },
+      { title: "Plant Propagation", description: "Suitable substrate conditions for establishing young plants.", image: industryPlantPropagation, alt: "Young plants growing in organized propagation trays", icon: Sprout },
+    ],
   },
   {
     slug: "coir-matting",
@@ -194,6 +226,11 @@ export const products: Product[] = [
       { label: "Customisation", value: "Weave, colour, backing and size" },
     ],
     applications: ["Landscaping", "Home Gardening"],
+    industrySolutions: [
+      { title: "Landscaping", description: "Natural growing media for landscape and planting applications.", image: industryLandscaping, alt: "Freshly planted garden bed with natural mulch and leafy plants", icon: Mountain },
+      { title: "Industrial Oil Absorption", description: "Natural coir-based material for selected absorption applications.", image: industryIndustrialOilAbsorption, alt: "Coir fiber mats absorbing an oil spill on a factory floor beside machinery", icon: Droplets },
+      { title: "Animal Bedding", description: "Natural coir material for applicable animal bedding uses.", image: industryAnimalBedding, alt: "Brown horse standing in a wooden stable with coir bedding", icon: Leaf },
+    ],
   },
   {
     slug: "650-gram-block",
@@ -223,6 +260,9 @@ export const products: Product[] = [
       { label: "Customisation", value: "Label, barcode and carton count" },
     ],
     applications: ["Home Gardening", "Nurseries", "Plant Propagation"],
+    industrySolutions: [
+      { title: "Retail Garden Centres", description: "Convenient coir formats for professional and consumer gardening.", image: industryRetailGardenCentres, alt: "Coir and garden products arranged for retail garden use", icon: Store },
+    ],
   },
   {
     slug: "husk-chips",
@@ -252,8 +292,32 @@ export const products: Product[] = [
       { label: "Customisation", value: "Grade, wash level and pack size" },
     ],
     applications: ["Floriculture", "Nurseries", "Hydroponics"],
+    industrySolutions: [
+      { title: "Floriculture", description: "Growing solutions for cut flowers and ornamental cultivation.", image: industryFloriculture, alt: "Fresh colorful flowers growing on a flower farm", icon: Flower2 },
+    ],
   },
 ];
+
+const industrySolutionOrder = [
+  "Professional Horticulture",
+  "Greenhouse Growers",
+  "Floriculture",
+  "Substrate Manufacturers",
+  "Landscaping",
+  "Retail Garden Centres",
+  "Plant Propagation",
+  "Industrial Oil Absorption",
+  "Animal Bedding",
+];
+
+export const industrySolutions: IndustrySolution[] = products
+  .flatMap((product) =>
+    (product.industrySolutions ?? []).map((solution) => ({
+      ...solution,
+      href: `/products/${product.slug}` as const,
+    })),
+  )
+  .sort((a, b) => industrySolutionOrder.indexOf(a.title) - industrySolutionOrder.indexOf(b.title));
 
 export const productFilters = ["All", "Coco Peat", "Coco Peat 650", "Coir Fibre", "Coco Husk"];
 
@@ -481,17 +545,6 @@ export const cropApplications = [
       "Natural presentation",
     ],
   },
-];
-
-export const usageApplications = [
-  { title: "Professional Horticulture & Greenhouses", product: "Coco Peat Blocks / Grow Bags" },
-  { title: "Floriculture", product: "Grow Bags / Hanging Baskets" },
-  { title: "Substrate Manufacturers", product: "Coco Peat Blocks" },
-  { title: "Landscaping & Potting Mixes", product: "Coco Peat Blocks" },
-  { title: "Retail Garden Centres", product: "Garden Articles" },
-  { title: "Plant Propagation", product: "Coir Pots / Germination Plugs" },
-  { title: "Industrial Oil Absorption", product: "Coco Peat" },
-  { title: "Animal Bedding", product: "Natural Coir Material" },
 ];
 
 export const trustPoints = [

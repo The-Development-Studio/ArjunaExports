@@ -4,18 +4,13 @@ import {
   ArrowDownRight,
   ArrowRight,
   Droplets,
-  Factory,
-  Flower2,
-  Leaf,
-  Mountain,
   Recycle,
   Sprout,
-  Store,
   Wind,
   type LucideIcon,
 } from "lucide-react";
-import { cropIcons, img } from "@/lib/site-data";
-import { Label, PrimaryButton, Reveal, SecondaryButton } from "@/components/site/primitives";
+import { cropIcons, img, industrySolutions, products } from "@/lib/site-data";
+import { Label, PrimaryButton, SecondaryButton } from "@/components/site/primitives";
 import { pageMeta } from "@/components/site/PageHero";
 import strawberryPlants from "@/assets/applications/strawberry-plants.jpg";
 import blueberryPlants from "@/assets/applications/blueberry-plants.jpg";
@@ -25,15 +20,6 @@ import tomatoPlants from "@/assets/applications/tomato-plants.jpg";
 import cucumberPlants from "@/assets/applications/cucumber-plants.jpg";
 import bellPepperPlants from "@/assets/applications/bell-pepper-plants.jpg";
 import eggplantPlants from "@/assets/applications/eggplant-plants.jpg";
-import industryProfessionalHorticulture from "@/assets/applications/industry-professional-horticulture.jpg";
-import industryGreenhouseGrowers from "@/assets/applications/industry-greenhouse-growers.jpg";
-import industryFloriculture from "@/assets/applications/industry-floriculture.jpg";
-import industrySubstrateManufacturers from "@/assets/applications/industry-substrate-manufacturers.jpg";
-import industryLandscaping from "@/assets/applications/industry-landscaping.jpg";
-import industryRetailGardenCentres from "@/assets/applications/industry-retail-garden-centres.jpg";
-import industryPlantPropagation from "@/assets/applications/industry-plant-propagation.jpg";
-import industryIndustrialOilAbsorption from "@/assets/applications/industry-industrial-oil-absorption.jpg";
-import industryAnimalBedding from "@/assets/applications/industry-animal-bedding.jpg";
 
 export const Route = createFileRoute("/applications")({
   head: () =>
@@ -144,96 +130,6 @@ const coirBenefits: { title: string; description: string; Icon: LucideIcon }[] =
   { title: "Efficient Drainage", description: "Helps reduce excessive water around roots.", Icon: ArrowDownRight },
   { title: "Sustainable Material", description: "A renewable, coconut coir-based growing medium.", Icon: Recycle },
   { title: "Versatile Applications", description: "For greenhouse, nursery, landscape and commercial use.", Icon: Sprout },
-];
-
-const industries: {
-  title: string;
-  description: string;
-  image: string;
-  alt: string;
-  icon: LucideIcon;
-  href: "/products";
-}[] = [
-  {
-    title: "Professional Horticulture",
-    description: "Commercial growing media for greenhouse and controlled cultivation.",
-    image: industryProfessionalHorticulture,
-    alt: "Rows of young seedlings in a modern commercial nursery",
-    icon: Sprout,
-    href: "/products",
-  },
-  {
-    title: "Greenhouse Growers",
-    description: "Coir substrates designed for controlled irrigation and root-zone management.",
-    image: industryGreenhouseGrowers,
-    alt: "Tomato and cucumber plants growing inside a bright commercial greenhouse",
-    icon: Leaf,
-    href: "/products",
-  },
-  {
-    title: "Floriculture",
-    description: "Growing solutions for cut flowers and ornamental cultivation.",
-    image: industryFloriculture,
-    alt: "Fresh colorful flowers growing on a flower farm",
-    icon: Flower2,
-    href: "/products",
-  },
-  {
-    title: "Substrate Manufacturers",
-    description: "Coir materials suited to professional substrate formulations.",
-    image: industrySubstrateManufacturers,
-    alt: "Compressed coir block prepared for professional substrate manufacturing",
-    icon: Factory,
-    href: "/products",
-  },
-  {
-    title: "Landscaping",
-    description: "Natural growing media for landscape and planting applications.",
-    image: industryLandscaping,
-    alt: "Freshly planted garden bed with natural mulch and leafy plants",
-    icon: Mountain,
-    href: "/products",
-  },
-  {
-    title: "Retail Garden Centres",
-    description: "Convenient coir formats for professional and consumer gardening.",
-    image: industryRetailGardenCentres,
-    alt: "Coir and garden products arranged for retail garden use",
-    icon: Store,
-    href: "/products",
-  },
-  {
-    title: "Plant Propagation",
-    description: "Suitable substrate conditions for establishing young plants.",
-    image: industryPlantPropagation,
-    alt: "Young plants growing in organized propagation trays",
-    icon: Sprout,
-    href: "/products",
-  },
-  {
-    title: "Industrial Oil Absorption",
-    description: "Natural coir-based material for selected absorption applications.",
-    image: industryIndustrialOilAbsorption,
-    alt: "Natural coir fibre matting arranged for industrial floor protection and absorption",
-    icon: Droplets,
-    href: "/products",
-  },
-  {
-    title: "Animal Bedding",
-    description: "Natural coir material for applicable animal bedding uses.",
-    image: industryAnimalBedding,
-    alt: "Horse standing on clean, natural coir bedding in a bright stable stall",
-    icon: Leaf,
-    href: "/products",
-  },
-];
-
-const relatedProducts = [
-  { name: "Coco Peat Blocks", image: img.productCocoPeat5kg, alt: "Compressed coco peat block for professional growing media", slug: "coco-peat-blocks" },
-  { name: "Coco Peat Grow Bags", image: img.productGrowbag, alt: "Coco peat grow bag for greenhouse cultivation", slug: null },
-  { name: "Erosion Control Products", image: img.productErosion, alt: "Natural coir erosion control material for landscape applications", slug: null },
-  { name: "Garden Articles", image: img.productGarden, alt: "Coir and coco products for garden applications", slug: null },
-  { name: "Micro Nutrients", image: img.productNutrients, alt: "Nutrient products for horticultural growing systems", slug: null },
 ];
 
 function Applications() {
@@ -360,9 +256,9 @@ function Applications() {
 
       <section id="by-application" className="scroll-mt-24 bg-pure-white py-14 sm:py-16 lg:py-24">
         <div className="shell">
-          <div className="mb-9 max-w-3xl">
+          <div className="mb-9">
             <Label className="text-brand">By Application</Label>
-            <h2 className="display mt-5 text-[clamp(2rem,3.5vw,3rem)] leading-tight text-brand-deep">
+            <h2 className="display mt-5 w-max max-w-full whitespace-nowrap text-[clamp(1rem,4vw,2.5rem)] leading-tight text-brand-deep">
               Solutions Across Industries
             </h2>
             <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-charcoal/65">
@@ -370,11 +266,9 @@ function Applications() {
               suit a range of professional uses.
             </p>
           </div>
-          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {industries.map((industry, index) => (
-              <Reveal key={industry.title} delay={index * 60} className="h-full">
-                <IndustryCard {...industry} />
-              </Reveal>
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {industrySolutions.map((industry) => (
+              <IndustryCard key={industry.title} {...industry} />
             ))}
           </div>
         </div>
@@ -383,8 +277,40 @@ function Applications() {
       <section aria-labelledby="related-products-heading" className="bg-offwhite py-14 sm:py-16 lg:py-20">
         <div className="shell">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4"><div><Label className="text-brand">Product range</Label><h2 id="related-products-heading" className="display mt-4 text-[clamp(2rem,3.5vw,3rem)] leading-tight text-brand-deep">Find the Right Growing Solution</h2></div><Link to="/products" className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-brand focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">All products <ArrowRight className="h-4 w-4" aria-hidden="true" /></Link></div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {relatedProducts.map((product) => <a key={product.name} href={product.slug ? `/products/${product.slug}` : "/products"} className="group flex min-w-0 flex-col overflow-hidden rounded-sm border border-charcoal/10 bg-pure-white transition-shadow hover:shadow-[0_14px_32px_rgba(31,45,40,.09)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"><div className="aspect-[4/3] overflow-hidden bg-pure-white p-4"><img src={product.image} alt={product.alt} loading="lazy" decoding="async" className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]" /></div><span className="flex min-h-[76px] items-center justify-between gap-2 border-t border-charcoal/10 px-4 py-4 text-sm font-semibold text-brand-deep">{product.name}<ArrowRight className="h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1" aria-hidden="true" /></span></a>)}
+          <div className="related-products-carousel mt-8" role="region" aria-label="Product range">
+            <div className="related-products-track">
+              {[false, true].map((duplicate) => (
+                <div
+                  key={duplicate ? "products-copy" : "products"}
+                  className="flex shrink-0 gap-4 pr-4"
+                  aria-hidden={duplicate || undefined}
+                >
+                  {products.map((product) => (
+                    <Link
+                      key={product.slug}
+                      to="/products/$slug"
+                      params={{ slug: product.slug }}
+                      tabIndex={duplicate ? -1 : undefined}
+                      className="group flex w-[min(78vw,14rem)] shrink-0 flex-col overflow-hidden rounded-sm border border-charcoal/10 bg-pure-white transition-shadow hover:shadow-[0_14px_32px_rgba(31,45,40,.09)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+                    >
+                      <div className="aspect-[4/3] overflow-hidden bg-pure-white p-4">
+                        <img
+                          src={product.image}
+                          alt={duplicate ? "" : product.name}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+                        />
+                      </div>
+                      <span className="flex min-h-[76px] items-center justify-between gap-2 border-t border-charcoal/10 px-4 py-4 text-sm font-semibold text-brand-deep">
+                        {product.name}
+                        <ArrowRight className="h-4 w-4 shrink-0 text-brand transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -406,12 +332,13 @@ function IndustryCard({
   alt,
   icon: Icon,
   href,
-}: (typeof industries)[number]) {
+}: (typeof industrySolutions)[number]) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <Link
-      to={href}
+      to="/products/$slug"
+      params={{ slug: href.split("/").at(-1)! }}
       aria-label={`${title}: ${description} Explore`}
       className="industry-card group block h-full overflow-hidden rounded-2xl border border-[#D7E3E1] bg-[#F9F9F5] text-left shadow-[0_4px_18px_rgba(11,92,92,0.06)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#0B5C5C]"
     >
