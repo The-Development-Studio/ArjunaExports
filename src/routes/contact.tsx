@@ -224,17 +224,17 @@ function Contact() {
                     aria-hidden
                   />
                 </span>
-                <span className="flex min-w-0 flex-1 items-center justify-center px-6 py-6 sm:px-8 xl:px-9">
+                <span className="flex min-w-0 flex-1 items-center justify-center px-4 py-6 sm:px-6 xl:px-8">
                   <div
-                    className="flex flex-col justify-center text-left text-[15px] font-bold leading-[1.7] tracking-normal text-[#20555A] sm:text-base xl:text-[17px] xl:leading-[1.75]"
+                    className="flex min-w-0 flex-col justify-center text-left text-[14px] font-bold leading-[1.55] tracking-normal text-[#20555A] sm:text-[15px] xl:text-base xl:leading-[1.65]"
                     style={{ color: "#20555A" }}
                   >
                     <span>1/140-12, GM Complex,</span>
-                    <span>Opp. to TMB Bank</span>
+                    <span>Opposite TMB Bank,</span>
                     <span>Kumaramangalam Post,</span>
-                    <span>Tiruchengode TK</span>
-                    <span>Namakkal District, Tamil Nadu</span>
-                    <span>637205, India</span>
+                    <span>Tiruchengode Taluk,</span>
+                    <span>Namakkal District,</span>
+                    <span>Tamil Nadu – 637205, India.</span>
                   </div>
                 </span>
               </address>
