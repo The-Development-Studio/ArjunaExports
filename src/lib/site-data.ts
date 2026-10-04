@@ -22,7 +22,7 @@ import stage9Shipping from "@/assets/Process/stage-9-shipping.jpg";
 import productBlock from "@/assets/product-block.jpg";
 import productCocoPeat5kg from "@/assets/product-coco-peat-5kg.png";
 import productCocoPeat650g from "@/assets/product-coco-peat-650g.png";
-import productCocoHuskChips4kg from "@/assets/product-coco-husk-chips-4kg.png";
+import productCocoHushChips4kg from "@/assets/product-coco-hush-chips-4kg.png";
 import productGrowbag from "@/assets/product-growbag.jpg";
 import productErosion from "@/assets/product-erosion.jpg";
 import productFloor from "@/assets/product-floor.jpg";
@@ -83,7 +83,7 @@ export const img = {
   productBlock,
   productCocoPeat5kg,
   productCocoPeat650g,
-  productCocoHuskChips4kg,
+  productCocoHushChips4kg,
   productGrowbag,
   productErosion,
   productFloor,
@@ -199,42 +199,8 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "coir-matting",
-    name: "Coir Matting",
-    category: "Coir Fibre",
-    image: productFloor,
-    short: "Durable natural coir matting for entrances, interiors and contract flooring.",
-    format: "Rolls · Cut mats · Custom sizes",
-    application: "Interiors, hospitality, retail and contract flooring",
-    overview:
-      "Woven from selected coir fibre, our matting range brings a natural, hard-wearing surface to entrance areas and interior flooring programmes. Rolls and cut mats can be supplied in standard or customer-specific dimensions.",
-    benefits: [
-      "Hard-wearing natural fibre construction",
-      "Roll and cut-mat formats available",
-      "Natural, bleached and dyed finishes",
-      "Private label and custom sizing support",
-    ],
-    specs: [
-      { label: "Dimensions", value: "Up to 2 m width, cut to length" },
-      { label: "Weight", value: "600 – 1400 gsm" },
-      { label: "Format", value: "Rolls and cut mats" },
-      { label: "Fibre", value: "Selected natural coir" },
-      { label: "Finish", value: "Natural, bleached or dyed" },
-      { label: "Moisture", value: "< 12%" },
-      { label: "Backing", value: "Latex backing available" },
-      { label: "Packaging", value: "Rolled or carton packed" },
-      { label: "Customisation", value: "Weave, colour, backing and size" },
-    ],
-    applications: ["Landscaping", "Home Gardening"],
-    industrySolutions: [
-      { title: "Landscaping", description: "Natural growing media for landscape and planting applications.", image: industryLandscaping, alt: "Freshly planted garden bed with natural mulch and leafy plants", icon: Mountain },
-      { title: "Industrial Oil Absorption", description: "Natural coir-based material for selected absorption applications.", image: industryIndustrialOilAbsorption, alt: "Coir fiber mats absorbing an oil spill on a factory floor beside machinery", icon: Droplets },
-      { title: "Animal Bedding", description: "Natural coir material for applicable animal bedding uses.", image: industryAnimalBedding, alt: "Brown horse standing in a wooden stable with coir bedding", icon: Leaf },
-    ],
-  },
-  {
-    slug: "650-gram-block",
-    name: "650 Gram Block",
+    slug: "coir-650-gram-bricks",
+    name: "Coir 650 Gram Bricks",
     category: "Coco Peat",
     image: productCocoPeat650g,
     short: "Compact coco peat block format for retail packs and smaller growing applications.",
@@ -265,15 +231,15 @@ export const products: Product[] = [
     ],
   },
   {
-    slug: "husk-chips",
-    name: "Husk Chips",
+    slug: "coco-hush-chips",
+    name: "Coco Hush Chips",
     category: "Coco Husk",
-    image: productCocoHuskChips4kg,
-    short: "Chunky coconut husk chips for airy substrate blends and orchid-style growing media.",
+    image: productCocoHushChips4kg,
+    short: "Chunky coir chips for airy substrate blends and orchid-style growing media.",
     format: "4 kg block · Loose chips · Compressed bales",
     application: "Orchids, aroids, nursery blends and hydroponic substrates",
     overview:
-      "Coconut husk chips add structure, drainage and air space to professional growing mixes. Custom grading helps customers balance water retention with fast drainage for crop-specific blends.",
+      "Coco Hush Chips add structure, drainage and air space to professional growing mixes. Custom grading helps customers balance water retention with fast drainage for crop-specific blends.",
     benefits: [
       "Improves air-filled porosity",
       "Stable natural structure",
@@ -294,6 +260,40 @@ export const products: Product[] = [
     applications: ["Floriculture", "Nurseries", "Hydroponics"],
     industrySolutions: [
       { title: "Floriculture", description: "Growing solutions for cut flowers and ornamental cultivation.", image: industryFloriculture, alt: "Fresh colorful flowers growing on a flower farm", icon: Flower2 },
+    ],
+  },
+  {
+    slug: "coir-matting",
+    name: "Coir Matting",
+    category: "Coir Fibre",
+    image: detailCoirFlooring,
+    short: "Durable natural coir matting for entrances, interiors and contract flooring.",
+    format: "Rolls · Cut mats · Custom sizes",
+    application: "Interiors, hospitality, retail and contract flooring",
+    overview:
+      "Woven from selected coir fibre, our matting range brings a natural, hard-wearing surface to entrance areas and interior flooring programmes. Rolls and cut mats can be supplied in standard or customer-specific dimensions.",
+    benefits: [
+      "Hard-wearing natural fibre construction",
+      "Roll and cut-mat formats available",
+      "Natural, bleached and dyed finishes",
+      "Private label and custom sizing support",
+    ],
+    specs: [
+      { label: "Dimensions", value: "Up to 2 m width, cut to length" },
+      { label: "Weight", value: "600 – 1400 gsm" },
+      { label: "Format", value: "Rolls and cut mats" },
+      { label: "Fibre", value: "Selected natural coir" },
+      { label: "Finish", value: "Natural, bleached or dyed" },
+      { label: "Moisture", value: "< 12%" },
+      { label: "Backing", value: "Latex backing available" },
+      { label: "Packaging", value: "Rolled or carton packed" },
+      { label: "Customisation", value: "Weave, colour, backing and size" },
+    ],
+    applications: ["Landscaping", "Home Gardening"],
+    industrySolutions: [
+      { title: "Landscaping", description: "Natural growing media for landscape and planting applications.", image: industryLandscaping, alt: "Freshly planted garden bed with natural mulch and leafy plants", icon: Mountain },
+      { title: "Industrial Oil Absorption", description: "Natural coir-based material for selected absorption applications.", image: industryIndustrialOilAbsorption, alt: "Coir fiber mats absorbing an oil spill on a factory floor beside machinery", icon: Droplets },
+      { title: "Animal Bedding", description: "Natural coir material for applicable animal bedding uses.", image: industryAnimalBedding, alt: "Brown horse standing in a wooden stable with coir bedding", icon: Leaf },
     ],
   },
 ];
@@ -319,7 +319,7 @@ export const industrySolutions: IndustrySolution[] = products
   )
   .sort((a, b) => industrySolutionOrder.indexOf(a.title) - industrySolutionOrder.indexOf(b.title));
 
-export const productFilters = ["All", "Coco Peat", "Coco Peat 650", "Coir Fibre", "Coco Husk"];
+export const productFilters = ["All", "Coco Peat", "Coir 650 Gram Bricks", "Coir Fibre", "Coco Husk"];
 
 export const transformationStages = [
   {

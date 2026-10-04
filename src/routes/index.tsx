@@ -20,6 +20,7 @@ import {
   transformationStages,
   trustPoints,
 } from "@/lib/site-data";
+import { ProductCard } from "@/components/site/ProductCard";
 import { resourceArticles } from "@/lib/resource-data";
 import {
   ChapterHeading,
@@ -91,42 +92,12 @@ function ProductCarousel() {
             aria-hidden={duplicate || undefined}
           >
             {products.map((product, index) => (
-              <Link
+              <ProductCard
                 key={product.slug}
-                to="/products/$slug"
-                params={{ slug: product.slug }}
-                tabIndex={duplicate ? -1 : undefined}
-                className="group block w-[min(82vw,22rem)] shrink-0 overflow-hidden rounded-md border border-brand/15 bg-ivory shadow-[0_14px_38px_rgba(31,45,40,.08)]"
-              >
-                <div
-                  className={`aspect-[4/3] overflow-hidden ${
-                    product.slug === "coir-matting"
-                      ? "bg-brand-soft"
-                      : "flex items-center justify-center bg-pure-white p-4"
-                  }`}
-                >
-                  <img
-                    src={product.image}
-                    alt={duplicate ? "" : product.name}
-                    loading="lazy"
-                    decoding="async"
-                    className={`transition duration-700 group-hover:scale-105 ${
-                      product.slug === "coir-matting"
-                        ? "h-full w-full object-cover"
-                        : "max-h-full w-auto max-w-full object-contain drop-shadow-sm"
-                    }`}
-                  />
-                </div>
-                <div className="p-6">
-                  <span className="micro-label text-brand">
-                    {String(index + 1).padStart(2, "0")} / {product.category}
-                  </span>
-                  <h3 className="display mt-3 text-2xl leading-tight">{product.name}</h3>
-                  <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-charcoal/70">
-                    {product.short}
-                  </p>
-                </div>
-              </Link>
+                product={product}
+                index={index}
+                variant="carousel"
+              />
             ))}
           </div>
         ))}
@@ -257,6 +228,22 @@ function Home() {
           </div>
         </div>
       </section>
+      <section className="bg-brand-soft py-20 lg:py-28">
+        <div className="shell">
+          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+            <ChapterHeading
+              label="02 — Our Range"
+              lines={["Made for growers.", "Built for distance."]}
+            />
+            <TextLink to="/products" className="shrink-0 text-brand">
+              View all products
+            </TextLink>
+          </Reveal>
+          <Reveal>
+            <ProductCarousel />
+          </Reveal>
+        </div>
+      </section>
       <section className="bg-ivory py-20 lg:py-28">
         <div className="shell">
           <Reveal>
@@ -325,22 +312,6 @@ function Home() {
           <TextLink to="/process" className="mt-12 text-[#20555A]">
             Explore the full process
           </TextLink>
-        </div>
-      </section>
-      <section className="bg-brand-soft py-20 lg:py-28">
-        <div className="shell">
-          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <ChapterHeading
-              label="02 — Our Range"
-              lines={["Made for growers.", "Built for distance."]}
-            />
-            <TextLink to="/products" className="shrink-0 text-brand">
-              View all products
-            </TextLink>
-          </Reveal>
-          <Reveal>
-            <ProductCarousel />
-          </Reveal>
         </div>
       </section>
       <section className="bg-ivory py-20 lg:py-28">

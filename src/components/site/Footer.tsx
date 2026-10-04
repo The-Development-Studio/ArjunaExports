@@ -1,169 +1,176 @@
 import { Link } from "@tanstack/react-router";
+import { Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/logo.svg";
+import plantation from "@/assets/hero-plantation.jpg";
 import { navItems, products } from "@/lib/site-data";
+
+const socialLinks = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/arjunaexports" },
+  { label: "Instagram", href: "https://www.instagram.com/arjunaexports/" },
+  { label: "Facebook", href: "https://www.facebook.com/ArjunaExports/" },
+];
+
+function SocialIcon({ label }: { label: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="footer-social-icon">
+      {label === "Instagram" && (
+        <>
+          <defs>
+            <linearGradient id="footer-instagram-gradient" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stopColor="#FFB13D" />
+              <stop offset="48%" stopColor="#E1306C" />
+              <stop offset="100%" stopColor="#833AB4" />
+            </linearGradient>
+          </defs>
+          <circle cx="12" cy="12" r="12" fill="url(#footer-instagram-gradient)" />
+          <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="white" strokeWidth="1.8" />
+          <circle cx="12" cy="12" r="3.2" fill="none" stroke="white" strokeWidth="1.8" />
+          <circle cx="16.3" cy="7.9" r="1" fill="white" />
+        </>
+      )}
+      {label === "LinkedIn" && (
+        <>
+          <circle cx="12" cy="12" r="12" fill="#0A66C2" />
+          <text x="12" y="17" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-1">
+            in
+          </text>
+        </>
+      )}
+      {label === "Facebook" && (
+        <>
+          <circle cx="12" cy="12" r="12" fill="#0866FF" />
+          <path d="M13.7 24V13.1h3.6l.55-4.25H13.7V6.14c0-1.23.34-2.07 2.1-2.07H18V.27C17.62.22 16.3.1 14.76.1c-3.2 0-5.4 1.95-5.4 5.54v3.21H5.74v4.25h3.62V24h4.34Z" fill="white" transform="translate(1.8 0) scale(.84)" />
+        </>
+      )}
+    </svg>
+  );
+}
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-brand text-pure-white/80">
-      <div className="shell pb-8 pt-20 lg:pt-24">
-        <div className="grid items-center gap-8 md:grid-cols-2">
-          <h2 className="display text-[clamp(1.5rem,2.7vw,2.4rem)] font-bold leading-tight tracking-tight text-pure-white antialiased">
-            The journey continues
-            <span className="block">From a coconut husk to new life</span>
+    <footer className="site-footer">
+      <section className="footer-story" aria-labelledby="footer-story-title">
+        <img
+          src={plantation}
+          alt="Coconut palms growing in a tropical plantation"
+          className="footer-story-image"
+          loading="lazy"
+          decoding="async"
+        />
+        <div className="footer-story-wash" aria-hidden="true" />
+        <div className="shell footer-story-content">
+          <h2 id="footer-story-title" className="footer-headline">
+            <span>The journey continues</span>
+            <span>From a coconut</span>
+            <span className="footer-headline-accent">husk to new life</span>
           </h2>
-          <h2 className="display text-[clamp(1rem,1.8vw,1.6rem)] font-bold leading-tight tracking-tight text-pure-white antialiased md:text-right">
-            Growing Beyond Boundaries.
-          </h2>
+          <p className="footer-tagline" aria-label="Growing Beyond Boundaries.">
+            <span>Growing</span>
+            <span>Beyond</span>
+            <span className="footer-tagline-accent">Boundaries.</span>
+          </p>
         </div>
+      </section>
 
-        <div className="mt-14 grid gap-10 border-t border-pure-white/15 pt-10 md:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <Link to="/" aria-label="Arjuna Exports home" className="inline-block">
-              <img
-                src={logo}
-                alt="Arjuna Exports"
-                loading="lazy"
-                decoding="async"
-                className="h-auto w-[210px] brightness-0 invert"
-              />
+      <div className="shell footer-content">
+        <div className="footer-columns">
+          <div className="footer-company">
+            <Link to="/" aria-label="Arjuna Exports home" className="footer-logo-link">
+              <img src={logo} alt="Arjuna Exports" className="footer-logo" />
             </Link>
-            <p className="mt-4 max-w-[34ch] text-base leading-relaxed text-pure-white/75">
+            <p className="footer-description">
               Manufacturer and exporter of coconut-based growing media, serving professional growers
               worldwide from Tamil Nadu, India.
             </p>
-            <div className="mt-6 flex gap-3" aria-label="Arjuna Exports social media">
-              {[
-                {
-                  label: "LinkedIn",
-                  href: "https://www.linkedin.com/company/arjunaexports",
-                },
-                {
-                  label: "Instagram",
-                  href: "https://www.instagram.com/arjunaexports/",
-                },
-                {
-                  label: "Facebook",
-                  href: "https://www.facebook.com/ArjunaExports/",
-                },
-              ].map(({ label, href }) => (
+            <nav className="footer-socials" aria-label="Arjuna Exports social media">
+              {socialLinks.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="group flex h-11 w-11 items-center justify-center rounded-full border border-pure-white/25 transition-colors duration-300 hover:border-aqua hover:bg-aqua hover:text-brand-deep"
+                  rel="noopener"
+                  aria-label={`Visit Arjuna Exports on ${label} (opens in a new tab)`}
+                  className="footer-social-link"
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
-                  >
-                    {label === "Instagram" && (
-                      <>
-                        <defs>
-                          <linearGradient id="footer-instagram-gradient" x1="0" y1="1" x2="1" y2="0">
-                            <stop offset="0%" stopColor="#FFB13D" />
-                            <stop offset="48%" stopColor="#E1306C" />
-                            <stop offset="100%" stopColor="#833AB4" />
-                          </linearGradient>
-                        </defs>
-                        <circle cx="12" cy="12" r="12" fill="url(#footer-instagram-gradient)" />
-                        <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" fill="none" stroke="white" strokeWidth="1.8" />
-                        <circle cx="12" cy="12" r="3.2" fill="none" stroke="white" strokeWidth="1.8" />
-                        <circle cx="16.3" cy="7.9" r="1" fill="white" />
-                      </>
-                    )}
-                    {label === "LinkedIn" && (
-                      <>
-                        <circle cx="12" cy="12" r="12" fill="#0A66C2" />
-                        <text x="12" y="17" textAnchor="middle" fill="white" fontFamily="Arial, sans-serif" fontSize="13" fontWeight="700" letterSpacing="-1">in</text>
-                      </>
-                    )}
-                    {label === "Facebook" && (
-                      <>
-                        <circle cx="12" cy="12" r="12" fill="#0866FF" />
-                        <path d="M13.7 24V13.1h3.6l.55-4.25H13.7V6.14c0-1.23.34-2.07 2.1-2.07H18V.27C17.62.22 16.3.1 14.76.1c-3.2 0-5.4 1.95-5.4 5.54v3.21H5.74v4.25h3.62V24h4.34Z" fill="white" transform="translate(1.8 0) scale(.84)" />
-                      </>
-                    )}
-                  </svg>
+                  <SocialIcon label={label} />
                 </a>
               ))}
-            </div>
+            </nav>
           </div>
 
-          <div>
-            <div className="micro-label text-pure-white/60">Navigate</div>
-            <ul className="mt-5 space-y-2.5 text-base">
-              {navItems.map((n) => (
-                <li key={n.to}>
-                  <Link to={n.to} className="transition-colors duration-300 hover:text-pure-white">
-                    {n.label}
+          <nav aria-label="Navigate the website" className="footer-nav">
+            <h3 className="footer-column-heading">Navigate</h3>
+            <ul className="footer-link-list">
+              {navItems.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="footer-link">
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div>
-            <div className="micro-label text-pure-white/60">Products</div>
-            <ul className="mt-5 space-y-2.5 text-base">
-              {products.map((p) => (
-                <li key={p.slug}>
+          <nav aria-label="Products" className="footer-nav">
+            <h3 className="footer-column-heading">Products</h3>
+            <ul className="footer-link-list">
+              {products.map((product) => (
+                <li key={product.slug}>
                   <Link
                     to="/products/$slug"
-                    params={{ slug: p.slug }}
-                    className="transition-colors duration-300 hover:text-pure-white"
+                    params={{ slug: product.slug }}
+                    className="footer-link"
                   >
-                    {p.name}
+                    {product.name}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          <div className="min-w-0">
-            <div className="micro-label text-pure-white/60">Contact</div>
-            <address className="mt-5 space-y-2.5 text-base leading-relaxed not-italic">
-              <p className="space-y-1 text-left">
-                <span className="block">Arjuna Exports</span>
-                <span className="block">1/140-12, GM Complex, Opp. to TMB Bank</span>
-                <span className="block">Kumaramangalam Post, Tiruchengode TK</span>
-                <span className="block">Namakkal District, Tamil Nadu – 637205, India</span>
-              </p>
-              <p>
-                <a href="mailto:info@arjunaexports.com" className="hover:text-pure-white">
-                  info@arjunaexports.com
-                </a>
-                <br />
-                <a href="tel:+919629874555" className="hover:text-pure-white">
-                  +91 96298 74555
-                </a>
-                <br />
-                <a href="tel:+914288250125" className="hover:text-pure-white">
-                  +91 4288 250125
-                </a>
-              </p>
+          <div className="footer-contact">
+            <h3 className="footer-column-heading">Contact</h3>
+            <address className="footer-address">
+              <div className="footer-contact-item footer-address-item">
+                <MapPin aria-hidden="true" className="footer-contact-icon" />
+                <div className="footer-address-lines">
+                  <strong>Arjuna Exports</strong>
+                  <span>1/140-12, GM Complex,</span>
+                  <span>Opposite TMB Bank,</span>
+                  <span>Kumaramangalam Post,</span>
+                  <span>Tiruchengode Taluk,</span>
+                  <span>Namakkal District,</span>
+                  <span>Tamil Nadu – 637205,</span>
+                  <span>India</span>
+                </div>
+              </div>
+              <a href="mailto:info@arjunaexports.com" className="footer-contact-item footer-contact-link">
+                <Mail aria-hidden="true" className="footer-contact-icon" />
+                <span>info@arjunaexports.com</span>
+              </a>
+              <a href="tel:+919629874555" className="footer-contact-item footer-contact-link">
+                <Phone aria-hidden="true" className="footer-contact-icon" />
+                <span>+91 96298 74555</span>
+              </a>
+              <a href="tel:+914288250125" className="footer-contact-item footer-contact-link">
+                <Phone aria-hidden="true" className="footer-contact-icon" />
+                <span>+91 4288 250125</span>
+              </a>
             </address>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-pure-white/15 pt-6 text-sm text-pure-white/70">
-          <div className="flex flex-col gap-2">
+        <div className="footer-legal">
+          <div className="footer-legal-copy">
             <span>© {new Date().getFullYear()} Arjuna Exports. All rights reserved.</span>
-            <span className="text-pure-white/45">
+            <span className="footer-credit">
               Crafted by{" "}
-              <a
-                href="https://www.devstudioco.com"
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-aqua"
-              >
+              <a href="https://www.devstudioco.com" target="_blank" rel="noopener" className="footer-credit-link">
                 The Development Studio
               </a>
             </span>
           </div>
-          <div className="flex gap-6">
+          <div className="footer-legal-links">
             <span>Privacy Policy</span>
             <span>Terms of Use</span>
             <span>India</span>

@@ -23,14 +23,14 @@ const productGalleries: Record<string, Array<{ image: string; label: string }>> 
     { image: img.processPackaging, label: "Wrapped and palletised packaging" },
   ],
   "coir-matting": [
-    { image: img.productFloor, label: "Natural coir matting" },
+    { image: img.detailCoirFlooring, label: "Natural coir matting" },
     { image: img.detailCoirFlooring, label: "Woven coir mat and floor runner" },
     { image: img.stageFibre, label: "Selected long coir fibres" },
     { image: img.storyPeople, label: "Experienced production team" },
     { image: img.processQuality, label: "Product quality inspection" },
     { image: img.exportPort, label: "Export logistics readiness" },
   ],
-  "650-gram-block": [
+  "coir-650-gram-bricks": [
     { image: img.productCocoPeat650g, label: "Premium 650g Coco Peat Brick" },
     { image: img.productBlock, label: "650 gram coco peat block format" },
     { image: img.detailBlockStack, label: "Compressed coco block stacks" },
@@ -39,9 +39,9 @@ const productGalleries: Record<string, Array<{ image: string; label: string }>> 
     { image: img.appNursery, label: "Young plants in a nursery" },
     { image: img.processPackaging, label: "Private-label packing formats" },
   ],
-  "husk-chips": [
-    { image: img.productCocoHuskChips4kg, label: "Premium 4kg Coco Husk Chips" },
-    { image: img.stageHusk, label: "Coconut husk chips source material" },
+  "coco-hush-chips": [
+    { image: img.productCocoHushChips4kg, label: "Premium 4kg Coco Hush Chips" },
+    { image: img.stageHusk, label: "Coco Hush Chips source material" },
     { image: img.stageCoconut, label: "Renewable coconut origin" },
     { image: img.stageFibre, label: "Coarse coir structure" },
     { image: img.stageMedium, label: "Open growing medium blend" },
@@ -148,7 +148,8 @@ export const Route = createFileRoute("/products/$slug")({
   loader: ({ params }) => {
     const product = products.find((p) => p.slug === params.slug);
     if (!product) throw notFound();
-    return product;
+    const { industrySolutions, ...serializableProduct } = product;
+    return serializableProduct;
   },
   head: ({ loaderData: p }) => ({
     meta: [
@@ -186,13 +187,13 @@ function ProductDetail() {
   }));
   const isCocoPeatBlocks = p.slug === "coco-peat-blocks";
   const isCoirMatting = p.slug === "coir-matting";
-  const isGramBlock = p.slug === "650-gram-block";
-  const isHuskChips = p.slug === "husk-chips";
+  const isGramBlock = p.slug === "coir-650-gram-bricks";
+  const isHuskChips = p.slug === "coco-hush-chips";
   const isPackagingPhoto = activePhoto?.image
     ? [
         img.productCocoPeat5kg,
         img.productCocoPeat650g,
-        img.productCocoHuskChips4kg,
+        img.productCocoHushChips4kg,
       ].includes(activePhoto.image)
     : false;
   const specification = [
@@ -216,7 +217,7 @@ function ProductDetail() {
           ]
         : isGramBlock
           ? [
-              "Coco Peat 650 Gram Bricks - Grade I / Grade II",
+              "Coir 650 Gram Bricks - Grade I / Grade II",
               "",
               ...gramBlockComparison.map(
                 (item) =>
@@ -282,7 +283,7 @@ function ProductDetail() {
                     const isThumbPackaging = [
                       img.productCocoPeat5kg,
                       img.productCocoPeat650g,
-                      img.productCocoHuskChips4kg,
+                      img.productCocoHushChips4kg,
                     ].includes(photo.image);
                     return (
                       <button
@@ -495,7 +496,7 @@ function ProductDetail() {
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[820px] border-collapse text-left">
                     <caption className="sr-only">
-                      Coco Peat 650 Gram Bricks Grade I and Grade II specification comparison
+                      Coir 650 Gram Bricks Grade I and Grade II specification comparison
                     </caption>
                     <thead>
                       <tr className="bg-brand text-pure-white">
@@ -503,10 +504,10 @@ function ProductDetail() {
                           Product name
                         </th>
                         <th className="w-[40%] border-r border-pure-white/20 px-5 py-5 text-center text-base font-bold">
-                          Coco Peat 650 Gram Bricks - Grade I
+                          Coir 650 Gram Bricks - Grade I
                         </th>
                         <th className="w-[40%] px-5 py-5 text-center text-base font-bold">
-                          Coco Peat 650 Gram Bricks - Grade II
+                          Coir 650 Gram Bricks - Grade II
                         </th>
                       </tr>
                       <tr className="bg-[#68e6c2] text-brand">
@@ -575,7 +576,7 @@ function ProductDetail() {
               ) : isHuskChips ? (
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[700px] border-collapse text-left">
-                    <caption className="sr-only">Husk Chips technical specification</caption>
+                    <caption className="sr-only">Coco Hush Chips technical specification</caption>
                     <thead>
                       <tr className="bg-brand text-pure-white">
                         <th className="w-[12%] border-r border-pure-white/20 px-5 py-5 text-center text-sm font-bold uppercase tracking-[.08em]">
