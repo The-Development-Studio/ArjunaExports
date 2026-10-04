@@ -1,25 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  Award,
-  ClipboardCheck,
-  Container,
-  Gauge,
-  Globe2,
-  Headphones,
-  PackageCheck,
-  RefreshCw,
-  UsersRound,
-  type LucideIcon,
-} from "lucide-react";
-import { useEffect, useState } from "react";
-import {
-  applications,
-  img,
-  processStages,
-  products,
-  transformationStages,
-  trustPoints,
-} from "@/lib/site-data";
+import { Award, Container, Globe2, PackageCheck, RefreshCw, type LucideIcon } from "lucide-react";
+import { Fragment, useEffect, useState } from "react";
+import { img, industrySolutions, processStages, products, transformationStages } from "@/lib/site-data";
 import { ProductCard } from "@/components/site/ProductCard";
 import { resourceArticles } from "@/lib/resource-data";
 import {
@@ -29,9 +11,9 @@ import {
   Reveal,
   TextLink,
 } from "@/components/site/primitives";
-import { ThreeDIcon } from "@/components/site/ThreeDIcon";
 import { CustomerJourney } from "@/components/site/CustomerJourney";
 import heroVideo from "@/assets/hero_page.mp4";
+import logo from "@/assets/logo.svg";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -92,12 +74,7 @@ function ProductCarousel() {
             aria-hidden={duplicate || undefined}
           >
             {products.map((product, index) => (
-              <ProductCard
-                key={product.slug}
-                product={product}
-                index={index}
-                variant="carousel"
-              />
+              <ProductCard key={product.slug} product={product} index={index} variant="carousel" />
             ))}
           </div>
         ))}
@@ -124,7 +101,7 @@ function ArticlesCarousel() {
                 to="/resources/$slug"
                 params={{ slug: article.slug }}
                 tabIndex={duplicate ? -1 : undefined}
-                className="group flex w-[min(84vw,23rem)] shrink-0 flex-col overflow-hidden rounded-md border border-charcoal/10 bg-pure-white shadow-[0_14px_38px_rgba(31,45,40,.08)]"
+                className="group flex w-[min(84vw,23rem)] shrink-0 flex-col overflow-hidden rounded-md border-2 border-[#1B4D2E] bg-pure-white shadow-[0_14px_38px_rgba(31,45,40,.08)]"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-brand-soft">
                   <img
@@ -232,7 +209,7 @@ function Home() {
         <div className="shell">
           <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <ChapterHeading
-              label="02 — Our Range"
+              label="01 — Our Products"
               lines={["Made for growers.", "Built for distance."]}
             />
             <TextLink to="/products" className="shrink-0 text-brand">
@@ -244,22 +221,87 @@ function Home() {
           </Reveal>
         </div>
       </section>
-      <section className="bg-ivory py-20 lg:py-28">
+
+      <Link
+        to="/process"
+        aria-label="Explore the full process"
+        className="process-preview-link block bg-charcoal text-[#20555A] transition duration-300 hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"
+      >
+        <section className="py-14 lg:py-20">
+          <div className="shell">
+            <Reveal>
+              <div>
+                <Label className="mb-4 block">02 / Transformation</Label>
+                <h2 className="display whitespace-nowrap text-[clamp(1.15rem,5.6vw,3.5rem)] leading-tight">
+                  Natural Meets Precision
+                </h2>
+              </div>
+            </Reveal>
+            <div className="mt-8 grid gap-5 md:grid-cols-3">
+              {processStages.slice(0, 9).map((s, i) => (
+                <Fragment key={s.n}>
+                  <Reveal
+                    delay={(i % 3) * 70}
+                    className={`${i === 3 || i === 7 ? "md:col-span-2" : ""} group relative min-h-[300px] overflow-hidden rounded-md`}
+                  >
+                    <img
+                      src={s.image}
+                      alt={s.title}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-7">
+                      <span className="display text-4xl text-pure-white/75">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="display mt-2 text-3xl text-[#20555A]">{s.title}</h3>
+                    </div>
+                  </Reveal>
+                  {i === 6 && (
+                    <div className="flex min-h-[180px] items-center justify-center rounded-md border border-[#20555A]/15 bg-pure-white/10 p-6 md:min-h-[300px] md:p-5">
+                      <img
+                        src={logo}
+                        alt="Arjuna Exports"
+                        width={1436}
+                        height={328}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-auto w-full max-w-[320px] object-contain"
+                      />
+                    </div>
+                  )}
+                </Fragment>
+              ))}
+            </div>
+            <div className="mt-8 flex justify-center sm:justify-end">
+              <span className="process-preview-cta inline-flex min-h-[52px] items-center gap-3 rounded-sm bg-[var(--brand-green)] px-7 text-[14px] font-semibold uppercase tracking-[0.06em] text-pure-white transition-colors duration-300 hover:bg-[#1B5E20]">
+                Explore the full process
+                <span aria-hidden="true">→</span>
+              </span>
+            </div>
+          </div>
+        </section>
+      </Link>
+      <section className="bg-ivory py-12 sm:py-14 lg:py-16">
         <div className="shell">
           <Reveal>
-            <ChapterHeading
-              label="01 — The Material"
-              lines={["One coconut.", "A world of possibility."]}
-            />
+            <div>
+              <Label className="mb-4 block">03 — The Material</Label>
+              <h2 className="display whitespace-nowrap text-[clamp(0.8rem,3.6vw,3.5rem)] leading-tight">
+                One Coconut World of Possibilities
+              </h2>
+            </div>
           </Reveal>
-          <div className="mt-12 grid gap-px bg-charcoal/15 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-px bg-charcoal/15 md:grid-cols-2 lg:grid-cols-4">
             {transformationStages.map((s, i) => (
               <Reveal
                 key={s.n}
                 delay={i * 80}
                 className="group overflow-hidden rounded-md bg-ivory"
               >
-                <div className="aspect-[4/5] overflow-hidden">
+                <div className="aspect-[5/4] overflow-hidden">
                   <img
                     src={s.image}
                     alt={s.title}
@@ -268,154 +310,52 @@ function Home() {
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <span className="micro-label text-brand">{s.n}</span>
-                  <h3 className="display mt-4 text-3xl">{s.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal/65">{s.text}</p>
+                  <h3 className="display mt-3 text-2xl">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-charcoal/65">{s.text}</p>
                 </div>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-      <section className="bg-charcoal py-20 text-[#20555A] lg:py-28">
-        <div className="shell">
-          <Reveal>
-            <ChapterHeading label="02 / Transformation" lines={["Nature meets", "precision."]} />
-          </Reveal>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {processStages.slice(0, 9).map((s, i) => (
-              <Reveal
-                key={s.n}
-                delay={(i % 3) * 70}
-                className={`${i === 3 || i === 7 ? "md:col-span-2" : ""} group relative min-h-[300px] overflow-hidden rounded-md`}
-              >
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7">
-                  <span className="display text-4xl text-[#20555A]/60">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="display mt-2 text-3xl text-[#20555A]">{s.title}</h3>
-                  <p className="mt-2 max-w-md text-sm text-[#20555A]">{s.text}</p>
-                  <span className="micro-label mt-4 block text-[#20555A]">{s.data}</span>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <TextLink to="/process" className="mt-12 text-[#20555A]">
-            Explore the full process
-          </TextLink>
-        </div>
-      </section>
-      <section className="bg-ivory py-20 lg:py-28">
-        <div className="shell grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
-          <Reveal>
-            <ChapterHeading label="03 — Where It Grows" lines={["Rooted in", "real work."]} />
-            <p className="mt-8 max-w-[38ch] leading-relaxed text-charcoal/65">
-              One material, tuned for eight growing environments—from precision greenhouse systems
-              to public landscapes.
-            </p>
-            <TextLink to="/applications" className="mt-8 text-brand">
-              View applications
-            </TextLink>
-          </Reveal>
-          <div className="grid gap-px bg-charcoal/15 sm:grid-cols-2">
-            {applications.slice(0, 4).map((a) => (
-              <Reveal key={a.slug} className="group relative min-h-72 overflow-hidden">
-                <img
-                  src={a.image}
-                  alt={a.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/90 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-pure-white">
-                  <span className="micro-label text-aqua">{a.n}</span>
-                  <h3 className="display mt-2 text-3xl">{a.title}</h3>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="bg-offwhite py-20 lg:py-28">
-        <div className="shell">
-          <Reveal className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
-            <div>
-              <Label className="text-brand">04 / Best service for you</Label>
-              <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">Our unique values.</h2>
-            </div>
-            <p className="max-w-xl text-lg leading-relaxed text-charcoal/60 lg:justify-self-end">
-              Six connected commitments guide every order—from the first specification to the moment
-              it reaches the customer.
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-px bg-brand-deep/15 md:grid-cols-2 lg:grid-cols-3">
-            {trustPoints.map((point, index) => {
-              const icons = [Award, UsersRound, PackageCheck, ClipboardCheck, Gauge, Headphones];
-              const Icon = icons[index] ?? Award;
-              return (
-                <Reveal
-                  key={point.label}
-                  delay={(index % 3) * 80}
-                  className="group relative min-h-[310px] overflow-hidden rounded-md bg-ivory p-7 transition-colors duration-500 hover:bg-brand-soft lg:p-8"
-                >
-                  <div className="flex items-start justify-between">
-                    <ThreeDIcon
-                      icon={Icon}
-                      index={index}
-                      size="lg"
-                      className="transition-transform duration-500 group-hover:-translate-y-1"
-                    />
-                    <span className="display text-4xl text-brand/20">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <div className="mt-8 border-t border-charcoal/15 pt-5">
-                    <h3 className="display text-3xl">{point.label}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-charcoal/65">{point.value}</p>
-                  </div>
-                  <span className="absolute right-0 bottom-0 left-0 h-1 origin-left scale-x-0 bg-brand transition-transform duration-700 group-hover:scale-x-100" />
-                </Reveal>
-              );
-            })}
-          </div>
-          <div className="mt-12 flex justify-end">
-            <PrimaryButton to="/contact">Request a quote</PrimaryButton>
           </div>
         </div>
       </section>
       <CustomerJourney />
-      <section className="relative flex min-h-[600px] items-end overflow-hidden text-pure-white lg:min-h-[680px]">
-        <img
-          src={img.closingRoots}
-          alt="Healthy crop roots growing in coco medium"
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/20 to-transparent" />
-        <div className="shell relative z-10 pb-16 lg:pb-20">
-          <Label className="text-aqua">The journey continues</Label>
-          <h2 className="display mt-6 max-w-[15ch] text-[clamp(2.5rem,4.5vw,4rem)] leading-[1.02]">
-            From a coconut husk to new life.
-          </h2>
-          <p className="mt-7 max-w-xl text-lg text-pure-white/75">
-            Growing solutions shaped by nature, refined through experience and delivered worldwide.
-          </p>
-          <div className="mt-9 flex flex-wrap gap-5">
-            <PrimaryButton to="/contact">Request a quote</PrimaryButton>
-            <TextLink to="/contact" className="text-pure-white">
-              Contact our team
+      <section className="bg-ivory py-20 lg:py-28">
+        <div className="shell grid gap-12 lg:grid-cols-[.75fr_1.25fr]">
+          <Reveal>
+            <ChapterHeading label="Our Solutions" lines={["Solutions Across", "Industries"]} />
+            <p className="mt-8 max-w-[38ch] leading-relaxed text-charcoal/65">
+              Coir-based products shaped for the needs of growers, manufacturers, retailers and
+              landscape professionals.
+            </p>
+            <TextLink to="/applications" className="mt-8 text-brand">
+              Explore all industries
             </TextLink>
+          </Reveal>
+          <div className="grid gap-px bg-charcoal/15 sm:grid-cols-2">
+            {industrySolutions.slice(0, 4).map((solution, index) => (
+              <Reveal key={solution.title} className="group relative min-h-72 overflow-hidden">
+                <Link
+                  to={solution.href}
+                  aria-label={`Explore ${solution.title} solutions`}
+                  className="absolute inset-0 focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-aqua"
+                >
+                  <img
+                    src={solution.image}
+                    alt={solution.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/90 to-transparent transition-colors group-hover:from-brand-deep/95" />
+                  <div className="absolute inset-x-0 bottom-0 p-7 text-pure-white">
+                    <span className="micro-label text-aqua">{String(index + 1).padStart(2, "0")}</span>
+                    <h3 className="display mt-2 text-3xl">{solution.title}</h3>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>

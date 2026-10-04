@@ -1,412 +1,254 @@
-import {
-  BadgeCheck,
-  Boxes,
-  ClipboardCheck,
-  ClipboardList,
-  FileCheck2,
-  FileSearch,
-  Handshake,
-  Lightbulb,
-  MessageSquareText,
-  PackageCheck,
-  RefreshCw,
-  SearchCheck,
-  Ship,
-  Truck,
-  UsersRound,
-  X,
-  type LucideIcon,
-} from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { Reveal } from "@/components/site/primitives";
-import { cn } from "@/lib/utils";
+import { useState, type CSSProperties } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
 
-type JourneyStep = {
+/**
+ * Customer Journey section for the Arjuna Exports site.
+ *
+ * Optional script font: add
+ * @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&display=swap");
+ * to the top of your global stylesheet, or load Caveat in your document <head>.
+ *
+ * Usage: <CustomerJourney />
+ * Custom steps: <CustomerJourney steps={[{ title: "Your step", image: "/images/custom.svg" }]} />
+ */
+
+export type Step = {
   title: string;
-  description: string;
-  Icon: LucideIcon;
-  x: number;
-  y: number;
+  /** Image URL. Defaults to /images/journey/step-{number}.svg. */
+  image?: string;
+  /** Descriptive alt text for a supplied illustration. */
+  alt?: string;
 };
 
-const journeySteps: JourneyStep[] = [
-  {
-    title: "Business Understanding",
-    description:
-      "We understand your business, application, volume, technical requirements and expectations before moving toward the right solution.",
-    Icon: UsersRound,
-    x: 7.5,
-    y: 14.5,
-  },
-  {
-    title: "Requirement Discovery",
-    description:
-      "We translate your commercial and operational needs into clear product, packing, volume and documentation requirements.",
-    Icon: ClipboardList,
-    x: 28.3,
-    y: 14.5,
-  },
-  {
-    title: "Solution Recommendation",
-    description:
-      "Our team recommends the most suitable coco format and specification for your crop, process and target market.",
-    Icon: Lightbulb,
-    x: 49.2,
-    y: 14.5,
-  },
-  {
-    title: "Quotation & Commercial Proposal",
-    description:
-      "You receive a transparent proposal covering specifications, quantity, packaging, pricing, terms and responsibilities.",
-    Icon: FileCheck2,
-    x: 70,
-    y: 14.5,
-  },
-  {
-    title: "Sample Evaluation",
-    description:
-      "Representative samples allow you to validate expansion, EC, moisture, texture and handling before committing at scale.",
-    Icon: SearchCheck,
-    x: 90.8,
-    y: 14.5,
-  },
-  {
-    title: "Order Confirmation",
-    description:
-      "Approved specifications, quantities, commercial terms and delivery milestones are consolidated into one confirmed order.",
-    Icon: ClipboardCheck,
-    x: 86.7,
-    y: 50,
-  },
-  {
-    title: "Production Planning",
-    description:
-      "Materials, processing, drying, compression, packing and container readiness are scheduled around the agreed dispatch plan.",
-    Icon: Boxes,
-    x: 66.7,
-    y: 50,
-  },
-  {
-    title: "Quality Assurance & Inspection",
-    description:
-      "Each batch is checked against agreed parameters, including moisture, EC, expansion, compression and packaging quality.",
-    Icon: FileSearch,
-    x: 46.7,
-    y: 50,
-  },
-  {
-    title: "Export Documentation Compliance",
-    description:
-      "Export and buyer-specific documents are prepared and verified early to support smooth regulatory clearance.",
-    Icon: BadgeCheck,
-    x: 26.7,
-    y: 50,
-  },
-  {
-    title: "Shipment & Logistics Coordination",
-    description:
-      "We coordinate container movement, freight, port handoff and dispatch updates throughout the shipment journey.",
-    Icon: Ship,
-    x: 7.5,
-    y: 50,
-  },
-  {
-    title: "Customs & Delivery Support",
-    description:
-      "Our support continues through customs clearance, destination handling and final delivery communication.",
-    Icon: Truck,
-    x: 12.5,
-    y: 85.5,
-  },
-  {
-    title: "Customer Feedback",
-    description:
-      "We capture feedback from your team and end users to understand real-world product and service performance.",
-    Icon: MessageSquareText,
-    x: 37.5,
-    y: 85.5,
-  },
-  {
-    title: "Continuous Improvement",
-    description:
-      "Specifications, packing, timing and communication are refined using the insights gained from every shipment.",
-    Icon: RefreshCw,
-    x: 62.5,
-    y: 85.5,
-  },
-  {
-    title: "Long-Term Partnership",
-    description:
-      "Reliable quality and responsive support create a dependable partnership for future seasons, markets and growth plans.",
-    Icon: Handshake,
-    x: 87.5,
-    y: 85.5,
-  },
+const defaultSteps: Step[] = [
+  { title: "Customer Inquiry", alt: "Customer speaking with a headset agent beside a dollar coin" },
+  { title: "Quotation & Negotiation", alt: "Price quotation document and coin" },
+  { title: "Order Confirmation", alt: "Tablet displaying a checkmark beside a hard hat" },
+  { title: "Production", alt: "Green factory with a leaf and smoke" },
+  { title: "Quality Control", alt: "Inspector checking a clipboard in a warehouse" },
+  { title: "Logistics & Shipment Delivery", alt: "Container ship with cranes and stacked containers" },
+  { title: "Long-Term Partnership", alt: "Two people shaking hands" },
 ];
 
-const roadmapPath =
-  "M90 110 H1090 C1145 110 1150 160 1150 220 V275 C1150 345 1110 380 1040 380 H90 C35 380 30 430 30 490 V545 C30 610 80 650 150 650 H1050";
+const headerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+const headerItemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } },
+};
+const stepVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const } },
+};
+const reducedFadeVariants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.25 } },
+};
+const stepsContainerVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.15 } },
+};
 
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value));
-}
-
-export function CustomerJourney() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
-  const [selectedStep, setSelectedStep] = useState<number | null>(null);
-
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) {
-      setProgress(1);
-      return;
-    }
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const section = sectionRef.current;
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      const stickyOffset = window.innerWidth >= 1024 ? 88 : 0;
-      const scrollDistance = Math.max(rect.height - window.innerHeight + stickyOffset, 1);
-      const next = clamp((stickyOffset - rect.top) / scrollDistance, 0, 1);
-      setProgress((current) => (Math.abs(current - next) > 0.002 ? next : current));
-    };
-    const requestUpdate = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", requestUpdate, { passive: true });
-    window.addEventListener("resize", requestUpdate);
-    return () => {
-      if (frame) window.cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", requestUpdate);
-      window.removeEventListener("resize", requestUpdate);
-    };
-  }, []);
-
-  const selected = selectedStep === null ? null : journeySteps[selectedStep];
+export function CustomerJourney({ steps = defaultSteps }: { steps?: Step[] }) {
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
-      id="customer-journey"
-      ref={sectionRef}
       aria-labelledby="customer-journey-title"
-      className="relative overflow-clip bg-[#043f40] py-20 text-pure-white lg:h-[240vh] lg:py-0"
+      className="customer-journey relative overflow-hidden py-16"
+      style={{ "--brand-dark": "#14452F", "--brand-green": "#2F7D4F" } as CSSProperties}
     >
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_14%_12%,rgba(0,100,101,.6),transparent_34%),linear-gradient(145deg,#043f40_0%,#032e2f_100%)]" />
-        <div className="absolute inset-0 opacity-[.07] [background-image:linear-gradient(rgba(255,255,255,.22)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.18)_1px,transparent_1px)] [background-size:72px_72px]" />
-        <div className="absolute -right-32 top-24 h-96 w-96 rounded-full border border-pure-white/10" />
-        <div className="absolute -right-16 top-40 h-64 w-64 rounded-full border border-[#ffc928]/15" />
-      </div>
-
-      <div className="lg:sticky lg:top-[88px] lg:flex lg:h-[calc(100vh-88px)] lg:items-center">
-        <div className="shell relative lg:py-5">
-          <Reveal className="grid gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(300px,440px)] lg:items-end">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[.24em] text-[#ffd45a]">
-                Customer Journey
-              </p>
-              <h2
-                id="customer-journey-title"
-                className="display mt-5 max-w-[18ch] text-[clamp(2.25rem,3.8vw,4rem)] leading-[1.02] text-pure-white"
-              >
-                From First Call to Long-Term Partnership
-              </h2>
-            </div>
-            <p className="max-w-xl text-lg leading-relaxed text-pure-white/68 lg:justify-self-end">
-              A transparent, accountable path from understanding your needs to building dependable
-              supply confidence across every order.
-            </p>
-          </Reveal>
-
-          <div className="relative mt-8 hidden lg:block">
-            <div className="relative h-[clamp(420px,55vh,620px)] overflow-hidden rounded-[2rem] border border-pure-white/12 bg-[#052f30]/72 shadow-[0_42px_110px_rgba(0,0,0,.34)] backdrop-blur-sm">
-              <svg
-                viewBox="0 0 1200 760"
-                preserveAspectRatio="none"
-                className="absolute inset-0 h-full w-full"
-                aria-hidden="true"
-              >
-                <path
-                  d={roadmapPath}
-                  pathLength="100"
-                  fill="none"
-                  stroke="rgba(230,255,247,.22)"
-                  strokeWidth="30"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d={roadmapPath}
-                  pathLength="100"
-                  fill="none"
-                  stroke="#dff8ef"
-                  strokeWidth="13"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeDasharray="100"
-                  strokeDashoffset={100 - progress * 100}
-                  className="transition-[stroke-dashoffset] duration-150 ease-linear"
-                />
-              </svg>
-
-              <ol className="absolute inset-0">
-                {journeySteps.map((step, index) => {
-                  const Icon = step.Icon;
-                  const visible = progress >= index / journeySteps.length;
-                  const active = selectedStep === index;
-                  return (
-                    <li
-                      key={step.title}
-                      className="absolute"
-                      style={
-                        {
-                          left: `${step.x}%`,
-                          top: `${step.y}%`,
-                          "--journey-delay": `${index * 45}ms`,
-                        } as CSSProperties
-                      }
-                    >
-                      <button
-                        type="button"
-                        aria-expanded={active}
-                        aria-controls="journey-step-detail"
-                        aria-label={`${String(index + 1).padStart(2, "0")}. ${step.title}`}
-                        onClick={() => setSelectedStep(active ? null : index)}
-                        className={cn(
-                          "journey-milestone group absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2 focus-visible:outline-[#ffd45a]",
-                          visible && "is-visible",
-                          active && "is-active",
-                        )}
-                      >
-                        <span className="absolute -right-2 -top-2 grid h-7 min-w-7 place-items-center rounded-full border-2 border-[#052f30] bg-pure-white px-1 text-[10px] font-black text-brand-deep shadow-md">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <Icon className="h-7 w-7" strokeWidth={1.7} aria-hidden="true" />
-                      </button>
-                      <span
-                        className={cn(
-                          "journey-milestone-label absolute left-0 text-center text-[13px] font-bold leading-tight text-pure-white",
-                          index >= 10 ? "bottom-12" : "top-12",
-                          visible && "is-visible",
-                        )}
-                      >
-                        {step.title}
-                      </span>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-
-            <div
-              id="journey-step-detail"
-              aria-live="polite"
-              className={cn(
-                "pointer-events-none absolute inset-0 z-20 grid place-items-center rounded-[2rem] bg-charcoal/35 p-8 opacity-0 backdrop-blur-[2px] transition-opacity duration-500",
-                selected && "pointer-events-auto opacity-100",
-              )}
+      <div className="mx-auto w-full max-w-[1200px] px-5 sm:px-8">
+        <div className="mb-10 grid grid-cols-1 items-center gap-7 md:grid-cols-[1fr_auto] md:gap-10 lg:mb-14">
+          <motion.div
+            variants={prefersReducedMotion ? reducedFadeVariants : headerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.3 }}
+            className="max-w-[760px]"
+          >
+            <motion.p variants={prefersReducedMotion ? reducedFadeVariants : headerItemVariants} className="mb-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#617469]">
+              Customer Journey
+            </motion.p>
+            <motion.h2
+              id="customer-journey-title"
+              variants={prefersReducedMotion ? reducedFadeVariants : headerItemVariants}
+              className="mb-3 font-sans text-[32px] font-bold leading-[1.12] tracking-[-0.035em] text-[var(--brand-dark)] sm:text-[38px] lg:text-[40px]"
             >
-              <div className="w-full max-w-4xl">
-                {selected && (
-                  <div className="relative grid gap-5 rounded-2xl border border-[#ffd45a]/30 bg-[#062b2c] p-6 shadow-[0_24px_70px_rgba(0,0,0,.3)] sm:grid-cols-[72px_1fr] sm:p-8">
-                    <span className="grid h-[72px] w-[72px] place-items-center rounded-full bg-[#ffc928] text-brand-deep">
-                      <selected.Icon className="h-8 w-8" strokeWidth={1.7} aria-hidden="true" />
-                    </span>
-                    <div className="pr-8">
-                      <p className="text-xs font-bold uppercase tracking-[.2em] text-[#ffd45a]">
-                        Stage {String(selectedStep! + 1).padStart(2, "0")}
-                      </p>
-                      <h3 className="display mt-2 text-3xl text-pure-white">{selected.title}</h3>
-                      <p className="mt-3 max-w-2xl text-base leading-relaxed text-pure-white/68">
-                        {selected.description}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedStep(null)}
-                      aria-label="Close journey stage details"
-                      className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full text-pure-white/60 transition-colors hover:bg-pure-white/10 hover:text-pure-white"
-                    >
-                      <X className="h-5 w-5" aria-hidden="true" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+              From First Call to Long-Term Partnership
+            </motion.h2>
+            <motion.p variants={prefersReducedMotion ? reducedFadeVariants : headerItemVariants} className="max-w-[620px] text-left text-[16px] leading-relaxed text-gray-700">
+              A simple and transparent process, designed around your success.
+            </motion.p>
+          </motion.div>
 
-          <div className="relative mt-14 lg:hidden">
-            <span
-              className="absolute bottom-8 left-7 top-8 w-px bg-pure-white/16 md:hidden"
-              aria-hidden="true"
-            >
-              <span
-                className="block w-full bg-[#ffd45a] transition-[height] duration-300"
-                style={{ height: `${progress * 100}%` }}
-              />
-            </span>
-            <ol className="grid gap-5 md:grid-cols-2">
-              {journeySteps.map((step, index) => {
-                const Icon = step.Icon;
-                const active = selectedStep === index;
-                return (
-                  <Reveal as="li" key={step.title} delay={(index % 2) * 80} className="relative">
-                    <button
-                      type="button"
-                      aria-expanded={active}
-                      aria-controls={`journey-mobile-detail-${index}`}
-                      onClick={() => setSelectedStep(active ? null : index)}
-                      className={cn(
-                        "group relative flex w-full items-center gap-5 rounded-2xl border border-pure-white/12 bg-[#062f30]/90 p-4 text-left shadow-[0_18px_50px_rgba(0,0,0,.2)] transition duration-300 hover:-translate-y-1 hover:border-[#ffd45a]/45 sm:p-5",
-                        active && "border-[#ffd45a]/60 bg-[#073738]",
-                      )}
-                    >
-                      <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[#ffc928] text-brand-deep shadow-[0_0_0_7px_rgba(255,201,40,.09)]">
-                        <Icon className="h-6 w-6" strokeWidth={1.7} aria-hidden="true" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-[10px] font-black uppercase tracking-[.18em] text-[#ffd45a]">
-                          Stage {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="mt-1 block text-base font-bold leading-snug text-pure-white sm:text-lg">
-                          {step.title}
-                        </span>
-                      </span>
-                    </button>
-                    <div
-                      id={`journey-mobile-detail-${index}`}
-                      className={cn(
-                        "grid transition-[grid-template-rows,opacity] duration-400",
-                        active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
-                      )}
-                    >
-                      <div className="min-h-0 overflow-hidden">
-                        <p className="mx-4 border-x border-b border-pure-white/10 bg-[#052a2b] px-5 py-5 text-sm leading-relaxed text-pure-white/68 sm:text-base">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  </Reveal>
-                );
-              })}
-            </ol>
-          </div>
-
-          <div className="mt-8 flex items-center justify-between gap-6 border-t border-pure-white/12 pt-5 text-xs font-bold uppercase tracking-[.16em] text-pure-white/45 lg:mt-5">
-            <span>First conversation</span>
-            <span className="flex items-center gap-2 text-[#ffd45a]">
-              <PackageCheck className="h-4 w-4" aria-hidden="true" />
-              Partnership in motion
-            </span>
-          </div>
+          <motion.p
+            initial={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, rotate: -12, scale: 0.92 }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1, rotate: -6, scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={prefersReducedMotion ? { duration: 0.25 } : { type: "spring", stiffness: 160, damping: 13, delay: 0.25 }}
+            className="justify-self-start text-left font-['Caveat',_'Kalam',_cursive] text-[30px] font-semibold leading-[0.84] text-[var(--brand-green)] md:justify-self-end md:text-right md:text-[35px]"
+            aria-label="Growing Together Worldwide"
+          >
+            <span className="block">Growing</span>
+            <span className="block">Together</span>
+            <span className="block">Worldwide</span>
+          </motion.p>
         </div>
+
+        <motion.ol
+          aria-label="Customer journey steps"
+          variants={stepsContainerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="journey-steps relative m-0 grid list-none grid-cols-1 gap-y-5 p-0 sm:grid-cols-4 sm:gap-x-4 sm:gap-y-8 lg:grid-cols-7 lg:gap-x-0 lg:gap-y-0"
+        >
+          {steps.map((step, index) => (
+            <JourneyItem
+              key={`${step.title}-${index}`}
+              step={step}
+              index={index}
+              total={steps.length}
+              reducedMotion={!!prefersReducedMotion}
+            />
+          ))}
+        </motion.ol>
       </div>
+
+      <style>{`
+        .customer-journey { background: #F6F5F0; }
+        .journey-step { grid-column: span 1; }
+        .journey-chevron { display: none; }
+        @media (min-width: 1024px) {
+          .journey-chevron { display: flex; }
+          .journey-steps::before { content: ""; position: absolute; z-index: 0; top: 14px; left: 7.14%; right: 7.14%; border-top: 1px dashed rgba(47,125,79,.22); }
+        }
+        @media (hover: hover) and (min-width: 1024px) {
+          .journey-step:hover .journey-badge { background-color: var(--brand-green); }
+          .journey-step:hover .journey-label { color: var(--brand-green); }
+        }
+        @media (max-width: 639px) {
+          .journey-steps { padding-left: 52px; }
+          .journey-steps::before { content: ""; position: absolute; left: 14px; top: 18px; bottom: 20px; border-left: 1px dashed rgba(47,125,79,.38); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .journey-illustration { animation: none !important; }
+        }
+      `}</style>
     </section>
   );
 }
+
+function JourneyItem({ step, index, total, reducedMotion }: { step: Step; index: number; total: number; reducedMotion: boolean }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const image = step.image ?? `/images/journey/step-${index + 1}.svg`;
+
+  return (
+    <>
+      <motion.li
+        aria-label={`Step ${index + 1}: ${step.title}`}
+        variants={reducedMotion ? reducedFadeVariants : stepVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className="journey-step relative flex min-w-0 items-center gap-3 py-2 sm:flex-col sm:gap-0 sm:py-0"
+      >
+        <motion.span
+          initial={reducedMotion ? { opacity: 0 } : { opacity: 0, scale: 0 }}
+          whileInView={reducedMotion ? { opacity: 1 } : { opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={reducedMotion ? { duration: 0.2 } : { type: "spring", stiffness: 300, damping: 15, delay: index * 0.08 }}
+          className="journey-badge absolute left-[-52px] top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--brand-dark)] text-[13px] font-bold leading-none text-white transition-colors duration-200 sm:relative sm:left-auto sm:top-auto sm:mb-2 sm:h-7 sm:w-7 sm:translate-y-0"
+        >
+          {index + 1}
+        </motion.span>
+
+        <motion.div
+          className="journey-illustration relative flex h-[88px] w-[88px] shrink-0 items-center justify-center sm:h-[110px] sm:w-[110px]"
+          animate={reducedMotion ? undefined : { y: [0, -4, 0] }}
+          transition={reducedMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
+          whileHover={reducedMotion ? undefined : { y: -6, scale: 1.05 }}
+        >
+          <div className="pointer-events-none absolute inset-[4%] rounded-full bg-[#EAF1E7]" aria-hidden="true" />
+          {imageFailed ? (
+            <JourneyIllustration kind={index % 7} />
+          ) : (
+            <img
+              src={image}
+              alt={step.alt ?? step.title}
+              onError={() => setImageFailed(true)}
+              className="relative z-[1] h-full w-full object-contain"
+              loading="lazy"
+            />
+          )}
+        </motion.div>
+
+        <motion.p
+          initial={reducedMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
+          whileInView={reducedMotion ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={reducedMotion ? { duration: 0.2 } : { duration: 0.4, delay: index * 0.08 + 0.16 }}
+          className="journey-label mb-0 line-clamp-2 max-w-[145px] text-left text-[13px] font-bold leading-[1.22] text-[var(--brand-dark)] transition-colors duration-200 sm:mt-2 sm:text-center sm:text-[14px]"
+        >
+          {step.title}
+        </motion.p>
+      </motion.li>
+
+      {index < total - 1 && (
+        <motion.span
+          aria-hidden="true"
+          initial={reducedMotion ? { opacity: 0 } : { opacity: 0, x: -8 }}
+          whileInView={reducedMotion ? { opacity: 1 } : { opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.35, delay: index * 0.12 + 0.16 }}
+          className="journey-chevron absolute hidden items-center justify-center text-gray-400 lg:flex"
+          style={{ left: `${(index + 1) * (100 / total) - 1.3}%`, top: "66px" }}
+        >
+          <ChevronRight size={18} strokeWidth={1.8} />
+        </motion.span>
+      )}
+    </>
+  );
+}
+
+function JourneyIllustration({ kind }: { kind: number }) {
+  return (
+    <svg viewBox="0 0 120 120" role="img" aria-hidden="true" className="relative z-[1] h-full w-full overflow-visible">
+      <g stroke="#173F36" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2">
+        {kind === 0 && <>
+          <path fill="#F2B878" d="M28 92V58c0-7 5-12 12-12h18c8 0 13 5 13 13v33Z" />
+          <path fill="#F0C9A3" d="M39 51c0-13 8-21 20-21s19 8 19 20v15H39Z" />
+          <path fill="#1A3440" d="M39 51c0-15 9-24 21-24 13 0 20 9 20 22v9H69l-7-12-8 8-15 3Z" />
+          <path fill="none" d="M35 50c-10 0-11 6-11 14v7m52-20c10 0 12 7 12 15v5" />
+          <rect x="80" y="58" width="24" height="24" rx="12" fill="#F5BE35"/><text x="86" y="75" fill="#173F36" stroke="none" fontSize="16" fontWeight="700">$</text>
+          <path fill="#D9E9DC" d="M17 92h78v7H17z" />
+        </>}
+        {kind === 1 && <>
+          <path fill="#FEF8E9" d="M26 21h48l17 17v63H26Z"/><path fill="#F4CF59" d="M74 21v18h17"/>
+          <path fill="none" d="M39 50h32M39 60h27M39 70h22"/><circle cx="73" cy="79" r="20" fill="#F5BE35"/><text x="66" y="86" fill="#173F36" stroke="none" fontSize="21" fontWeight="700">$</text>
+        </>}
+        {kind === 2 && <>
+          <rect x="19" y="34" width="66" height="53" rx="6" fill="#294965"/><rect x="24" y="39" width="56" height="43" rx="3" fill="#DCEEE5"/><circle cx="52" cy="60" r="15" fill="#54AA70"/><path fill="none" stroke="white" strokeWidth="4" d="m44 60 6 6 12-14"/><path fill="#F4CB54" d="M68 23c3-9 17-11 23 0l8 13H61Z"/><path fill="#E4AD36" d="M61 36h39v6H61z"/>
+        </>}
+        {kind === 3 && <>
+          <path fill="#3C9B65" d="M19 91V57l18 10V55l19 12V42h34v49Z"/><path fill="#1B5A42" d="M53 42V30h10v12m10 0V23h9v19"/><path fill="#F5C64D" d="M25 75h8v9h-8zm18 0h8v9h-8zm28-20h8v8h-8zm0 19h8v9h-8z"/><path fill="none" d="M73 18c-5-6 5-8 1-13m7 13c-5-6 5-8 1-13"/><path fill="#69B66D" d="M30 48c10-10 17-4 15 3-6 6-11 5-15-3Z"/>
+        </>}
+        {kind === 4 && <>
+          <path fill="#E8E3D6" d="M12 36h96v59H12Z"/><path fill="#D6D0C0" d="M12 36h96v9H12Z"/><path fill="none" d="M28 45v49m32-49v49m32-49v49"/><path fill="#536F6D" d="M20 71h82v21H20Z"/><path fill="#D89A4A" d="M25 74h20v13H25zm26 0h20v13H51zm27 0h19v13H78z"/><circle cx="52" cy="44" r="11" fill="#F0C49B"/><path fill="#203E46" d="M41 44c0-13 20-17 23-2v6H53l-7 7-5-4Z"/><path fill="#316B58" d="M41 57h25l7 30H35Z"/><path fill="#FFFDF5" d="M74 53h23v30H74z"/><path fill="none" d="m79 65 4 4 9-10m-9 13h9"/>
+        </>}
+        {kind === 5 && <>
+          <path fill="#4B9BB0" d="M17 71h87l-14 23H33Z"/><path fill="#1C4656" d="M27 68h70v8H27Z"/><path fill="#E3A842" d="M35 47h18v19H35zm20-13h18v32H55zm20 12h18v20H75z"/><path fill="#DA5C43" d="M35 47h18v7H35zm20-13h18v7H55zm20 12h18v7H75z"/><path fill="none" d="M22 67V25h5v42m-5-35h20L27 46m65 21V20h5v47m-5-36H78l14 17"/>
+        </>}
+        {kind === 6 && <>
+          <path fill="#F1C19A" d="M18 37c0-12 8-20 20-20s20 8 20 20v10H18Zm44 0c0-12 8-20 20-20s20 8 20 20v10H62Z"/><path fill="#315569" d="M18 40h40v13H18zm44 0h40v13H62Z"/><path fill="#E7A778" d="M51 61h18v9H51z"/><path fill="none" strokeWidth="5" d="m52 65-8 7 9 6 8-6 8 6 8-6-8-7"/><path fill="#3B9C68" d="M19 57h25v31H19zm57 0h25v31H76z"/><path fill="#F0C24D" d="M15 88h91v7H15z"/>
+        </>}
+      </g>
+    </svg>
+  );
+}
+
+export default CustomerJourney;

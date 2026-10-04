@@ -40,7 +40,7 @@ import industryAnimalBedding from "@/assets/applications/industry-animal-bedding
 import detailBlockStack from "@/assets/detail-block-stack.png";
 import detailGrowbagTomatoes from "@/assets/detail-growbag-tomatoes.png";
 import detailErosionSlope from "@/assets/detail-erosion-slope.png";
-import detailCoirFlooring from "@/assets/detail-coir-flooring.png";
+import detailCoirFlooring from "@/assets/product-coir-matting.jpg";
 import detailGardenArticles from "@/assets/detail-garden-articles.png";
 import detailMicroNutrients from "@/assets/detail-micro-nutrients.png";
 import appGreenhouse from "@/assets/app-greenhouse.jpg";

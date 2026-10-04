@@ -90,7 +90,7 @@ function Resources() {
           </Reveal>
 
           {filter === "All" && featured && (
-            <Reveal className="group mt-10 grid overflow-hidden rounded-md border-2 border-solid border-brand bg-brand-deep text-pure-white lg:grid-cols-2">
+            <Reveal className="group mt-10 grid overflow-hidden rounded-md border-2 border-solid border-[#1B4D2E] bg-brand-deep text-pure-white lg:grid-cols-2">
               <div className="relative min-h-[340px] overflow-hidden lg:min-h-[440px]">
                 <img
                   src={featured.image}
@@ -131,7 +131,7 @@ function Resources() {
                 <Link
                   to="/resources/$slug"
                   params={{ slug: article.slug }}
-                  className="group flex h-full flex-col overflow-hidden rounded-md border-2 border-solid border-brand bg-ivory"
+                  className="group flex h-full flex-col overflow-hidden rounded-md border-2 border-solid border-[#1B4D2E] bg-ivory"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-brand-soft">
                     <img
