@@ -55,7 +55,10 @@ export default defineConfig(({ command }) => ({
       },
       server: { entry: "server" },
     }),
-    command === "build" && nitro(),
+    command === "build" &&
+      nitro({
+        preset: process.env.VERCEL ? "vercel" : "node-server",
+      }),
     react(),
   ],
   server: {
