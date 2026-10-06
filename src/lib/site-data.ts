@@ -159,7 +159,7 @@ export type IndustrySolution = {
   image: string;
   alt: string;
   icon: LucideIcon;
-  href: `/products/${string}`;
+  href: any;
 };
 
 export const products: Product[] = [

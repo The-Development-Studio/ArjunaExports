@@ -12,7 +12,7 @@ import {
   TextLink,
 } from "@/components/site/primitives";
 import { CustomerJourney } from "@/components/site/CustomerJourney";
-import heroVideo from "@/assets/hero_page.mp4";
+import heroVideo from "@/assets/Heropage (1).mp4";
 import logo from "@/assets/logo.svg";
 
 export const Route = createFileRoute("/")({ component: Home });
@@ -159,7 +159,7 @@ function Home() {
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-brand/28 to-black/12" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#006465] via-[#006465]/70 to-black/30" />
         <div className="home-hero__content shell relative z-10 pb-10 pt-28 sm:pt-32 md:pb-44 lg:pt-32">
           <Label className="mb-6 text-aqua">Arjuna Exports · India</Label>
           <h1

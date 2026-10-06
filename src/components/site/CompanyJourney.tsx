@@ -80,9 +80,9 @@ export function CompanyJourney() {
                     onFocus={() => setHoveredMilestone(index)}
                     onBlur={() => setHoveredMilestone(null)}
                     className={cn(
-                      "absolute left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand/30 bg-ivory outline-none transition duration-300",
+                      "absolute left-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-brand/30 bg-ivory outline-none transition duration-300 focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2",
                       complete && "border-brand bg-brand",
-                      current && "h-9 w-9 bg-[#ffc21a] shadow-[0_0_0_12px_rgba(0,100,101,.09)]",
+                      current && "h-9 w-9 bg-primary-green text-pure-white shadow-[0_0_0_12px_rgba(0,100,101,.09)]",
                     )}
                     style={{ top: `${(index / (timeline.length - 1)) * 100}%` }}
                   >

@@ -86,7 +86,7 @@ export function Arrow({ className }: { className?: string }) {
 /* ---------- buttons ---------- */
 
 const baseBtn =
-  "group inline-flex min-h-[52px] items-center gap-3 rounded-sm px-7 text-[14px] font-semibold tracking-[0.06em] uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]";
+  "group inline-flex min-h-[52px] items-center gap-3 rounded-sm px-7 text-[14px] font-semibold tracking-[0.06em] uppercase transition-colors duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2 active:bg-primary-green-active disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60 aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:opacity-60";
 
 export function PrimaryButton({
   to,
@@ -94,12 +94,14 @@ export function PrimaryButton({
   onClick,
   type,
   className,
+  disabled = false,
 }: {
   to?: string;
   children: ReactNode;
   onClick?: () => void;
   type?: "submit" | "button";
   className?: string;
+  disabled?: boolean;
 }) {
   const inner = (
     <>
@@ -107,15 +109,25 @@ export function PrimaryButton({
       <Arrow className="group-hover:translate-x-1.5" />
     </>
   );
-  const cls = cn(baseBtn, "bg-brand text-pure-white hover:bg-brand-deep", className);
+  const cls = cn(
+    baseBtn,
+    "bg-primary-green text-pure-white hover:bg-primary-green-hover",
+    className,
+  );
   if (to)
     return (
-      <Link to={to} className={cls}>
+      <Link
+        to={to}
+        className={cls}
+        aria-disabled={disabled || undefined}
+        tabIndex={disabled ? -1 : undefined}
+        onClick={disabled ? (event) => event.preventDefault() : undefined}
+      >
         {inner}
       </Link>
     );
   return (
-    <button type={type ?? "button"} onClick={onClick} className={cls}>
+    <button type={type ?? "button"} onClick={onClick} className={cls} disabled={disabled}>
       {inner}
     </button>
   );

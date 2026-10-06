@@ -91,7 +91,7 @@ export function Header({ overHero = false }: { overHero?: boolean }) {
               className={cn(
                 "site-menu-font group hidden min-h-11 items-center gap-3 rounded-sm px-6 text-[13px] tracking-[0.04em] transition-colors duration-300 sm:inline-flex",
                 solid
-                  ? "bg-brand text-pure-white hover:bg-brand-deep"
+                  ? "bg-primary-green text-pure-white hover:bg-primary-green-hover active:bg-primary-green-active"
                   : "border border-pure-white/70 text-pure-white hover:bg-pure-white hover:text-brand-deep",
               )}
             >
@@ -160,7 +160,7 @@ export function Header({ overHero = false }: { overHero?: boolean }) {
           </ul>
           <Link
             to="/contact"
-            className="site-menu-font group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-sm bg-brand px-8 text-[14px] tracking-[0.04em] text-pure-white"
+            className="site-menu-font group inline-flex min-h-[56px] items-center justify-center gap-3 rounded-sm bg-primary-green px-8 text-[14px] tracking-[0.04em] text-pure-white transition-colors hover:bg-primary-green-hover active:bg-primary-green-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2"
           >
             Request a Quote
             <Arrow className="group-hover:translate-x-1.5" />

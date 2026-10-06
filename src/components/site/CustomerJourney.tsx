@@ -169,9 +169,13 @@ function JourneyItem({ step, index, total, reducedMotion }: { step: Step; index:
 
         <motion.div
           className="journey-illustration relative flex h-[88px] w-[88px] shrink-0 items-center justify-center sm:h-[110px] sm:w-[110px]"
-          animate={reducedMotion ? undefined : { y: [0, -4, 0] }}
-          transition={reducedMotion ? undefined : { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }}
-          whileHover={reducedMotion ? undefined : { y: -6, scale: 1.05 }}
+          {...(reducedMotion
+            ? {}
+            : {
+                animate: { y: [0, -4, 0] },
+                transition: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 },
+                whileHover: { y: -6, scale: 1.05 },
+              })}
         >
           <div className="pointer-events-none absolute inset-[4%] rounded-full bg-[#EAF1E7]" aria-hidden="true" />
           {imageFailed ? (

@@ -26,7 +26,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary-green px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-green-hover active:bg-primary-green-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2"
           >
             Go home
           </Link>
@@ -77,7 +77,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
                 reset();
               }
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary-green px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-green-hover active:bg-primary-green-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-green focus-visible:ring-offset-2"
           >
             Try again
           </button>
@@ -124,7 +124,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Dela+Gothic+One&family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap",
       },
     ],
   }),

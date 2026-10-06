@@ -508,7 +508,7 @@ function Process() {
             </h2>
           </Reveal>
           <Reveal delay={100} className="lg:justify-self-end">
-            <PrimaryButton to="/contact" className="bg-[#ffc21a] text-brand-deep hover:bg-ivory">
+            <PrimaryButton to="/contact">
               Talk to our team
             </PrimaryButton>
           </Reveal>

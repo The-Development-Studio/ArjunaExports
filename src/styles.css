@@ -52,6 +52,9 @@
 
   /* brand + nature scale */
   --color-brand: var(--brand);
+  --color-primary-green: var(--primary-green);
+  --color-primary-green-hover: var(--primary-green-hover);
+  --color-primary-green-active: var(--primary-green-active);
   --color-brand-deep: var(--brand-deep);
   --color-brand-forest: var(--brand-forest);
   --color-brand-soft: var(--brand-soft);
@@ -78,6 +81,10 @@
   --radius: 4px;
 
   --brand: #006465;
+  /* AA-compliant with white text for primary actions (contrast ratio > 5:1). */
+  --primary-green: #15803d;
+  --primary-green-hover: #166534;
+  --primary-green-active: #14532d;
   --brand-deep: #006465;
   --brand-forest: #006465;
   --brand-soft: oklch(0.9358 0.019 196.83);
@@ -275,12 +282,14 @@
   color: var(--brand) !important;
 }
 
-:is(.bg-brand-deep, .bg-brand, .home-hero, [class~="text-pure-white"])
+:is(.bg-brand-deep, .bg-brand, .home-hero, [class*="text-pure-white"], [class*="text-white"])
   :is(h1, h2, h3, h4, h5, h6, .micro-label),
+:is(h1, h2, h3, h4, h5, h6)[class*="text-white"],
 :is(h1, h2, h3, h4, h5, h6).text-pure-white,
 :is(h1, h2, h3, h4, h5, h6).text-ivory,
-.micro-label[class*="text-pure-white"] {
-  color: var(--pure-white) !important;
+.micro-label[class*="text-pure-white"],
+.micro-label[class*="text-white"] {
+  color: #ffffff !important;
 }
 
 /* Ensure .bg-charcoal (mint background) surfaces maintain consistent, high-contrast dark-teal #20555A typography */
@@ -1495,8 +1504,8 @@ footer [class~="mt-16"] {
   place-items: center;
   border: 5px solid rgba(255, 255, 255, 0.9);
   border-radius: 999px;
-  background: #ffc928;
-  color: #043f40;
+  background: var(--primary-green);
+  color: #fff;
   opacity: 0;
   scale: 0.6;
   box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
@@ -1516,7 +1525,7 @@ footer [class~="mt-16"] {
 .journey-milestone.is-active {
   scale: 1.08;
   box-shadow:
-    0 0 0 10px rgba(255, 201, 40, 0.13),
+    0 0 0 10px color-mix(in oklab, var(--primary-green) 13%, transparent),
     0 18px 44px rgba(0, 0, 0, 0.34);
 }
 
