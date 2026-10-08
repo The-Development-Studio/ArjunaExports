@@ -592,8 +592,10 @@ function ProductDetail() {
           <Reveal>
             <div className="flex items-end justify-between gap-6">
               <div>
-                {!isCocoPeatBlocks && <Label className="text-brand">Technical data</Label>}
-                <h2 className={`display ${isCocoPeatBlocks ? "text-[clamp(1.4rem,3.5vw,2.5rem)] uppercase" : "mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]"}`}>
+                <Label className={isCocoPeatBlocks ? "text-[#0B6B6B]" : "text-brand"}>
+                  {isCocoPeatBlocks ? "TECHNICAL DATA" : "Technical data"}
+                </Label>
+                <h2 className={`display ${isCocoPeatBlocks ? "mt-4 text-[clamp(1.4rem,3.5vw,2.5rem)] uppercase" : "mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]"}`}>
                   {isCocoPeatBlocks ? "Product Technical Specifications" : "Typical specification."}
                 </h2>
               </div>
@@ -808,6 +810,7 @@ function ProductDetail() {
         <section className="bg-[#F5F2EA] py-12 lg:py-16">
           <div className="shell">
             <div className="mx-auto flex w-full flex-col xl:aspect-[16/9] xl:p-8">
+              <Label className="mb-4 text-[#0B6B6B]">PACKING OPTIONS</Label>
               <h2 className="display mb-7 whitespace-normal text-[clamp(1.75rem,3.2vw,3.25rem)] leading-tight text-[#0B6B6B] xl:whitespace-nowrap">
                 Packing Options &amp; Logistics
               </h2>
