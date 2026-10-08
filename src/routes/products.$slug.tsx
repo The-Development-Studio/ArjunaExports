@@ -1,6 +1,15 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import {
+  FileDown,
+  Info,
+  Layers3,
+  PackageOpen,
+  Settings,
+  Sprout,
+} from "lucide-react";
 import { applications, img, products } from "@/lib/site-data";
+import { CategoryCard } from "@/components/site/CategoryCard";
 import {
   Arrow,
   Label,
@@ -11,16 +20,33 @@ import {
 } from "@/components/site/primitives";
 import { PointArt } from "@/components/site/PointArt";
 import coconutIcon from "@/assets/coconut2.svg";
+import cocoBenefit1 from "@/assets/key benefits/1.png";
+import cocoBenefit2 from "@/assets/key benefits/2.png";
+import cocoBenefit3 from "@/assets/key benefits/3.png";
+import cocoBenefit4 from "@/assets/key benefits/4.png";
+import cocoBenefit5 from "@/assets/key benefits/5.png";
+import cocoBenefit6 from "@/assets/key benefits/6.png";
+import cocoBenefit7 from "@/assets/key benefits/7.png";
+import cocoBenefit8 from "@/assets/key benefits/8.png";
+import cocoBlockPhoto1 from "@/assets/Product/1.coco peat blocks/01.JPG";
+import cocoBlockPhoto2 from "@/assets/Product/1.coco peat blocks/02.JPG";
+import cocoBlockPhoto3 from "@/assets/Product/1.coco peat blocks/03.png";
+import cocoBlockPhoto4 from "@/assets/Product/1.coco peat blocks/04.jpg";
+import cocoBlockPhoto5 from "@/assets/Product/1.coco peat blocks/05.png";
+import cocoBlockPhoto6 from "@/assets/Product/1.coco peat blocks/06.png";
+import packingBulkPalletized from "@/assets/Product/packing/Bulk Pattelized.png";
+import packingPrivateLabel from "@/assets/Product/packing/Private Labelling.png";
+import packingBundles from "@/assets/Product/packing/Bundler Pack 3S & 4S.png";
+import packingBareBlocks from "@/assets/Product/packing/Bare Blocks - Direct Floor Loading.JPG";
 
 const productGalleries: Record<string, Array<{ image: string; label: string }>> = {
   "coco-peat-blocks": [
-    { image: img.productCocoPeat5kg, label: "Premium 5kg Coco Peat Block" },
-    { image: img.productBlock, label: "Compressed coco peat blocks" },
-    { image: img.detailBlockStack, label: "Export-ready coco peat block stacks" },
-    { image: img.stagePith, label: "Screened coco pith texture" },
-    { image: img.processCompression, label: "Hydraulic block compression" },
-    { image: img.stageMedium, label: "Expanded growing medium" },
-    { image: img.processPackaging, label: "Wrapped and palletised packaging" },
+    { image: cocoBlockPhoto1, label: "Coco peat block stack" },
+    { image: cocoBlockPhoto2, label: "Coco peat blocks at the production facility" },
+    { image: cocoBlockPhoto4, label: "Coco peat blocks prepared for export" },
+    { image: cocoBlockPhoto3, label: "Wrapped coco peat block pallets" },
+    { image: cocoBlockPhoto5, label: "Coco peat blocks loaded for shipment" },
+    { image: cocoBlockPhoto6, label: "Export-ready coco peat block shipment" },
   ],
   "coir-matting": [
     { image: img.detailCoirFlooring, label: "Natural coir matting" },
@@ -50,6 +76,52 @@ const productGalleries: Record<string, Array<{ image: string; label: string }>> 
   ],
 };
 
+const cocoPeatKeyFeatures = [
+  { title: "Consistent Quality", image: cocoBenefit1 },
+  { title: "High Volume Expansion", image: cocoBenefit2 },
+  { title: "Excellent Water Retention", image: cocoBenefit3 },
+  { title: "Double Washed", image: cocoBenefit4 },
+  { title: "100% Natural", image: cocoBenefit5 },
+  { title: "Biodegradable", image: cocoBenefit6 },
+  { title: "Low EC/Stable pH", image: cocoBenefit7 },
+  { title: "Easy Storage & Handling", image: cocoBenefit8 },
+];
+
+const packingOptions = [
+  {
+    number: "01",
+    title: "Bare Blocks – Direct Floor Loading",
+    description:
+      "Blocks loaded directly into the container without pallets to maximize container utilization and cargo loading efficiency.",
+    image: packingBareBlocks,
+    alt: "Bare coco peat blocks stacked for direct floor loading",
+  },
+  {
+    number: "02",
+    title: "Bulk Palletized",
+    description:
+      "Compressed coco peat blocks stacked and securely palletized with stretch/shrink wrapping for efficient handling, storage, and container loading.",
+    image: packingBulkPalletized,
+    alt: "Coco peat blocks stacked and stretch wrapped on pallets",
+  },
+  {
+    number: "03",
+    title: "Bundle Pack – 3S/4S",
+    description:
+      "Blocks packed in customized bundles for easier handling, distribution, and retail or commercial applications.",
+    image: packingBundles,
+    alt: "Bundles of coco peat blocks loaded inside a container",
+  },
+  {
+    number: "04",
+    title: "Retail Pack with Private Labelling",
+    description:
+      "Customized individual block packaging with the buyer's brand, product information, specifications, and market requirements.",
+    image: packingPrivateLabel,
+    alt: "Coco peat blocks in branded retail packaging",
+  },
+];
+
 const cocoPeatComparison = [
   { property: "Type", lowEc: "Coconut Peat", highEc: "Coconut Peat" },
   { property: "Form", lowEc: "Block", highEc: "Block" },
@@ -78,6 +150,47 @@ const cocoPeatComparison = [
   },
   { property: "Colour", lowEc: "Natural Brown", highEc: "Natural Brown" },
   { property: "Features", lowEc: "Washed", highEc: "Unwashed" },
+];
+
+const cocoPeatTechnicalGroups = [
+  {
+    label: "Core Product",
+    icon: <Layers3 />,
+    rows: [
+      { property: "Type", lowEc: "Coconut Peat", highEc: "Coconut Peat" },
+      { property: "Form", lowEc: "Block", highEc: "Block" },
+    ],
+  },
+  {
+    label: "Physical Properties",
+    icon: <PackageOpen />,
+    rows: [
+      { property: "Size (L x B x H)", lowEc: "30 x 30 x 10 to 12 cm", highEc: "30 x 30 x 10 to 12 cm" },
+      { property: "Moisture", lowEc: "Below 15%", highEc: "Below 15%" },
+      { property: "Weight", lowEc: "4.2 to 5.2 KGS", highEc: "4.2 to 5.2 KGS" },
+      { property: "Compression", lowEc: "5:1", highEc: "5:1" },
+      { property: "Electrical Conductivity (EC)", lowEc: "Below 0.5 mS/cm", highEc: "Above 1.5 mS/cm" },
+      { property: "pH", lowEc: "5.2–6.8", highEc: "5.2–6.8" },
+    ],
+  },
+  {
+    label: "Growing Media Properties",
+    icon: <Sprout />,
+    rows: [
+      { property: "Expansion Volume", lowEc: "16 Liters & above per KG", highEc: "15 Liters & above per KG" },
+      { property: "Grade", lowEc: "6mm Sieved", highEc: "6mm Sieved" },
+      { property: "Colour", lowEc: "Natural Brown", highEc: "Natural Brown" },
+    ],
+  },
+  {
+    label: "Processing & Application",
+    icon: <Settings />,
+    rows: [
+      { property: "Material", lowEc: "100% Natural Coir Pith", highEc: "100% Natural Coir Pith" },
+      { property: "Processing", lowEc: "Double Washed", highEc: "Unwashed" },
+      { property: "Usage", lowEc: "Potting mix suppliers, greenhouses, hydroponic growers, etc.", highEc: "Plant growing and animal bedding" },
+    ],
+  },
 ];
 
 const coirMattingSpecification = [
@@ -233,7 +346,7 @@ function ProductDetail() {
   const downloadHref = `data:text/plain;charset=utf-8,${encodeURIComponent(specification)}`;
   return (
     <>
-      <section className="relative overflow-hidden bg-ivory pt-20 lg:pt-0">
+      <section className="relative overflow-hidden bg-ivory pt-20 lg:pt-[88px]">
         <img
           src={coconutIcon}
           alt=""
@@ -243,10 +356,44 @@ function ProductDetail() {
         <div className="shell grid gap-8 py-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:py-14">
           <div
             className={`relative min-h-[400px] overflow-hidden rounded-md border border-brand/15 shadow-[0_20px_60px_rgba(31,45,40,.12)] sm:min-h-[480px] lg:min-h-[540px] ${
+              isCocoPeatBlocks ? "bg-pure-white" :
               isPackagingPhoto ? "bg-pure-white" : "bg-charcoal"
             }`}
           >
-            {isPackagingPhoto ? (
+            {isCocoPeatBlocks ? (
+              <>
+                <div className="absolute inset-0 bg-pure-white">
+                  <img
+                    src={activePhoto?.image}
+                    alt={activePhoto?.label ?? p.name}
+                    className="h-full w-full scale-110 object-cover"
+                  />
+                </div>
+                <p className="absolute inset-x-0 bottom-[104px] truncate bg-pure-white/95 px-5 py-2 text-center text-xs text-charcoal/75 sm:bottom-[108px]">
+                  {activePhoto?.label ?? p.name}
+                </p>
+                <div className="absolute inset-x-0 bottom-0 overflow-x-auto bg-pure-white/95 px-4 pb-4 pt-2 sm:px-5">
+                  <div className="flex w-max gap-2">
+                    {gallery.map((photo) => (
+                      <button
+                        key={photo.label}
+                        type="button"
+                        onClick={() => setActivePhoto(photo)}
+                        aria-label={`Show ${photo.label}`}
+                        aria-pressed={activePhoto?.image === photo.image}
+                        className={`h-14 w-14 shrink-0 overflow-hidden rounded-sm border-2 bg-pure-white transition-opacity ${
+                          activePhoto?.image === photo.image
+                            ? "border-[#1B7F3B]"
+                            : "border-brand/15 hover:opacity-70"
+                        }`}
+                      >
+                        <img src={photo.image} alt="" loading="lazy" className="h-full w-full object-contain p-0.5" />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : isPackagingPhoto ? (
               <div className="absolute inset-x-0 top-0 bottom-[140px] flex items-center justify-center p-6 sm:bottom-[150px] sm:p-8">
                 <img
                   src={activePhoto?.image}
@@ -261,14 +408,14 @@ function ProductDetail() {
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
               />
             )}
-            <div
+            {!isCocoPeatBlocks && <div
               className={`pointer-events-none absolute inset-0 ${
                 isPackagingPhoto
                   ? "bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent"
                   : "bg-gradient-to-t from-charcoal/75 via-transparent to-charcoal/10"
               }`}
-            />
-            <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+            />}
+            {!isCocoPeatBlocks && <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
               <div className="flex flex-col gap-5">
                 <div>
                   <span className="micro-label text-pure-white/70">
@@ -310,18 +457,20 @@ function ProductDetail() {
                   })}
                 </div>
               </div>
-            </div>
+            </div>}
           </div>
           <Reveal delay={100} className="flex items-center py-8 lg:py-12">
             <div className="w-full max-w-xl">
               <Label className="text-brand">{p.category} collection</Label>
-              <h1 className="display mt-6 max-w-[16ch] text-[clamp(2.5rem,4.2vw,4.5rem)] leading-[1.02]">
+              <h1 className={`display mt-6 ${isCocoPeatBlocks ? "text-[clamp(2rem,4vw,3.25rem)] leading-[1.05] whitespace-normal sm:whitespace-nowrap" : "max-w-[16ch] text-[clamp(2.5rem,4.2vw,4.5rem)] leading-[1.02]"}`}>
                 {p.name}
               </h1>
-              <p className="mt-7 max-w-xl text-left text-lg font-medium leading-relaxed text-charcoal/70">
-                {p.short}
+              <p className={`mt-7 text-left text-charcoal/70 ${isCocoPeatBlocks ? "max-w-[560px] text-base font-normal leading-[1.7]" : "max-w-xl text-lg font-medium leading-relaxed"}`}>
+                {isCocoPeatBlocks
+                  ? "Coco Peat Blocks are manufactured from selected coconut husks, a natural by-product of the coconut and coir industry. The coir material is carefully washed, screened, graded, and compressed to produce consistent coco peat growing media. Our premium coco peat blocks are suitable for greenhouse cultivation, nurseries, potting mixes, and commercial horticulture. Available in washed, low EC, and customized specifications to meet specific growing requirements. Natural, renewable, and biodegradable, coco peat provides an efficient and sustainable growing medium for professional cultivation."
+                  : p.short}
               </p>
-              <dl className="mt-10 grid gap-px overflow-hidden rounded-md border border-brand/15 bg-brand/15 sm:grid-cols-2">
+              {!isCocoPeatBlocks && <dl className="mt-10 grid gap-px overflow-hidden rounded-md border border-brand/15 bg-brand/15 sm:grid-cols-2">
                 <div className="bg-offwhite p-5 sm:p-6">
                   <dt className="micro-label text-brand">Available formats</dt>
                   <dd className="mt-3 text-sm font-semibold leading-relaxed">{p.format}</dd>
@@ -330,8 +479,8 @@ function ProductDetail() {
                   <dt className="micro-label text-brand">Best suited for</dt>
                   <dd className="mt-3 text-sm font-semibold leading-relaxed">{p.application}</dd>
                 </div>
-              </dl>
-              <div className="mt-9 flex flex-wrap gap-3">
+              </dl>}
+              <div className={`${isCocoPeatBlocks ? "mt-7" : "mt-9"} flex flex-wrap gap-3`}>
                 <PrimaryButton to="/contact">Request information</PrimaryButton>
                 <a
                   href={downloadHref}
@@ -346,7 +495,7 @@ function ProductDetail() {
         </div>
       </section>
 
-      <section className="bg-offwhite py-20 lg:py-28">
+      {!isCocoPeatBlocks && <section className="bg-offwhite py-20 lg:py-28">
         <div className="shell">
           <div className="grid gap-8 border-b border-brand/20 pb-10 lg:grid-cols-[.85fr_1.15fr] lg:items-end lg:gap-16">
             <Reveal>
@@ -396,23 +545,31 @@ function ProductDetail() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section>}
 
       <section className="bg-ivory py-20 lg:py-28">
         <div className="shell">
-          <Reveal className="grid gap-6 lg:grid-cols-[.8fr_1.2fr] lg:items-end lg:gap-16">
+          <Reveal className="flex flex-col items-start gap-5">
             <div>
               <Label className="text-brand">Key benefits</Label>
-              <h2 className="display mt-6 text-[clamp(2.25rem,4vw,4rem)]">
+              <h2 className={`display mt-6 text-[clamp(2rem,4vw,3.25rem)] leading-tight ${isCocoPeatBlocks ? "whitespace-normal sm:whitespace-nowrap" : ""}`}>
                 Built around the crop.
               </h2>
             </div>
-            <p className="max-w-xl text-left text-lg leading-relaxed text-charcoal/65 lg:justify-self-end">
+            <p className="max-w-xl text-left text-lg leading-relaxed text-charcoal/65">
               Practical performance designed for consistent preparation, growing and delivery.
             </p>
           </Reveal>
 
-          <ul className="mt-12 grid border-t border-brand/25 md:grid-cols-2">
+          {isCocoPeatBlocks ? (
+            <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {cocoPeatKeyFeatures.map(({ title, image }) => (
+                <li key={title} className="flex min-h-40 items-center justify-center rounded-sm border border-brand/10 bg-pure-white p-3">
+                  <img src={image} alt={title} loading="lazy" className="h-auto w-full max-w-[220px] object-contain" />
+                </li>
+              ))}
+            </ul>
+          ) : <ul className="mt-12 grid border-t border-brand/25 md:grid-cols-2">
             {p.benefits.map((benefit, index) => (
               <li
                 key={benefit}
@@ -426,7 +583,7 @@ function ProductDetail() {
                 </span>
               </li>
             ))}
-          </ul>
+          </ul>}
         </div>
       </section>
 
@@ -435,60 +592,51 @@ function ProductDetail() {
           <Reveal>
             <div className="flex items-end justify-between gap-6">
               <div>
-                <Label className="text-brand">Technical data</Label>
-                <h2 className="display mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]">
-                  Typical specification.
+                {!isCocoPeatBlocks && <Label className="text-brand">Technical data</Label>}
+                <h2 className={`display ${isCocoPeatBlocks ? "text-[clamp(1.4rem,3.5vw,2.5rem)] uppercase" : "mt-6 text-[clamp(2.25rem,3.5vw,3.75rem)]"}`}>
+                  {isCocoPeatBlocks ? "Product Technical Specifications" : "Typical specification."}
                 </h2>
               </div>
-              <span className="micro-label hidden text-charcoal/40 sm:block">
+              {!isCocoPeatBlocks && <span className="micro-label hidden text-charcoal/40 sm:block">
                 Subject to agreed order specification
-              </span>
+              </span>}
             </div>
-            <div className="mt-10 overflow-hidden rounded-md border border-brand/15 bg-pure-white shadow-[0_24px_80px_rgba(31,45,40,.08)]">
+            <div className={`mt-6 overflow-hidden rounded-md border border-brand/15 bg-pure-white ${isCocoPeatBlocks ? "shadow-[0_12px_32px_rgba(31,45,40,.06)]" : "mt-10 shadow-[0_24px_80px_rgba(31,45,40,.08)]"}`}>
               {isCocoPeatBlocks ? (
                 <div className="overflow-x-auto">
-                  <table className="w-full min-w-[760px] border-collapse text-left">
+                  <table className="w-full min-w-[620px] border-collapse text-left text-[12px]">
                     <caption className="sr-only">
-                      Coco Peat 5kg Blocks Low EC and High EC specification comparison
+                      Product technical specifications for Coco Peat Blocks, including Low EC and High EC options
                     </caption>
                     <thead>
-                      <tr className="bg-brand text-pure-white">
-                        <th className="w-[24%] border-r border-pure-white/20 px-6 py-5 text-center text-sm font-bold uppercase tracking-[.08em]">
-                          Product name
+                      <tr>
+                        <th className="w-[18%] bg-brand" aria-label="Specification category" />
+                        <th className="w-[19%] border-r border-pure-white/20 bg-brand px-4 py-3 text-left text-[11px] font-bold uppercase text-pure-white">
+                          Parameter
                         </th>
-                        <th colSpan={2} className="px-6 py-5 text-center text-lg font-bold">
-                          Coco Peat 5kg Blocks
-                        </th>
-                      </tr>
-                      <tr className="bg-[#68e6c2] text-brand">
-                        <th className="border-r border-brand/15 px-6 py-4 text-center text-sm font-bold uppercase tracking-[.08em]">
-                          Properties
-                        </th>
-                        <th className="border-r border-brand/15 px-6 py-4 text-center text-sm font-bold uppercase tracking-[.08em]">
+                        <th className="w-[31.5%] border-r border-pure-white/20 bg-[#68e6c2] px-4 py-3 text-center text-[11px] font-bold uppercase text-brand">
                           Low EC
                         </th>
-                        <th className="px-6 py-4 text-center text-sm font-bold uppercase tracking-[.08em]">
+                        <th className="w-[31.5%] bg-[#68e6c2] px-4 py-3 text-center text-[11px] font-bold uppercase text-brand">
                           High EC
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {cocoPeatComparison.map((item, index) => (
-                        <tr
-                          key={item.property}
-                          className={`border-t border-charcoal/10 ${index % 2 === 0 ? "bg-pure-white" : "bg-offwhite"}`}
-                        >
-                          <th className="border-r border-charcoal/10 px-6 py-4 text-center text-sm font-bold text-brand">
-                            {item.property}
-                          </th>
-                          <td className="border-r border-charcoal/10 px-6 py-4 text-center text-sm font-medium leading-relaxed text-charcoal">
-                            {item.lowEc}
-                          </td>
-                          <td className="px-6 py-4 text-center text-sm font-medium leading-relaxed text-charcoal">
-                            {item.highEc}
-                          </td>
-                        </tr>
-                      ))}
+                      {cocoPeatTechnicalGroups.map((group) =>
+                        group.rows.map((item, index) => (
+                          <tr key={`${group.label}-${item.property}`} className={`${(index + group.rows.length) % 2 === 0 ? "bg-offwhite" : "bg-pure-white"}`}>
+                            {index === 0 && (
+                              <th rowSpan={group.rows.length} className="relative border-r border-brand/10 bg-gradient-to-br from-[#e2f8f3] to-[#d1f2eb] p-0 text-center align-middle">
+                                <CategoryCard icon={group.icon} label={group.label === "Core Product" ? "CORE\nPRODUCT" : group.label === "Physical Properties" ? "PHYSICAL\nPROPERTIES" : group.label === "Growing Media Properties" ? "GROWING\nMEDIA\nPROPERTIES" : "PROCESSING\n&\nAPPLICATION"} />
+                              </th>
+                            )}
+                            <th className="border-r border-charcoal/10 px-2 py-1.5 text-left text-[9px] font-bold text-charcoal">{item.property}</th>
+                            <td className="border-r border-charcoal/10 px-2 py-1.5 text-[9px] font-semibold text-charcoal">{item.lowEc}</td>
+                            <td className="px-2 py-1.5 text-[9px] font-semibold text-charcoal">{item.highEc}</td>
+                          </tr>
+                        )),
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -637,22 +785,66 @@ function ProductDetail() {
                   </dl>
                 </>
               )}
-              <div className="flex flex-col gap-3 border-t border-charcoal/10 bg-offwhite px-5 py-4 text-sm text-charcoal/60 sm:flex-row sm:items-center sm:justify-between">
-                <span>
+              <div className={`flex flex-col gap-3 border-t border-charcoal/10 bg-offwhite px-5 py-3 text-xs text-charcoal/60 sm:flex-row sm:items-center sm:justify-between ${isCocoPeatBlocks ? "" : "sm:py-4 sm:text-sm"}`}>
+                <span className="flex items-center gap-2">
+                  {isCocoPeatBlocks && <Info aria-hidden="true" className="h-4 w-4 shrink-0 text-brand" />}
                   Values shown are typical and can be adjusted to customer order specifications.
                 </span>
                 <a
                   href={downloadHref}
                   download={`${p.slug}-specification.txt`}
-                  className="font-semibold text-brand hover:text-brand-deep"
+                  className={`font-semibold text-brand hover:text-brand-deep ${isCocoPeatBlocks ? "inline-flex items-center gap-2 rounded-full bg-[#d8f3ed] px-4 py-2" : ""}`}
                 >
-                  Download technical sheet
+                  {isCocoPeatBlocks && <FileDown aria-hidden="true" className="h-4 w-4" />}
+                  Download Technical Sheet {isCocoPeatBlocks && <Arrow />}
                 </a>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
+
+      {isCocoPeatBlocks && (
+        <section className="bg-[#F5F2EA] py-12 lg:py-16">
+          <div className="shell">
+            <div className="mx-auto flex w-full flex-col xl:aspect-[16/9] xl:p-8">
+              <h2 className="display mb-7 whitespace-normal text-[clamp(1.75rem,3.2vw,3.25rem)] leading-tight text-[#0B6B6B] xl:whitespace-nowrap">
+                Packing Options &amp; Logistics
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:min-h-0 xl:flex-1 xl:grid-cols-4">
+                {packingOptions.map((option, index) => (
+                  <article
+                    key={option.number}
+                    className={`flex flex-col border-[#0B6B6B]/25 xl:h-full ${
+                      index < packingOptions.length - 1 ? "border-b md:border-b-0 md:border-r" : ""
+                    } ${index === 0 ? "md:border-r xl:border-r" : ""} ${
+                      index === 2 ? "md:border-r-0 xl:border-r" : ""
+                    }`}
+                  >
+                    <img
+                      src={option.image}
+                      alt={option.alt}
+                      loading="lazy"
+                      className="h-56 w-full flex-none object-cover sm:h-64 xl:h-[56%]"
+                    />
+                    <div className="flex flex-1 flex-col px-5 py-5 xl:px-5 xl:py-4">
+                      <span className="text-[11px] font-bold tracking-[0.18em] text-[#0B6B6B]">
+                        {option.number}
+                      </span>
+                      <h3 className="display mt-3 min-h-[2.5em] text-[clamp(1rem,1.45vw,1.35rem)] leading-tight text-[#0B6B6B]">
+                        {option.title}
+                      </h3>
+                      <p className="mt-3 text-justify text-[12px] leading-[1.55] text-[#0B6B6B]">
+                        {option.description}
+                      </p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="bg-brand-soft py-20 lg:py-28">
         <div className="shell">
@@ -684,7 +876,7 @@ function ProductDetail() {
         </div>
       </section>
 
-      <section className="grid bg-brand-deep text-pure-white lg:grid-cols-2">
+      {!isCocoPeatBlocks && <section className="grid bg-brand-deep text-pure-white lg:grid-cols-2">
         <img
           src={img.exportPort}
           alt="Export containers ready for shipping"
@@ -704,7 +896,7 @@ function ProductDetail() {
             </SecondaryButton>
           </Reveal>
         </div>
-      </section>
+      </section>}
 
       <section className="bg-offwhite py-20 lg:py-28">
         <div className="shell">
